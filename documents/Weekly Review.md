@@ -29,3 +29,8 @@
 - [ ] Who needs help with what?
 - [ ] Determine how we are progressing and direct resources as needed
 - [ ] Get everyone’s availability for upcoming week
+- [ ] Approx. how much time can you spend working on the project this week?
+- [ ] Who wants to do the weekly check-in?
+
+### Other Topics
+- [ ] Other topics/things we should address
