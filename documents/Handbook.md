@@ -12,44 +12,6 @@ Doesn't have to be fully featured, an MVP that can go live is fine.
 ### Coding Style
 - Airbnb Style Guide
 
-### Git Workflow
-**If you need help with something, ask! Git can be confusing**  
-- Fork the project
-- Branch Headers:
-  + bug/fix-header
-  + feature/add-task
-  + refactor/clean-up-footer
-  + style/colour-the-navbar
-
-**Before you start coding...**  
-- pull changes before starting to work
-- commit often. Each commit should have 1 clear purpose (single responsibility principle)
-
-**I want to work on something**  
-Create a new feature branch (refer to above: bug, feature, refactor, style)
-
-
-### Merging Workflow
-**I'm done working on a feature. I want to merge it now!**  
-Create a pull request for the `dev` branch.
-
-**We should move code from `dev` to `master`**  
-Once a group of features are ready:
-- thoroughly test to make sure they work
-  + check edge cases
-- after, create a pull request to master
-
-**Okay, but how do I make a pull request?**  
-- make sure you've pushed your changes in your feature branch
-- on GitHub, click "New Pull Request"
-  + Base: dev or master
-  + Compare: feature branch
-- add 1 or more reviewers
-- assign to the person making the request
-
-**What if there's a merge conflict?**  
-Discuss it with relevant team member. Communication is key!
-
 ### Weekly Review Day & Time
 Saturdays at 7PM (8PM for Philosocode & Roo)
 
@@ -61,6 +23,46 @@ Try Asana for now. If it doesn't work out, try ZenHub + Google Calendars
 
 ### Weekly Meeting Flow
 Review previous sprint -> prepare for upcoming sprint -> do weekly review
+
+
+## Git Workflow
+**If you need help with something, ask! Git can be confusing**  
+
+### General
+- Fork the project
+- Branch Headers:
+  + bug/fix-header
+  + feature/add-task
+  + refactor/clean-up-footer
+  + style/colour-the-navbar
+
+### Before you start coding...
+- pull changes before starting to work
+- commit often. Each commit should have 1 clear purpose (single responsibility principle)
+
+### I want to work on something! What do I do?
+Create a new feature branch (refer to above: bug, feature, refactor, style)
+
+## Merging
+### I'm done working on a feature. I want to merge it now!
+Create a pull request for the `dev` branch.
+
+### We should move code from `dev` to `master`
+Once a group of features are ready:
+- thoroughly test to make sure they work
+  + check edge cases
+- after, create a pull request to master
+
+### Okay, but how do I make a pull request?
+- make sure you've pushed your changes in your feature branch
+- on GitHub, click "New Pull Request"
+  + Base: dev or master
+  + Compare: feature branch
+- add 1 or more reviewers
+- assign to the person making the request
+
+### What if there's a merge conflict?
+Discuss it with relevant team member. Communication is key!
 
 
 ## Members
