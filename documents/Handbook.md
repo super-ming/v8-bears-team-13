@@ -7,7 +7,7 @@ Doesn't have to be fully featured, an MVP that can go live is fine.
 ### Tech Stack
 - React + Redux + React-Router
 - Express + Node
-- [database undecided]
+- PostgreSQL
 
 ### Coding Style
 - Airbnb Style Guide
