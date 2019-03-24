@@ -10,7 +10,7 @@ Doesn't have to be fully featured, an MVP that can go live is fine.
 - PostgreSQL
 
 ### Coding Style
-- Airbnb Style Guide
+- AirBnb Style Guide
 
 ### Weekly Review Day & Time
 Saturdays at 7PM (8PM for Philosocode & Roo)
@@ -29,7 +29,7 @@ Review previous sprint -> prepare for upcoming sprint -> do weekly review
 **If you need help with something, ask! Git can be confusing**  
 
 ### General
-- Clonw the project
+- Clone the project
 - Branch Headers:
   + bug/fix-header
   + feature/add-task
