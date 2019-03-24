@@ -29,7 +29,7 @@ Review previous sprint -> prepare for upcoming sprint -> do weekly review
 **If you need help with something, ask! Git can be confusing**  
 
 ### General
-- Fork the project
+- Clonw the project
 - Branch Headers:
   + bug/fix-header
   + feature/add-task
