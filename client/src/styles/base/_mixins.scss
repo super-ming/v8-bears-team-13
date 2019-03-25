@@ -1,0 +1,18 @@
+@mixin chrome-styles {
+  @media screen and (-webkit-min-device-pixel-ratio:0)
+    and (min-resolution:.001dpcm) {
+      @content;
+  }
+}
+
+@mixin firefox-styles {
+  @supports (-moz-appearance: none) {
+    @content;
+  }
+}
+
+@mixin safari-styles {
+  @media not all and (min-resolution:.001dpcm){ @supports (-webkit-appearance:none) { 
+    @content;
+  }}
+}
