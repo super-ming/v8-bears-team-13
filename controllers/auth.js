@@ -2,7 +2,7 @@ const User = require('../models/User');
 
 // Do auth-related stuff...
 exports.postRegister = (req, res, next) => {
-  return res.json({ msg: 'User was registered!' });
+  return res.json({ msg: "User was registered!" });
 }
 
 exports.postLogin = (req, res, next) => {
