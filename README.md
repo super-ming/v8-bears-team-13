@@ -30,7 +30,14 @@ This will setup the table with the data in the `migrations/migration-*.sql` file
 In your terminal, run: `psql -d <dbname> -f db/seeds/users.sql`. This will insert a user into the database.
 
 ### Set Database Name
-In `db/config.js`, change the database name to the one you created.
+In the `config` folder, create a new file called `keys_dev.js` (you should also see two files there: `keys_prod.js` and `keys.js`).
+
+Put this inside `keys_dev.js`:
+```javascript
+module.exports = {
+  databaseName: '<dbname>' 
+};
+```
 
 
 ## Starting The App

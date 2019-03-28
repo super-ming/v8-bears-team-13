@@ -2,6 +2,9 @@
 node_modules/
 jspm_packages/
 
+# Keys
+/config/keys_dev.js
+
 # Logs
 logs
 *.log

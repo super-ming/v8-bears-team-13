@@ -5,19 +5,20 @@ const options = {
 };
 
 const pgp = require('pg-promise')(options);
+const keys = require('../config/keys');
 
 // eslint-disable-next-line consistent-return
 const setupDB = () => {
   if (process.env.NODE_ENV === 'development' || !process.env.NODE_ENV) {
     return pgp({
-      database: 'expense-api',
+      database: keys.databaseName,
       port: 5432,
       host: 'localhost'
     });
   }
 
   if (process.env.NODE_ENV === 'production') {
-    return pgp(process.env.DATABASE_URL);
+    return pgp(keys.databaseUrl);
   }
 };
 
