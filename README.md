@@ -20,7 +20,7 @@ Download from here: https://www.postgresql.org/download/windows/
 3. After installing Postgres with Brew, run `brew services start postgresql` in your terminal
 
 ### Create The Database
-In your terminal, run: `createdb <dbname>`. **Do not include the angle brackets < >!**
+In your terminal, make sure you're in the root directory of the project. Run: `createdb <dbname>`. **Do not include the angle brackets < >!**
 
 ### Add A Migration
 In your terminal, run: `psql -d <dbname> -f db/migrations/migration-1553750532676.sql`. 
@@ -28,6 +28,9 @@ This will setup the table with the data in the `migrations/migration-*.sql` file
 
 ### Populate Data With A Seed
 In your terminal, run: `psql -d <dbname> -f db/seeds/users.sql`. This will insert a user into the database.
+
+### Set Database Name
+In `db/config.js`, change the database name to the one you created.
 
 
 ## Starting The App

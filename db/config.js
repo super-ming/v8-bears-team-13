@@ -10,7 +10,7 @@ const pgp = require('pg-promise')(options);
 const setupDB = () => {
   if (process.env.NODE_ENV === 'development' || !process.env.NODE_ENV) {
     return pgp({
-      database: 'quotes-app',
+      database: 'expense-api',
       port: 5432,
       host: 'localhost'
     });
