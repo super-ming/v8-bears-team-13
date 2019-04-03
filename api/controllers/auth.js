@@ -4,13 +4,13 @@ const User = require('../models/User');
 
 exports.getUsers = (req, res) => {
   User.findAll()
-    .then((users) => {
+    .then(users => {
       res.json({
         message: 'Success',
         data: users
       });
     })
-    .catch((err) => {
+    .catch(err => {
       console.log(err);
       res.status(500).json({ err });
     });
@@ -18,13 +18,13 @@ exports.getUsers = (req, res) => {
 
 exports.getUserById = (req, res) => {
   User.findById(req.params.id)
-    .then((user) => {
+    .then(user => {
       res.json({
         message: 'Success',
         data: user
       });
     })
-    .catch((err) => {
+    .catch(err => {
       console.log(err);
       res.status(500).json({ err });
     });
