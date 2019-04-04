@@ -3,10 +3,6 @@
   "version": "1.0.0",
   "description": "App for tracking expenses and encouraging healthy spending habits",
   "scripts": {
-    "install:all": "concurrently \"npm:install:api\" \"npm:install:client\"",
-    "install:api": "npm install --prefix api",
-    "install:client": "npm install --prefix client",
-    
     "dev": "concurrently --kill-others \"npm:start:api\" \"npm:start:client\"",
     "start:api": "nodemon api/server.js",
     "start:client": "npm start --prefix client"

@@ -3,11 +3,9 @@
 
 
 ## Installation
-In the root directory, run:
-```
-1. `npm install`, which will install `concurrently` and `nodemon`
-2. `npm run install:all`, which will install the api and client dependencies
-```
+1. Run `npm install` in the root directory
+2. cd into `api` directory and run `npm install`
+3. cd into `client` directory and run `npm install`
 
 ## Database Setup
 Instructions obtained from this post: https://www.byteconf.com/blog/building-a-full-stack-application-with-react-and-node
