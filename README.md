@@ -6,6 +6,14 @@
 1. Run `npm install` in the root directory
 2. cd into `api` directory and run `npm install`
 3. cd into `client` directory and run `npm install`
+4. In the `api/config` folder, you should see two files: `keys.js` and `keys_prod.js`. In `api/config`, add a new file called `keys_dev.js` and put this inside:
+```javascript
+module.exports = {
+  databaseName: '<dbname>'
+};
+```
+5. In the root directory, run `npm run dev` to launch the client and the server.
+
 
 ## Database Setup
 Instructions obtained from this post: https://www.byteconf.com/blog/building-a-full-stack-application-with-react-and-node
@@ -30,8 +38,7 @@ This will setup the table with the data in the `api/migrations/migration-*.sql` 
 In your terminal, run: `psql -d <dbname> -f api/db/seeds/users.sql`. This will insert a user into the database.
 
 ### Set Database Name
-In the `api/config` folder, you should see two files: `keys.js` and `keys_prod.js`.  
-In `api/config`, create a new file called `keys_dev.js`. Put this inside:
+In the `api/config` folder, you should've created a file called `keys_dev.js`. Now, replace `<dbname` with the name of the database you created in Postgres.
 
 ```javascript
 module.exports = {
