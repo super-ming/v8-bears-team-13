@@ -6,6 +6,7 @@ module.exports = {
     "react-app",
     "airbnb"
   ],
+  "settings": { "import/resolver": { "node": { "paths": ["node_modules", "src/"] } } },
   "rules" : {
     // "indent": ["error", 2],
     "comma-dangle": ["error", "never"],
