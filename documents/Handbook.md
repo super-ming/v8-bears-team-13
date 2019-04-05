@@ -25,6 +25,11 @@ Try Asana for now. If it doesn't work out, try ZenHub + Google Calendars
 Review previous sprint -> prepare for upcoming sprint -> do weekly review
 
 
+## Team Conventions
+### React Component Names
+File names should be in PascalCase (e.g. MyComponent), where the first letter of each word is capitalized.
+Exported components should also be named this way.
+
 ## Git Workflow
 **If you need help with something, ask! Git can be confusing**  
 

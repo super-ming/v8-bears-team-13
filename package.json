@@ -1,14 +1,11 @@
 {
-  "name": "bears-13",
+  "name": "expense-tracker-app",
   "version": "1.0.0",
-  "description": "Our app",
-  "main": "index.js",
+  "description": "App for tracking expenses and encouraging healthy spending habits",
   "scripts": {
-    "client-install": "npm install --prefix client",
-    "start": "node server",
-    "server": "nodemon server",
-    "client": "npm start --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "dev": "concurrently --kill-others \"npm:start:api\" \"npm:start:client\"",
+    "start:api": "nodemon api/server.js",
+    "start:client": "npm start --prefix client"
   },
   "repository": {
     "type": "git",
@@ -20,20 +17,8 @@
     "url": "https://github.com/chingu-voyages/v8-bears-team-13/issues"
   },
   "homepage": "https://github.com/chingu-voyages/v8-bears-team-13#readme",
-  "dependencies": {
-    "bcryptjs": "^2.4.3",
-    "body-parser": "^1.18.3",
-    "concurrently": "^4.1.0",
-    "express": "^4.16.4",
-    "passport": "^0.4.0",
-    "pg": "^7.9.0",
-    "pg-promise": "^8.6.4",
-    "validator": "^10.11.0"
-  },
   "devDependencies": {
-    "eslint": "^5.15.3",
-    "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.16.0",
+    "concurrently": "^4.1.0",
     "nodemon": "^1.18.10"
   }
 }

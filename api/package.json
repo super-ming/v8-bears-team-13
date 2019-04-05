@@ -1,0 +1,35 @@
+{
+  "name": "bears-13",
+  "version": "1.0.0",
+  "description": "Our app",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server",
+    "server": "nodemon server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chingu-voyages/v8-bears-team-13.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chingu-voyages/v8-bears-team-13/issues"
+  },
+  "homepage": "https://github.com/chingu-voyages/v8-bears-team-13#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "passport": "^0.4.0",
+    "pg": "^7.9.0",
+    "pg-promise": "^8.6.4",
+    "validator": "^10.11.0"
+  },
+  "devDependencies": {
+    "eslint": "^5.15.3",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.16.0",
+    "nodemon": "^1.18.10"
+  }
+}
