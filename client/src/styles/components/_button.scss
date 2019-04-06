@@ -1,0 +1,16 @@
+.button {
+  background-color: $color-white;
+  border: 1px solid $color-green;
+  border-radius: 3px;
+  color: $color-green;
+  cursor: pointer;
+  font-size: $font-size-small;
+  height: 4rem;
+  width: 8rem;
+  transition: all .2s ease;
+
+  &:hover {
+    background-color: $color-green;
+    color: $color-white;
+  }
+}

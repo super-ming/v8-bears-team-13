@@ -1,0 +1,23 @@
+.navbar {
+  font-size: $font-size-small;
+  list-style-type: none;
+
+  display: flex;
+  justify-content: center;
+
+  &__item {
+    margin: 1rem 1rem;
+  }
+
+  &__link {
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+
+    &--active {
+      color: $color-green;
+    }
+  }
+}
