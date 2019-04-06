@@ -1,10 +1,18 @@
 .heading {
+  &__main {
+    font-size: 5rem;
+  }
+
+  &__sub {
+    font-size: 4rem;
+  }
 }
 
 .text-container {
 }
 
 .body-text {
+  font-size: $font-size-large;
 }
 
 .paragraph {

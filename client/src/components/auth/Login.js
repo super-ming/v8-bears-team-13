@@ -1,13 +1,13 @@
 import React from 'react';
 
 const initialState = {
-  name: '',
+  username: '',
   password: '',
   nameError: '',
   passwordError: ''
 };
 
-class SignIn extends React.Component {
+class Login extends React.Component {
   state = initialState;
 
   handleChange = (event) => {
@@ -50,35 +50,41 @@ class SignIn extends React.Component {
 
   render() {
     return (
-      <>
-        <div className="App">
-          <h2>Sign In</h2>
-          <form onSubmit={this.handleSubmit}>
-            <div>
+      <div className="form__container">
+        <h1 className="heading__main">Login</h1>
+        <form className="form" onSubmit={this.handleSubmit}>
+          <div className="form__group">
+            <label htmlFor="name" className="form__label">
+              Username
               <input
-                name="name"
-                placeholder="name"
-                value={this.state.name}
+                className="form__input"
+                name="username"
+                placeholder="Username"
+                value={this.state.username}
                 onChange={this.handleChange}
               />
-              <div className="Error">{this.state.nameError}</div>
-            </div>
-            <div>
+            </label>
+            <div className="error">{this.state.nameError}</div>
+          </div>
+          <div className="form__group">
+            <label htmlFor="password" className="form__label">
+              Password
               <input
+                className="form__input"
                 type="password"
                 name="password"
-                placeholder="password"
+                placeholder="Password"
                 value={this.state.password}
                 onChange={this.handleChange}
               />
-              <div className="Error">{this.state.passwordError}</div>
-            </div>
-            <button type="submit">Sign In</button>
-          </form>
-        </div>
-      </>
+            </label>
+            <div className="error">{this.state.passwordError}</div>
+          </div>
+          <button className="button" type="submit">Login</button>
+        </form>
+      </div>
     );
   }
 }
 
-export default SignIn;
+export default Login;

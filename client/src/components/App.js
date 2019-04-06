@@ -6,9 +6,14 @@ import { Provider } from 'react-redux'; // Provide app with Store/State. Wrap ar
 import store from '../store/store';
 
 // Components
+import Dashboard from './dashboard/Dashboard';
+import Footer from './layout/Footer';
+import History from './history/History';
 import Landing from './landing/Landing';
-import SignIn from './auth/SignIn';
+import Login from './auth/Login';
+import Navbar from './layout/Navbar';
 import NotFound from './error/NotFound';
+import Register from './auth/Register';
 
 // CSS
 import 'normalize.css';
@@ -21,12 +26,17 @@ class App extends Component {
     return (
       <Provider store={store}>
         <Router>
-          <div className="App">
+          <div className="app">
+            <Navbar />
             <Switch>
               <Route exact path="/" component={Landing} />
-              <Route exact path="/sign-in" component={SignIn} />
+              <Route exact path="/register" component={Register} />
+              <Route exact path="/login" component={Login} />
+              <Route exact path="/dashboard" component={Dashboard} />
+              <Route exact path="/history" component={History} />
               <Route component={NotFound} />
             </Switch>
+            <Footer />
           </div>
         </Router>
       </Provider>
