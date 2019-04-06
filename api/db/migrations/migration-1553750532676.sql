@@ -11,28 +11,33 @@ CREATE TABLE IF NOT EXISTS transactions (
 );
 
 INSERT INTO transactions VALUES
-    (0, 'Income'),
-    (1, 'Expense');
+    ('0', 'Income'),
+    ('1', 'Expense');
 
 CREATE TABLE IF NOT EXISTS categories (
   id BIGSERIAL PRIMARY KEY,
+  transact_id BOOLEAN, 
   FOREIGN KEY ("transact_id") REFERENCES "public"."transactions"("id") ON DELETE RESTRICT ON UPDATE RESTRICT,
   category_desc TEXT
 );
 
 INSERT INTO categories (transact_id, category_desc) VALUES
-    (0, 'Salary'),
-    (1, 'Groceries'),
-    (1, 'Transportation'),
-    (1, 'Utilities');
+    ('0', 'Salary'),
+    ('1', 'Groceries'),
+    ('1', 'Transportation'),
+    ('1', 'Utilities');
 
 CREATE TABLE IF NOT EXISTS balances (
+  user_id BIGSERIAL, 
   FOREIGN KEY ("user_id") REFERENCES "public"."users"("id") ON DELETE RESTRICT ON UPDATE RESTRICT,
   balance INT
 );
 
 CREATE TABLE IF NOT EXISTS entries (
   entry_id SERIAL PRIMARY KEY,
+  user_id BIGSERIAL, 
+  transact_id BOOLEAN,
+  category_id BIGSERIAL,
   FOREIGN KEY ("user_id") REFERENCES "public"."users"("id") ON DELETE RESTRICT ON UPDATE RESTRICT,
   FOREIGN KEY ("transact_id") REFERENCES "public"."transactions"("id") ON DELETE RESTRICT ON UPDATE RESTRICT,
   FOREIGN KEY ("category_id") REFERENCES "public"."categories"("id") ON DELETE RESTRICT ON UPDATE RESTRICT,
