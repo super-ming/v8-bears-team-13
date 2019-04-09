@@ -11,8 +11,8 @@
 ```javascript
 module.exports = {
   databaseName: '<dbname>',
-  user: '<dbuser>' || 'postgres',
-  password: '<dbpassword>' || ''
+  user: 'postgres', // or your database user
+  password: ''      // or your database password
 };
 ```
 5. In the root directory, run `npm run dev` to launch the client and the server.
@@ -47,9 +47,9 @@ If you created a database user, you can also replace `<dbuser>` and `<dbpassword
 
 ```javascript
 module.exports = {
-  databaseName: '<dbname>',       // dbname == the name of the database you created
-  user: '<dbuser>' || 'postgres', // don't have to change
-  password: '<dbpassword>' || ''  // don't have to change
+  databaseName: '<dbname>',    // dbname == the name of the database you created
+  user: 'postgres',            // or your database user
+  password: ''                 // or your database user's password
 };
 ```
 
