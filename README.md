@@ -11,8 +11,8 @@
 ```javascript
 module.exports = {
   databaseName: '<dbname>',
-  user: '<dbuser>',
-  password: '<dbpassword>'
+  user: '<dbuser>' || 'postgres',
+  password: '<dbpassword>' || ''
 };
 ```
 5. In the root directory, run `npm run dev` to launch the client and the server.
@@ -41,13 +41,15 @@ This will setup the table with the data in the `api/migrations/migration-*.sql` 
 In your terminal, run: `psql -d <dbname> -f api/db/seeds/users.sql`. This will insert a user into the database.
 
 ### Set Database Values
-In the `api/config` folder, you should've created a file called `keys_dev.js`. Now, replace `<dbname>`, `<dbuser>`, and `<dbpassword>` with the name of the database you created in Postgres.
+In the `api/config` folder, you should've created a file called `keys_dev.js`. Now, replace `<dbname>` with the name of the database you created in Postgres.
+
+If you created a database user, you can also replace `<dbuser>` and `<dbpassword>`.
 
 ```javascript
 module.exports = {
   databaseName: '<dbname>',       // dbname == the name of the database you created
-  user: '<dbuser>' || 'postgres', // dbuser == database user. Default: 'postgres'
-  password: '<dbpassword>' || ''  // default: ''
+  user: '<dbuser>' || 'postgres', // don't have to change
+  password: '<dbpassword>' || ''  // don't have to change
 };
 ```
 
