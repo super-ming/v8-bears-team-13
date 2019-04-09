@@ -43,7 +43,7 @@ In your terminal, run: `psql -d <dbname> -f api/db/seeds/users.sql`. This will i
 ### Set Database Values
 In the `api/config` folder, you should've created a file called `keys_dev.js`. Now, replace `<dbname>` with the name of the database you created in Postgres.
 
-If you created a database user, you can also replace `<dbuser>` and `<dbpassword>`.
+If you created a database user, you can also replace `postgres` and `''` with your database's user + password.
 
 ```javascript
 module.exports = {
