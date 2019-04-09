@@ -7,9 +7,12 @@
 2. cd into `api` directory and run `npm install`
 3. cd into `client` directory and run `npm install`
 4. In the `api/config` folder, you should see two files: `keys.js` and `keys_prod.js`. In `api/config`, add a new file called `keys_dev.js` and put this inside:
+
 ```javascript
 module.exports = {
-  databaseName: '<dbname>'
+  databaseName: '<dbname>',
+  user: '<dbuser>',
+  password: '<dbpassword>'
 };
 ```
 5. In the root directory, run `npm run dev` to launch the client and the server.
@@ -31,18 +34,20 @@ Download from here: https://www.postgresql.org/download/windows/
 In your terminal, make sure you're in the root directory of the project. Run: `createdb <dbname>`. **Do not include the angle brackets < >!**
 
 ### Add A Migration
-In your terminal, run: `psql -d <dbname> -f api/db/migrations/migration-1553750532676.sql`. 
+In your terminal, run: `psql -d <dbname> -f api/db/migrations/migration-1554797849605.sql`. 
 This will setup the table with the data in the `api/migrations/migration-*.sql` file.
 
 ### Populate Data With A Seed
 In your terminal, run: `psql -d <dbname> -f api/db/seeds/users.sql`. This will insert a user into the database.
 
-### Set Database Name
-In the `api/config` folder, you should've created a file called `keys_dev.js`. Now, replace `<dbname` with the name of the database you created in Postgres.
+### Set Database Values
+In the `api/config` folder, you should've created a file called `keys_dev.js`. Now, replace `<dbname>`, `<dbuser>`, and `<dbpassword>` with the name of the database you created in Postgres.
 
 ```javascript
 module.exports = {
-  databaseName: '<dbname>' // Where dbname == the name of the database you created in Postgres
+  databaseName: '<dbname>',       // dbname == the name of the database you created
+  user: '<dbuser>' || 'postgres', // dbuser == database user. Default: 'postgres'
+  password: '<dbpassword>' || ''  // default: ''
 };
 ```
 
