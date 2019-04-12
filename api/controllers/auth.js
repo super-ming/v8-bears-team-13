@@ -1,6 +1,7 @@
 const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 const crypto = require('crypto');
+const passport = require('passport');
 
 // encrypt plain text password with bcrypt
 const hashPassword = (password) => {
@@ -71,6 +72,23 @@ exports.getUserById = (req, res) => {
     });
 };
 
-exports.postLogin = (req, res) => res.json({ msg: 'User was logged in!' });
+exports.postLogin = (req, res) => 
+// res.json({ msg: 'User was logged in!' });
+{
+  const {user} = req;
+  const { username, password } = req.body;
+  passport.authenticate(
+    'local',
+    {session: false},
+    (error, user) => {
+      if (error || !user) {
+        res.status(400).json({ error });
+      }
+    
+    
+    }
+  )
+
+}
 
 exports.getCurrentUser = (req, res) => res.json({ msg: 'Current user' });
