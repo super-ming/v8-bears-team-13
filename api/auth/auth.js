@@ -22,6 +22,7 @@ const {secret} = require('../config/secret');
 
 
 const myLocalStrategy = new LocalStrategy(
+  // username and password are in req.body (default names are req.username and req.password)
   async (username, password, done) => {
     try {
         //User.findOne returns '1' if user exists

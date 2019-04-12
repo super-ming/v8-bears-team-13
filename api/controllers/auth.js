@@ -76,8 +76,8 @@ exports.getUserById = (req, res) => {
 
 exports.postLogin = (req, res, next) => {
   // res.json({ msg: 'User was logged in!' });
-  const {user} = req;
-  const { username, password } = req.body;
+  // const {user} = req;
+  // const { username, password } = req.body;
   passport.authenticate('local', {session: false}, (error, user) => {
       if (error || !user) {
         res.status(400).json({ error });
@@ -99,7 +99,7 @@ exports.postLogin = (req, res, next) => {
 
         // assign our jwt to the cookie
         res.cookie('jwt', token, { httpOnly: true, secure: true });
-        res.status(200).send({ username });
+        res.status(200).send(payload.username);
       });
     }
   )(req, res, next);
