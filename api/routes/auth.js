@@ -1,8 +1,11 @@
 const express = require('express');
+const cors = require('cors');
 
 const authController = require('../controllers/auth');
 
 const router = express.Router();
+
+router.options('/register', cors());
 
 // All routes in this file start with `api/auth`
 
@@ -19,7 +22,7 @@ router.get('/users', authController.getUsers);
 // @route   POST api/auth/register
 // @desc    Register user
 // @access  Public
-router.post('/register', authController.register);
+router.post('/register', cors(), authController.validate('register'), authController.register);
 
 // @route   POST api/auth/login
 // @desc    Login user
