@@ -9,7 +9,8 @@ const initialState = {
   emailError: '',
   passwordError: '',
   repasswordError: '',
-  nomatch: ''
+  nomatch: '',
+  serverError: ''
 };
 
 class Register extends React.Component {
@@ -28,32 +29,36 @@ class Register extends React.Component {
     let repasswordError = '';
     let nomatch = '';
 
-    if (!this.state.name) {
-      nameError = 'name cannot be blank';
+    if (!this.state.username) {
+      nameError = 'Name cannot be blank';
     }
 
     if (!this.state.email) {
-      emailError = 'email cannot be blank';
+      emailError = 'Email cannot be blank';
     }
 
-    if (this.state.email.length < 5) {
+    if(this.state.email.length < 4) {
       if (!this.state.email.includes('@')) {
-        emailError = 'invalid email';
+        emailError = 'Invalid email';
       } else {
-        emailError = 'length must be greater than 5';
+        emailError = 'Email length must be greater than 4 characters'
       }
+    }
+      
+    if (this.state.password.length < 6) {
+      passwordError = 'Length must be greater than 6 characters';
     }
 
     if (!this.state.password) {
-      passwordError = 'password cannot be blank';
+      passwordError = 'Password cannot be blank';
     }
 
     if (!this.state.repassword) {
-      repasswordError = 'password cannot be blank';
+      repasswordError = 'Please re-enter your password';
     }
 
     if (this.state.repassword !== this.state.password) {
-      nomatch = 'passwords must match';
+      nomatch = 'Passwords must match';
     }
 
     if (emailError || nameError || passwordError || repasswordError || nomatch) {
@@ -70,12 +75,33 @@ class Register extends React.Component {
     return true;
   };
 
+  handleFetchErrors = (response) => {
+    if (!response.ok) {
+      response.text().then((body) => { this.setState({ serverError: JSON.parse(body).error }); });
+      throw Error(response.statusText);
+    }
+    return response;
+}
+
   handleSubmit = (event) => {
     event.preventDefault();
     const isValid = this.validate();
 
     if (isValid) {
-      this.setState(initialState);
+      const url = 'http://localhost:5000/api/auth/register';
+      const { username, email, password } = this.state;
+      const data = JSON.stringify({ email, username, password });
+      fetch(url, {
+        method: 'POST',
+        body: data,
+        headers: {'Content-type': 'application/json'}
+      })
+        .then(res => this.handleFetchErrors(res))
+        .then((res) => {
+          this.setState(initialState);
+          res.json();
+        })
+        .catch(err => console.log(err))
     }
   };
 
@@ -83,21 +109,24 @@ class Register extends React.Component {
     return (
       <div>
         <h1 className="heading__main">Register</h1>
-
         <form className="form" onSubmit={this.handleSubmit}>
           <div className="form__group">
+            <label htmlFor="username">Username: </label>
             <input
+              id="username"  
               className="form__input"
               type="text"
               name="username"
               placeholder="Username"
-              value={this.state.name}
+              value={this.state.username}
               onChange={this.handleChange}
             />
             <div className="error">{this.state.nameError}</div>
           </div>
           <div className="form__group">
+            <label htmlFor="email">Email: </label>
             <input
+              id="email"
               className="form__input"
               type="email"
               name="email"
@@ -108,7 +137,9 @@ class Register extends React.Component {
             <div className="error">{this.state.emailError}</div>
           </div>
           <div className="form__group">
+            <label htmlFor="password">Password: </label>
             <input
+              id="password"
               className="form__input"
               type="password"
               name="password"
@@ -119,7 +150,9 @@ class Register extends React.Component {
             <div className="error">{this.state.passwordError}</div>
           </div>
           <div className="form__group">
+            <label htmlFor="repasssword">Re-enter password: </label>
             <input
+              id="repassword"
               className="form__input"
               type="password"
               name="repassword"
@@ -129,6 +162,12 @@ class Register extends React.Component {
             />
             <div className="error">{this.state.repasswordError}</div>
             <div className="error">{this.state.nomatch}</div>
+            {
+              this.state.serverError && (
+                this.state.serverError.map((err, idx) => (
+                  <div className="error" key={idx}>{err}</div>
+                )))
+            }
           </div>
           <button className="button" type="submit">Register</button>
         </form>
