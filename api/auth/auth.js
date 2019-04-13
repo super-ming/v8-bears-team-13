@@ -22,8 +22,10 @@ const bcrypt = require('bcryptjs');
 // used in tandem with token to generate a 'hashed' token value
 const {secret} = require('../config/secret');
 
+// need moment for time
+const moment = require('moment');
+
 const cookieExtractor = (req) => {
-  console.log(req.cookies);
   let token = null;
   if (req && req.cookies)
   {
@@ -61,11 +63,11 @@ const myLocalStrategy = new LocalStrategy(
 
 const myJWTStrategy = new JWTStrategy({
     // extract jwt object from cookie
-    jwtFromRequest: req => cookieExtractor(req),
+    jwtFromRequest: req => req.cookies.jwt,
     secretOrKey: secret
   },
   (jwtPayload, done) => {
-    if (Date.now() > jwtPayload.expires) {
+    if (moment() > jwtPayload.expires) {
       return done('jwt expired');
     }
     return done(null, jwtPayload);

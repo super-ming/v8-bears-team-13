@@ -4,7 +4,7 @@ const crypto = require('crypto');
 const passport = require('passport');
 const {secret} = require('../config/secret');
 const jwt = require('jsonwebtoken');
-
+const moment = require('moment');
 // encrypt plain text password with bcrypt
 const hashPassword = (password) => {
   const saltRounds = 12;
@@ -75,7 +75,6 @@ exports.getUserById = (req, res) => {
 };
 
 exports.postLogin = (req, res, next) => {
-  // res.json({ msg: 'User was logged in!' });
   const {user} = req;
   const { username, password } = req.body;
   passport.authenticate('local', {session: false}, (error, user) => {
@@ -87,7 +86,7 @@ exports.postLogin = (req, res, next) => {
       // create payload for JWT token
       const payload = {
         username: username,
-        expires: Date.now() + 1
+        expires: moment().add(1, 'day')
       };
 
       // assigns payload to req.user
@@ -95,18 +94,17 @@ exports.postLogin = (req, res, next) => {
         if (error) {
           res.status(400).send({ error });
         }
-        // generate a signed json web token and return it in the response */
+        // generate a signed json web token and return it in the response
         const token = jwt.sign(JSON.stringify(payload), secret);
 
         // assign our jwt to the cookie
+        // change to secure true in prod, but false in dev for cookie to work
         res.cookie('jwt', token, { httpOnly: true, secure: false });
         
         res.status(200).send(payload);
       });
     }
     }
-    
-  
   )(req, res, next);
 
 };
