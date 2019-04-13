@@ -1,19 +1,29 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 
-require('./auth/auth');
-
-const authRoutes = require('./routes/auth');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+
+
 
 // Setup body-parser
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+app.use(cookieParser());
+
+
+
+require('./auth/auth');
+
+const authRoutes = require('./routes/auth');
+
 // Routes will begin with `/api/auth`
 app.use('/api/auth', authRoutes);
+
+
 
 app.get('/', (req, res) => {
   res.json({ info: 'Node, Express, Postgres API' });

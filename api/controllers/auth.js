@@ -2,7 +2,7 @@ const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 const crypto = require('crypto');
 const passport = require('passport');
-const {secret} = require('./config/secret');
+const {secret} = require('../config/secret');
 const jwt = require('jsonwebtoken');
 
 // encrypt plain text password with bcrypt
@@ -76,17 +76,18 @@ exports.getUserById = (req, res) => {
 
 exports.postLogin = (req, res, next) => {
   // res.json({ msg: 'User was logged in!' });
-  // const {user} = req;
-  // const { username, password } = req.body;
+  const {user} = req;
+  const { username, password } = req.body;
   passport.authenticate('local', {session: false}, (error, user) => {
-      if (error || !user) {
+
+      if (error) {
         res.status(400).json({ error });
-      }
-      
+        res.end();
+      } else {
       // create payload for JWT token
       const payload = {
-        username: user.username,
-        expires: Date.now() + parseInt(process.env.JWT_EXPIRATION_MS)
+        username: username,
+        expires: Date.now() + 1
       };
 
       // assigns payload to req.user
@@ -98,10 +99,14 @@ exports.postLogin = (req, res, next) => {
         const token = jwt.sign(JSON.stringify(payload), secret);
 
         // assign our jwt to the cookie
-        res.cookie('jwt', token, { httpOnly: true, secure: true });
-        res.status(200).send(payload.username);
+        res.cookie('jwt', token, { httpOnly: true, secure: false });
+        
+        res.status(200).send(payload);
       });
     }
+    }
+    
+  
   )(req, res, next);
 
 };

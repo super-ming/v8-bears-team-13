@@ -35,11 +35,18 @@ router.post('/register', authController.register);
 // @route   POST api/auth/login
 // @desc    Login user
 // @access  Public
-router.post('/login', passport.authenticate('jwt', {session: false}), authController.postLogin);
+router.post('/login', authController.postLogin);
 
 // @route   GET api/auth/current
 // @desc    Return current user
 // @access  Private
 router.get('/current', authController.getCurrentUser);
+
+
+// for testing auth route that needs token once user has logged in
+router.get('/testauth', passport.authenticate('jwt', {session: false}), (req,res) => {
+    res.send("success!");
+
+});
 
 module.exports = router;
