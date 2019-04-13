@@ -4,6 +4,24 @@ const authController = require('../controllers/auth');
 
 const router = express.Router();
 
+const passport = require('passport');
+
+// use as middleware for routes that need auth
+// passport.authenticate('jwt', {session: false})
+// example 
+// router.get(
+//      '/path', 
+//      passport.authenticate('jwt', {session: false}),
+//      (req, res) => ....
+// )
+
+
+// for testing auth route that needs token/cookie once user has logged in
+router.get('/testauth', passport.authenticate('jwt', {session: false}), (req,res) => {
+    res.send("success!");
+});
+
+
 // All routes in this file start with `api/auth`
 
 /*  @route   GET api/auth/test
@@ -30,5 +48,6 @@ router.post('/login', authController.postLogin);
 // @desc    Return current user
 // @access  Private
 router.get('/current', authController.getCurrentUser);
+
 
 module.exports = router;
