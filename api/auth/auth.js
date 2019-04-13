@@ -5,7 +5,7 @@ const passportJWT = require('passport-jwt');
 
 // passport strategies
 // calling passport.authenticate('local') or passport.authenticate('jwt')
-// will invoke the strategies (think: action and reducers)
+// will invoke the strategies (think: calling action invokes reducers)
 // local strategy will authenticate user
 // jwt token strategy will generate token
 const LocalStrategy = require('passport-local').Strategy;
@@ -25,21 +25,21 @@ const {secret} = require('../config/secret');
 // need moment for time
 const moment = require('moment');
 
-const cookieExtractor = (req) => {
-  let token = null;
-  if (req && req.cookies)
-  {
-      token = req.cookies['jwt'];
-  }
-  return token;
-};
+// const cookieExtractor = (req) => {
+//   let token = null;
+//   if (req && req.cookies)
+//   {
+//       token = req.cookies['jwt'];
+//   }
+//   return token;
+// };
 
 
 const myLocalStrategy = new LocalStrategy(
   // username and password are in req.body (default names are req.username and req.password)
   async (username, password, done) => {
     try {
-        //User.findOne returns '1' if user exists
+        // User.findOne returns '1' if user exists
         const user = await User.findOne(username)
             .then(foundUser => {
                 foundUser === 1 ? username : foundUser;

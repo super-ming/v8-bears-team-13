@@ -15,6 +15,13 @@ const passport = require('passport');
 //      (req, res) => ....
 // )
 
+
+// for testing auth route that needs token/cookie once user has logged in
+router.get('/testauth', passport.authenticate('jwt', {session: false}), (req,res) => {
+    res.send("success!");
+});
+
+
 // All routes in this file start with `api/auth`
 
 /*  @route   GET api/auth/test
@@ -42,11 +49,5 @@ router.post('/login', authController.postLogin);
 // @access  Private
 router.get('/current', authController.getCurrentUser);
 
-
-// for testing auth route that needs token once user has logged in
-router.get('/testauth', passport.authenticate('jwt', {session: false}), (req,res) => {
-    res.send("success!");
-
-});
 
 module.exports = router;

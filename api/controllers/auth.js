@@ -78,7 +78,6 @@ exports.postLogin = (req, res, next) => {
   const {user} = req;
   const { username, password } = req.body;
   passport.authenticate('local', {session: false}, (error, user) => {
-
       if (error) {
         res.status(400).json({ error });
         res.end();

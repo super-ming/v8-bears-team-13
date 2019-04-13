@@ -12,10 +12,10 @@ const PORT = process.env.PORT || 5000;
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+// Need to read cookie
 app.use(cookieParser());
 
-
-
+// passport strategies
 require('./auth/auth');
 
 const authRoutes = require('./routes/auth');
