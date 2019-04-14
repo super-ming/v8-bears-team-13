@@ -6,13 +6,15 @@ import rootReducer from "../reducers"; // /reducers/index.js
 const initialState = {};
 const middleware = [thunk];
 
+// eslint-disable-next-line no-underscore-dangle
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
 // Reducer, Initial State, Middleware
 const store = createStore(
   rootReducer,
   initialState,
-  compose(
-    applyMiddleware(...middleware),
-    window.navigator.userAgent.includes("Chrome") ? window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() : compose,
+  composeEnhancers(
+    applyMiddleware(...middleware)
   )
 );
 
