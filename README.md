@@ -11,8 +11,9 @@
 ```javascript
 module.exports = {
   databaseName: '<dbname>',
-  user: 'postgres', // or your database user
-  password: ''      // or your database password
+  user: 'postgres',   // or your database user
+  password: '',       // or your database password
+  secret: "<secret>"    // secret for JWT strategy
 };
 ```
 5. In the root directory, run `npm run dev` to launch the client and the server.
@@ -47,9 +48,10 @@ If you created a database user, you can also replace `postgres` and `''` with yo
 
 ```javascript
 module.exports = {
-  databaseName: '<dbname>',    // dbname == the name of the database you created
-  user: 'postgres',            // or your database user
-  password: ''                 // or your database user's password
+  databaseName: '<dbname>',     // dbname == the name of the database you created
+  user: 'postgres',             // or your database user
+  password: '',                 // or your database user's password
+  secret: "<secret>"            // secret for JWT strategy
 };
 ```
 
