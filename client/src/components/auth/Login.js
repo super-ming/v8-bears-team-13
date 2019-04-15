@@ -50,12 +50,13 @@ class Login extends React.Component {
 
   render() {
     return (
-      <div className="form__container">
-        <h1 className="heading__main">Login</h1>
-        <form className="form" onSubmit={this.handleSubmit}>
-          <div className="form__group">
-            <label htmlFor="name" className="form__label">
-              Username
+      <div className="content">
+        <div className="form__container">
+          <h1 className="heading__main">Login</h1>
+          <form className="form" onSubmit={this.handleSubmit}>
+            <div className="form__group">
+              <label htmlFor="name" className="form__label">
+                Username
               <input
                 className="form__input"
                 name="username"
@@ -70,20 +71,21 @@ class Login extends React.Component {
             <label htmlFor="password" className="form__label">
               Password
               <input
-                className="form__input"
-                type="password"
-                name="password"
-                placeholder="Password"
-                value={this.state.password}
-                onChange={this.handleChange}
-              />
-            </label>
-            <div className="error">{this.state.passwordError}</div>
-          </div>
-          <button className="button" type="submit">
-            Login
+                  className="form__input"
+                  type="password"
+                  name="password"
+                  placeholder="Password"
+                  value={this.state.password}
+                  onChange={this.handleChange}
+                />
+              </label>
+              <div className="error">{this.state.passwordError}</div>
+            </div>
+            <button className="button" type="submit">
+              Login
           </button>
-        </form>
+          </form>
+        </div>
       </div>
     );
   }
