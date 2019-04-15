@@ -65,13 +65,13 @@ class Register extends React.Component {
       errors['repassword'] = 'Please re-enter your password';
     }
 
-    if (touched['repassword'] && fields['repassword'] !== fields['password']) {
-      formValid = false;
-      nomatch = 'Passwords must match';
-    }
-
-    if (touched['repassword'] && fields['repassword'] === fields['password']) {
-      nomatch = '';
+    if (touched['repassword']) {
+      if (fields['repassword'] !== fields['password']) {
+        formValid = false;
+        nomatch = 'Passwords must match';
+      } else {
+        nomatch = '';
+      }
     }
 
     if (!formValid) {
@@ -79,8 +79,6 @@ class Register extends React.Component {
         errors,
         nomatch
       });
-      console.log(this.state);
-      debugger
       return formValid;
     }
 
@@ -109,8 +107,8 @@ class Register extends React.Component {
     const isValid = this.validate();
     if (isValid) {
       const url = 'http://localhost:5000/api/auth/register';
-      const { username, email, password } = this.state;
-      const data = JSON.stringify({ email, username, password });
+      const { username, email, password } = this.state.fields;
+      const data = JSON.stringify({ username, email, password });
       fetch(url, {
         method: 'POST',
         body: data,
