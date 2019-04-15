@@ -40,8 +40,8 @@ class Register extends React.Component {
       formValid = false;
       errors['email'] = 'Email cannot be blank';
     }
-    
-    if(touched['email'] && fields['email'] && fields['email'].length < 4) {
+
+    if (touched['email'] && fields['email'] && fields['email'].length < 4) {
       formValid = false;
       if (!fields['email'].includes('@')) {
         errors['email'] = 'Invalid email';
@@ -54,7 +54,7 @@ class Register extends React.Component {
       formValid = false;
       errors['password'] = 'Password cannot be blank';
     }
-      
+
     if (touched['password'] && fields['password'] && fields['password'].length < 6) {
       formValid = false;
       errors['password'] = 'Length must be greater than 6 characters';
@@ -84,7 +84,7 @@ class Register extends React.Component {
       return formValid;
     }
 
-    if(formValid) {
+    if (formValid) {
       this.setState({
         ...this.state.fields,
         errors: {},
@@ -114,14 +114,14 @@ class Register extends React.Component {
       fetch(url, {
         method: 'POST',
         body: data,
-        headers: {'Content-type': 'application/json'}
+        headers: { 'Content-type': 'application/json' }
       })
         .then(res => this.handleFetchErrors(res))
         .then((res) => {
           this.setState(initialState);
           res.json();
         })
-        .catch(err => console.log(err))
+        .catch(err => console.log(err));
     }
   };
 
@@ -134,7 +134,7 @@ class Register extends React.Component {
             <label htmlFor="username">Username: </label>
             <input
               required
-              id="username"  
+              id="username"
               className="form__input"
               type="text"
               name="username"
@@ -176,7 +176,7 @@ class Register extends React.Component {
             <div className="error">{this.state.errors.password}</div>
           </div>
           <div className="form__group">
-            <label htmlFor="repasssword">Re-enter password: </label>
+            <label htmlFor="repassword">Re-enter password: </label>
             <input
               required
               id="repassword"

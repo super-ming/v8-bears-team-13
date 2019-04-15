@@ -24,7 +24,7 @@ const Navbar = () => (
         <NavLink to="/history" className="navbar__link" activeClassName="navbar__link--active"><button className="navbutton">History</button></NavLink>
       </li>
     </ul>
-  </div >
+  </div>
 );
 
 export default Navbar;
