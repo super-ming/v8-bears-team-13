@@ -20,7 +20,7 @@ class Login extends React.Component {
     let usernameError = '';
     let passwordError = '';
 
-    if (!this.state.name) {
+    if (!this.state.username) {
       usernameError = 'Username cannot be blank';
     }
 
@@ -57,20 +57,20 @@ class Login extends React.Component {
             <div className="form__group">
               <label htmlFor="name" className="form__label">
                 Username
-              <input
-                className="form__input"
-                name="username"
-                placeholder="Username"
-                value={this.state.username}
-                onChange={this.handleChange}
-              />
-            </label>
-            <div className="error">{this.state.usernameError}</div>
-          </div>
-          <div className="form__group">
-            <label htmlFor="password" className="form__label">
-              Password
-              <input
+                <input
+                  className="form__input"
+                  name="username"
+                  placeholder="Username"
+                  value={this.state.username}
+                  onChange={this.handleChange}
+                />
+              </label>
+              <div className="error">{this.state.usernameError}</div>
+            </div>
+            <div className="form__group">
+              <label htmlFor="password" className="form__label">
+                Password
+                <input
                   className="form__input"
                   type="password"
                   name="password"
@@ -83,7 +83,7 @@ class Login extends React.Component {
             </div>
             <button className="button" type="submit">
               Login
-          </button>
+            </button>
           </form>
         </div>
       </div>

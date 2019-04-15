@@ -55,7 +55,7 @@ exports.register = (req, res, next) => {
       return next(new Error(result.array()))
   } else {
      // check if username already exist
-    User.findOneByUsername(username) 
+    User.findOne(username) 
     .then(foundUser => {
       if(foundUser !== null) {
         res.json('This username is already taken. Please choose another one.')
@@ -64,7 +64,7 @@ exports.register = (req, res, next) => {
           .then((hashedPassword) => {
             delete password;
             // set user's password to encrypted password and add to database
-            return User.createUser(username, email, hashedPassword)
+            return User.createUser(email, username, hashedPassword)
               .then(newUser => {
                 res.json(newUser);
               })
