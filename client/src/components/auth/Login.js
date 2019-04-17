@@ -53,7 +53,8 @@ class Login extends React.Component {
     fetch(url, {
       method: 'POST',
       body: data,
-      headers: { 'Content-Type': 'application/json' }
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include'
     })
       .then(this.handleFetchErrors)
       .then(res => res.json())
