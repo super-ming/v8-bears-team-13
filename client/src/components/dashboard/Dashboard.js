@@ -1,15 +1,10 @@
 import React from 'react';
-import Cookies from 'universal-cookie';
+import getCookies from '../../utils/getCookies';
 
 class Dashboard extends React.Component {
-  state = {
-    isAuthenticated: false
-  }
-
   componentDidMount() {
-    const cookies = new Cookies();
-    console.log(cookies.get('jwt'));
-    console.log(cookies.getAll());
+    const cookies = getCookies();
+    console.log(cookies);
   }
 
   render() {

@@ -59,7 +59,6 @@ class Login extends React.Component {
       .then(this.handleFetchErrors)
       .then(res => res.json())
       .then((res) => {
-        console.log('Res', res);
         this.props.history.push('/dashboard');
       })
       .catch(err => console.log(err));
