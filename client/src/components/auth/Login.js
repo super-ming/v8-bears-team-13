@@ -4,7 +4,8 @@ const initialState = {
   username: '',
   password: '',
   usernameError: '',
-  passwordError: ''
+  passwordError: '',
+  serverError: ''
 };
 
 class Login extends React.Component {
@@ -39,14 +40,37 @@ class Login extends React.Component {
     return true;
   };
 
-  handleSubmit = (event) => {
+  handleSubmit = async (event) => {
     event.preventDefault();
     const isValid = this.validate();
 
-    if (isValid) {
-      this.setState(initialState);
-    }
+    if (!isValid) return;
+
+    const { username, password } = this.state;
+    const url = 'http://localhost:5000/api/auth/login';
+    const data = JSON.stringify({ username, password });
+
+    fetch(url, {
+      method: 'POST',
+      body: data,
+      headers: { 'Content-Type': 'application/json' }
+    })
+      .then(this.handleFetchErrors)
+      .then((res) => {
+        res.json();
+        this.props.history.push('/dashboard');
+      })
+      .catch(err => console.log(err));
   };
+
+  handleFetchErrors = (response) => {
+    if (!response.ok) {
+      response.text().then((body) => { this.setState({ serverError: JSON.parse(body).error }); });
+      throw Error(response.statusText);
+    }
+
+    return response;
+  }
 
   render() {
     return (
@@ -84,6 +108,7 @@ class Login extends React.Component {
             <button className="button" type="submit">
               Login
             </button>
+            <div className="error">{this.state.serverError}</div>
           </form>
         </div>
       </div>
