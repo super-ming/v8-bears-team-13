@@ -56,8 +56,9 @@ class Login extends React.Component {
       headers: { 'Content-Type': 'application/json' }
     })
       .then(this.handleFetchErrors)
+      .then(res => res.json())
       .then((res) => {
-        res.json();
+        console.log('Res', res);
         this.props.history.push('/dashboard');
       })
       .catch(err => console.log(err));
