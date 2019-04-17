@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs');
 const crypto = require('crypto');
 const { body, check, validationResult } = require('express-validator/check');
 const passport = require('passport');
-const {secret} = require('../config/secret');
+const keys = require('../config/keys');
 const jwt = require('jsonwebtoken');
 const moment = require('moment');
 
@@ -125,7 +125,7 @@ exports.postLogin = (req, res, next) => {
           res.status(400).send({ error });
         }
         // generate a signed json web token and return it in the response
-        const token = jwt.sign(JSON.stringify(payload), secret);
+        const token = jwt.sign(JSON.stringify(payload), keys.secret);
 
         // assign our jwt to the cookie
         // change to secure true in prod, but false in dev for cookie to work
