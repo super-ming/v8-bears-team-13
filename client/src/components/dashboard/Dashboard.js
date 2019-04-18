@@ -1,10 +1,7 @@
 import React from 'react';
-import getCookies from '../../utils/getCookies';
 
 class Dashboard extends React.Component {
   componentDidMount() {
-    const cookies = getCookies();
-    console.log(cookies);
   }
 
   render() {
