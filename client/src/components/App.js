@@ -6,6 +6,8 @@ import { Provider } from 'react-redux'; // Provide app with Store/State. Wrap ar
 import store from '../store/store';
 
 // Components
+import PrivateRoute from './auth/PrivateRoute';
+
 import Dashboard from './dashboard/Dashboard';
 import Footer from './layout/Footer';
 import History from './history/History';
@@ -32,8 +34,9 @@ class App extends Component {
               <Route exact path="/" component={Landing} />
               <Route exact path="/register" component={Register} />
               <Route exact path="/login" component={Login} />
-              <Route exact path="/dashboard" component={Dashboard} />
-              <Route exact path="/history" component={History} />
+
+              <PrivateRoute exact path="/dashboard" component={Dashboard} />
+              <PrivateRoute exact path="/history" component={History} />
               <Route component={NotFound} />
             </Switch>
             <Footer />

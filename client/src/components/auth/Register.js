@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 
 const initialState = {
   fields: {},
@@ -118,6 +119,7 @@ class Register extends React.Component {
         .then((res) => {
           this.setState(initialState);
           res.json();
+          this.props.history.push('/login');
         })
         .catch(err => console.log(err));
     }
@@ -202,4 +204,4 @@ class Register extends React.Component {
   }
 }
 
-export default Register;
+export default withRouter(Register);
