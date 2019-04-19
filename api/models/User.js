@@ -7,6 +7,7 @@ const createUser = (email, username, password) => {
 
 exports.createUser = createUser;
 exports.findAll = () => db.query('SELECT * FROM users');
-exports.findById = id => db.oneOrNone('SELECT * FROM users WHERE id = $1', [id]);
 exports.findOne = username => db.oneOrNone('SELECT 1 FROM users where lower(username)=$1', [username.toLowerCase()]);
+exports.findById = id => db.oneOrNone('SELECT * FROM users WHERE id = $1', [id]);
+exports.findByEmail = email => db.oneOrNone('SELECT 1 FROM users where lower(email)=$1', [email.toLowerCase()]);
 exports.findPassword = username => db.oneOrNone('SELECT password from users where lower(username)=$1', [username.toLowerCase()]);
