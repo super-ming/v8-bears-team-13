@@ -7,7 +7,7 @@ class Dashboard extends React.Component {
   render() {
     return (
       <div className="dashboard">
-        <h1 className="heading__main">Dashboard</h1>
+        <h1 className="heading-main">Dashboard</h1>
         <div className="content">
           <p className="body-text">This is what logged in users will see</p>
         </div>
