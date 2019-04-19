@@ -1,12 +1,13 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 const initialState = {
   fields: {},
   errors: {},
+  serverError: '',
   touched: {},
   nomatch: '',
-  serverError: ''
+  redirectToLogin: false
 };
 
 class Register extends React.Component {
@@ -51,14 +52,16 @@ class Register extends React.Component {
       }
     }
 
-    if (touched['password'] && !fields['password']) {
-      formValid = false;
-      errors['password'] = 'Password cannot be blank';
-    }
+    if (touched['password']) {
+      if (!fields['password']) {
+        formValid = false;
+        errors['password'] = 'Password cannot be blank';
+      }
 
-    if (touched['password'] && fields['password'] && fields['password'].length < 6) {
-      formValid = false;
-      errors['password'] = 'Length must be greater than 6 characters';
+      if (fields['password'] && fields['password'].length < 6) {
+        formValid = false;
+        errors['password'] = 'Password must be at least 6 characters';
+      }
     }
 
     if (touched['repassword'] && !fields['repassword']) {
@@ -75,14 +78,6 @@ class Register extends React.Component {
       }
     }
 
-    if (!formValid) {
-      this.setState({
-        errors,
-        nomatch
-      });
-      return formValid;
-    }
-
     if (formValid) {
       this.setState({
         ...this.state.fields,
@@ -91,39 +86,52 @@ class Register extends React.Component {
         nomatch: '',
         serverError: ''
       });
-      return formValid;
+    } else {
+      this.setState({
+        errors,
+        nomatch
+      });
     }
+
+    return formValid;
   };
 
-  handleFetchErrors = (response) => {
-    if (!response.ok) {
-      response.text().then((body) => { this.setState({ serverError: JSON.parse(body).error }); });
-      throw Error(response.statusText);
-    }
-    return response;
-  }
-
-  handleSubmit = (event) => {
+  handleSubmit = async (event) => {
     event.preventDefault();
     const isValid = this.validate();
-    if (isValid) {
-      const url = 'http://localhost:5000/api/auth/register';
-      const { username, email, password } = this.state.fields;
-      const data = JSON.stringify({ username, email, password });
-      fetch(url, {
-        method: 'POST',
-        body: data,
-        headers: { 'Content-type': 'application/json' }
+
+    if (!isValid) return;
+
+    const url = 'http://localhost:5000/api/auth/register';
+    const { username, email, password } = this.state.fields;
+    const data = JSON.stringify({ username, email, password });
+
+    fetch(url, {
+      method: 'POST',
+      body: data,
+      headers: { 'Content-type': 'application/json' }
+    })
+      .then(fetchRes => this.handleFetchErrors(fetchRes))
+      .then((res) => {
+        this.setState({
+          fields: {},
+          errors: {},
+          serverError: '',
+          redirectToLogin: true
+        }, () => console.log(this.state));
       })
-        .then(res => this.handleFetchErrors(res))
-        .then((res) => {
-          this.setState(initialState);
-          res.json();
-          this.props.history.push('/login');
-        })
-        .catch(err => console.log(err));
-    }
+      .catch(err => console.log('Error while fetching', err));
   };
+
+  handleFetchErrors = async (response) => {
+    if (response.ok) return response;
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      this.setState({ serverError: errorData.error });
+      throw new Error(response.statusText);
+    }
+  }
 
   render() {
     return (
@@ -190,18 +198,14 @@ class Register extends React.Component {
             />
             <div className="error">{this.state.errors.repassword}</div>
             <div className="error">{this.state.nomatch}</div>
-            {
-              this.state.serverError && (
-                this.state.serverError.map((err, idx) => (
-                  <div className="error" key={idx}>{err}</div>
-                )))
-            }
+            <div className="error">{this.state.serverError}</div>
           </div>
           <button className="button" type="submit">Register</button>
         </form>
+        { this.state.redirectToLogin && <Redirect to="/login" /> }
       </div>
     );
   }
 }
 
-export default withRouter(Register);
+export default Register;
