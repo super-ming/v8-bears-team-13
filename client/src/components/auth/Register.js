@@ -2,7 +2,10 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 
 const initialState = {
-  fields: {},
+  username: '',
+  email: '',
+  password: '',
+  repassword: '',
   errors: {},
   serverError: '',
   touched: {},
@@ -14,83 +17,74 @@ class Register extends React.Component {
   state = initialState;
 
   handleChange = (event) => {
-    let { fields } = this.state;
     const { name, value } = event.target;
-    fields[name] = value;
+
     this.setState({
-      fields
+      [name]: value
     });
   };
 
   handleBlur = field => (event) => {
-    this.setState({
-      touched: { ...this.state.touched, [field]: true }
-    }, this.validate);
+    this.setState(prevState => ({
+      touched: { ...prevState.touched, [field]: true }
+    }), this.validate);
   }
 
   validate = () => {
-    let { fields, touched, nomatch } = this.state;
-    let errors = {};
+    const {
+      username, email, password, repassword, touched
+    } = this.state;
+
+    const errors = {};
+
+    let nomatch = '';
     let formValid = true;
 
-    if (touched['username'] && !fields['username']) {
+    if (touched['username'] && !username) {
       formValid = false;
       errors['username'] = 'Name cannot be blank';
     }
 
-    if (touched['email'] && !fields['email']) {
+    if (touched['email'] && !email) {
       formValid = false;
       errors['email'] = 'Email cannot be blank';
     }
 
-    if (touched['email'] && fields['email'] && fields['email'].length < 4) {
+    if (touched['email'] && email.length < 4) {
       formValid = false;
-      if (!fields['email'].includes('@')) {
+      if (!email.includes('@')) {
         errors['email'] = 'Invalid email';
       } else {
-        errors['email'] = 'Email length must be greater than 4 characters'
+        errors['email'] = 'Email length must be greater than 4 characters';
       }
     }
 
-    if (touched['password']) {
-      if (!fields['password']) {
-        formValid = false;
-        errors['password'] = 'Password cannot be blank';
-      }
-
-      if (fields['password'] && fields['password'].length < 6) {
-        formValid = false;
-        errors['password'] = 'Password must be at least 6 characters';
-      }
+    if (touched['password'] && password.length < 6) {
+      formValid = false;
+      errors['password'] = 'Password must be at least 6 characters';
     }
 
-    if (touched['repassword'] && !fields['repassword']) {
+    if (touched['repassword'] && !repassword) {
       formValid = false;
       errors['repassword'] = 'Please re-enter your password';
     }
 
-    if (touched['repassword']) {
-      if (fields['repassword'] !== fields['password']) {
-        formValid = false;
-        nomatch = 'Passwords must match';
-      } else {
-        nomatch = '';
-      }
+    if (touched['repassword'] && repassword !== password) {
+      formValid = false;
+      nomatch = 'Passwords must match';
+    } else {
+      nomatch = '';
     }
 
     if (formValid) {
-      this.setState({
-        ...this.state.fields,
+      this.setState(prevState => ({
+        ...prevState,
         errors: {},
-        ...this.state.touched,
         nomatch: '',
         serverError: ''
-      });
+      }));
     } else {
-      this.setState({
-        errors,
-        nomatch
-      });
+      this.setState({ errors, nomatch });
     }
 
     return formValid;
@@ -103,7 +97,7 @@ class Register extends React.Component {
     if (!isValid) return;
 
     const url = 'http://localhost:5000/api/auth/register';
-    const { username, email, password } = this.state.fields;
+    const { username, email, password } = this.state;
     const data = JSON.stringify({ username, email, password });
 
     fetch(url, {
@@ -114,11 +108,9 @@ class Register extends React.Component {
       .then(fetchRes => this.handleFetchErrors(fetchRes))
       .then((res) => {
         this.setState({
-          fields: {},
-          errors: {},
-          serverError: '',
+          ...initialState,
           redirectToLogin: true
-        }, () => console.log(this.state));
+        });
       })
       .catch(err => console.log('Error while fetching', err));
   };
@@ -147,7 +139,7 @@ class Register extends React.Component {
               type="text"
               name="username"
               placeholder="Username"
-              value={this.state.fields.username || ''}
+              value={this.state.username || ''}
               onChange={this.handleChange}
               onBlur={this.handleBlur('username')}
             />
@@ -162,7 +154,7 @@ class Register extends React.Component {
               type="email"
               name="email"
               placeholder="Email"
-              value={this.state.fields.email || ''}
+              value={this.state.email || ''}
               onChange={this.handleChange}
               onBlur={this.handleBlur('email')}
             />
@@ -177,7 +169,7 @@ class Register extends React.Component {
               type="password"
               name="password"
               placeholder="Password"
-              value={this.state.fields.password || ''}
+              value={this.state.password || ''}
               onChange={this.handleChange}
               onBlur={this.handleBlur('password')}
             />
@@ -192,7 +184,7 @@ class Register extends React.Component {
               type="password"
               name="repassword"
               placeholder="Re-enter password"
-              value={this.state.fields.repassword || ''}
+              value={this.state.repassword || ''}
               onChange={this.handleChange}
               onBlur={this.handleBlur('repassword')}
             />
