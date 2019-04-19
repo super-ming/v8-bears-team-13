@@ -1,16 +1,18 @@
 import React from 'react';
 
+const initialState = {
+  monthlyAmountSaved: 999.99
+};
+
 class Dashboard extends React.Component {
-  componentDidMount() {
-  }
+  state = initialState;
 
   render() {
     return (
       <div className="dashboard">
         <h1 className="heading-main">Dashboard</h1>
-        <div className="content">
-          <p className="body-text">This is what logged in users will see</p>
-        </div>
+        <p>TEST</p>
+        <p>{`You've saved ${this.state.monthlyAmountSaved} so far this month`}</p>
       </div>
     );
   }
