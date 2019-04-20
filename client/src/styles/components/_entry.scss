@@ -1,0 +1,20 @@
+.entry__container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.entry {
+  border: 1px solid $color-black;
+  border-radius: 1px;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  width: 100rem;
+
+  display: flex;
+  flex-direction: row;
+
+  &:not(:first-of-type) {
+    margin-top: 3rem;
+  }
+}

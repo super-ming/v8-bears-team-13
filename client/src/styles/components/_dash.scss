@@ -1,0 +1,46 @@
+.dash {
+  &__button {
+    width: 10rem;
+    margin-top: 3rem;
+  }
+}
+
+.dash__summary {
+  border: 1px solid $color-black;
+  border-radius: $rounded-borders-med;
+
+  margin: 0 auto;
+  margin-top: 3rem;
+  height: 14rem;
+  width: 100rem;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  &__column {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+
+    &:first-of-type {
+      margin-left: 3rem;
+    }
+
+    &:last-of-type {
+      margin-right: 3rem;
+    }
+  }
+
+  &__heading {
+    font-size: $font-size-small;
+    font-weight: bold;
+  }
+
+  &__amount {
+    font-size: 5rem;
+    font-weight: normal;
+    margin-top: -1rem;
+  }
+}
