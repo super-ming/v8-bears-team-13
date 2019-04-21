@@ -18,10 +18,11 @@ class Dashboard extends React.Component {
       <div className="dash">
         <h1 className="heading-main">Dashboard</h1>
         <div className="content">
-          <p className="body-text">{`You've saved $${
-            this.state.monthlyAmountSaved
-          } so far this month.`}
-          </p>
+          <div className="dash__saved">
+            <p>
+              You have saved <span className="dash__saved--big">${this.state.monthlyAmountSaved}</span> so far this month.
+            </p>
+          </div>
           <DashboardSummary
             income={this.state.monthlyIncome}
             expense={this.state.monthlyExpenses}
@@ -41,7 +42,7 @@ class Dashboard extends React.Component {
             <Entry
               id={2}
               amount={-100.25}
-              category="lucky"
+              category="restaurant"
               date="April 5, 2018"
               description="Dinner at fancy restaurant"
             />
