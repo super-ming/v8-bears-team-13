@@ -128,73 +128,83 @@ class Register extends React.Component {
   render() {
     return (
       <div className="content">
-        <h1 className="heading__main">Register</h1>
-        <form className="form" onSubmit={this.handleSubmit}>
-          <div className="form__group">
-            <label htmlFor="username">Username: </label>
-            <input
-              required
-              id="username"
-              className="form__input"
-              type="text"
-              name="username"
-              placeholder="Username"
-              value={this.state.username || ''}
-              onChange={this.handleChange}
-              onBlur={this.handleBlur('username')}
-            />
-            <div className="error">{this.state.errors.username}</div>
-          </div>
-          <div className="form__group">
-            <label htmlFor="email">Email: </label>
-            <input
-              required
-              id="email"
-              className="form__input"
-              type="email"
-              name="email"
-              placeholder="Email"
-              value={this.state.email || ''}
-              onChange={this.handleChange}
-              onBlur={this.handleBlur('email')}
-            />
-            <div className="error">{this.state.errors.email}</div>
-          </div>
-          <div className="form__group">
-            <label htmlFor="password">Password: </label>
-            <input
-              required
-              id="password"
-              className="form__input"
-              type="password"
-              name="password"
-              placeholder="Password"
-              value={this.state.password || ''}
-              onChange={this.handleChange}
-              onBlur={this.handleBlur('password')}
-            />
-            <div className="error">{this.state.errors.password}</div>
-          </div>
-          <div className="form__group">
-            <label htmlFor="repassword">Re-enter password: </label>
-            <input
-              required
-              id="repassword"
-              className="form__input"
-              type="password"
-              name="repassword"
-              placeholder="Re-enter password"
-              value={this.state.repassword || ''}
-              onChange={this.handleChange}
-              onBlur={this.handleBlur('repassword')}
-            />
-            <div className="error">{this.state.errors.repassword}</div>
-            <div className="error">{this.state.nomatch}</div>
-            <div className="error">{this.state.serverError}</div>
-          </div>
-          <button className="button" type="submit">Register</button>
-        </form>
-        { this.state.redirectToLogin && <Redirect to="/login" /> }
+        <div className="form__container">
+          <h1 className="heading__main">Register</h1>
+          <form className="form" onSubmit={this.handleSubmit}>
+            <div className="form__group">
+              <label htmlFor="username" className="form__label">Username: </label>
+              <div className="form__input-container">
+                <input
+                  required
+                  id="username"
+                  className="form__input"
+                  type="text"
+                  name="username"
+                  placeholder="Username"
+                  value={this.state.username || ''}
+                  onChange={this.handleChange}
+                  onBlur={this.handleBlur('username')}
+                />
+                <div className="error">{this.state.errors.username}</div>
+              </div>
+            </div>
+            <div className="form__group">
+              <label htmlFor="email" className="form__label">Email: </label>
+              <div className="form__input-container">
+                <input
+                  required
+                  id="email"
+                  className="form__input"
+                  type="email"
+                  name="email"
+                  placeholder="Email"
+                  value={this.state.email || ''}
+                  onChange={this.handleChange}
+                  onBlur={this.handleBlur('email')}
+                />
+                <div className="error">{this.state.errors.email}</div>
+              </div>
+            </div>
+            <div className="form__group">
+              <label htmlFor="password" className="form__label">Password: </label>
+              <div className="form__input-container">
+                <input
+                  required
+                  id="password"
+                  className="form__input"
+                  type="password"
+                  name="password"
+                  placeholder="Password"
+                  value={this.state.password || ''}
+                  onChange={this.handleChange}
+                  onBlur={this.handleBlur('password')}
+                />
+                <div className="error">{this.state.errors.password}</div>
+              </div>
+            </div>
+            <div className="form__group">
+              <label htmlFor="repassword" className="form__label">Re-enter password: </label>
+              <div className="form__input-container">
+                <input
+                  required
+                  id="repassword"
+                  className="form__input"
+                  type="password"
+                  name="repassword"
+                  placeholder="Re-enter password"
+                  value={this.state.repassword || ''}
+                  onChange={this.handleChange}
+                  onBlur={this.handleBlur('repassword')}
+                />
+                <div className="error">{this.state.errors.repassword}</div>
+                <div className="error">{this.state.nomatch}</div>
+                <div className="error">{this.state.serverError}</div>
+              </div>
+            </div>
+            <button className="button" type="submit">Register</button>
+          </form>
+          { this.state.redirectToLogin && <Redirect to="/login" /> }
+        </div>  
       </div>
     );
   }
