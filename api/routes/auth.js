@@ -48,4 +48,9 @@ router.post('/login', authController.postLogin);
 // @access  Private
 router.get('/current', authController.getCurrentUser);
 
+// @route   GET api/auth/add-entry
+// @desc    add an entry
+// @access  Private
+router.post('/add-entry', passport.authenticate('jwt', { session: false }), authController.addEntry);
+
 module.exports = router;
