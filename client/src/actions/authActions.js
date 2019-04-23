@@ -1,4 +1,4 @@
-import { SET_CURRENT_USER } from './types';
+import { SET_CURRENT_USER, LOGOUT_USER } from './types';
 
 // `userTokenData` includes the username + token expiration time
 export const setCurrentUser = userTokenData => ({
@@ -6,4 +6,6 @@ export const setCurrentUser = userTokenData => ({
   payload: userTokenData
 });
 
-export const logoutUser = () => ({ });
+export const logoutUser = () => ({
+  type: LOGOUT_USER
+});

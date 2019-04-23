@@ -1,11 +1,17 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
+
+import { setCurrentUser } from '../../actions/authActions';
 
 const initialState = {
   username: '',
   password: '',
   usernameError: '',
   passwordError: '',
-  serverError: ''
+  serverError: '',
+  redirectToDashboard: false
 };
 
 class Login extends React.Component {
@@ -58,8 +64,9 @@ class Login extends React.Component {
     })
       .then(this.handleFetchErrors)
       .then(res => res.json())
-      .then((res) => {
-        this.props.history.push('/dashboard');
+      .then((userData) => {
+        this.setState({ redirectToDashboard: true });
+        this.props.setCurrentUser(userData);
       })
       .catch(err => console.log(err));
   };
@@ -78,6 +85,7 @@ class Login extends React.Component {
       <div className="content">
         <div className="form__container">
           <h1 className="heading--main">Login</h1>
+          { this.state.redirectToDashboard && <Redirect to="/dashboard" />}
           <form className="form" onSubmit={this.handleSubmit}>
             <div className="form__group">
               <label htmlFor="name" className="form__label">Username:</label>
@@ -117,4 +125,8 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+Login.propTypes = {
+  setCurrentUser: PropTypes.func.isRequired
+};
+
+export default connect(null, { setCurrentUser })(Login);
