@@ -77,7 +77,7 @@ class Login extends React.Component {
     return (
       <div className="content">
         <div className="form__container">
-          <h1 className="heading-main">Login</h1>
+          <h1 className="heading--main">Login</h1>
           <form className="form" onSubmit={this.handleSubmit}>
             <div className="form__group">
               <label htmlFor="name" className="form__label">Username:</label>

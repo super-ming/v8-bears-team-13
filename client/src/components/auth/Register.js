@@ -129,7 +129,7 @@ class Register extends React.Component {
     return (
       <div className="content">
         <div className="form__container">
-          <h1 className="heading-main">Register</h1>
+          <h1 className="heading--main">Register</h1>
           <form className="form" onSubmit={this.handleSubmit}>
             <div className="form__group">
               <label htmlFor="username" className="form__label">Username: </label>

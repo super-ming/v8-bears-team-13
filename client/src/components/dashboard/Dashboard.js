@@ -18,7 +18,7 @@ class Dashboard extends React.Component {
   render() {
     return (
       <div className="dash">
-        <h1 className="heading-main">Dashboard</h1>
+        <h1 className="heading--main">Dashboard</h1>
         <div className="content">
           <div className="dash__saved">
             <p>
@@ -32,7 +32,7 @@ class Dashboard extends React.Component {
           <button className="button dash__button" type="button">
             Add Entry
           </button>
-          <h2 className="heading-sub">Recent Entries</h2>
+          <h2 className="heading--sub">Recent Entries</h2>
           <EntryList entries={this.state.entries} />
         </div>
       </div>

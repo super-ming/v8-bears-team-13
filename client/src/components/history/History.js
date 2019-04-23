@@ -13,12 +13,12 @@ class History extends Component {
   render() {
     return (
       <div className="content">
-        <h1 className="heading-main">History</h1>
+        <h1 className="heading--main">History</h1>
         <div className="history">
           <FilterBar />
-          <h2 className="heading-sub">Showing results from...</h2>
+          <h2 className="heading--sub">Showing results from...</h2>
           <SavingsCard income={1000} expenses={900} />
-          <h2 className="heading-sub">Entries</h2>
+          <h2 className="heading--sub">Entries</h2>
           <EntryList entries={entries} />
         </div>
       </div>
