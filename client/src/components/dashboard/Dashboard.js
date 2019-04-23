@@ -2,11 +2,14 @@ import React from 'react';
 import DashboardSummary from './DashboardSummary';
 import EntryList from '../entries/EntryList';
 
+// Dummy Data
+import entries from '../../data/entries';
+
 const initialState = {
+  entries,
   monthlyAmountSaved: 999.99,
   monthlyIncome: 299.0,
-  monthlyExpenses: 99.99,
-  entries: [{}]
+  monthlyExpenses: 99.99
 };
 
 class Dashboard extends React.Component {
@@ -30,7 +33,7 @@ class Dashboard extends React.Component {
             Add Entry
           </button>
           <h2 className="heading-sub">Recent Entries</h2>
-          <EntryList />
+          <EntryList entries={this.state.entries} />
         </div>
       </div>
     );

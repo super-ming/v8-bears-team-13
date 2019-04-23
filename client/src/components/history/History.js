@@ -4,6 +4,9 @@ import FilterBar from './FilterBar';
 import SavingsCard from './SavingsCard';
 import EntryList from '../entries/EntryList';
 
+// Dummy Data
+import entries from '../../data/entries';
+
 class History extends Component {
   state = {}
 
@@ -16,7 +19,7 @@ class History extends Component {
           <h2 className="heading-sub">Showing results from...</h2>
           <SavingsCard income={1000} expenses={900} />
           <h2 className="heading-sub">Entries</h2>
-          <EntryList />
+          <EntryList entries={entries} />
         </div>
       </div>
     );

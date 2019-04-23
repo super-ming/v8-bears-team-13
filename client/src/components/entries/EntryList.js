@@ -1,24 +1,34 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Entry from './Entry';
 
-const EntryList = () => (
+const EntryList = ({ entries }) => (
   <div className="entry__container">
-    <Entry
-      id={1}
-      amount={100.25}
-      category="lucky"
-      date="April 7, 2018"
-      description="Won the lottery and became a millionaire"
-    />
-    <Entry
-      id={2}
-      amount={-100.25}
-      category="restaurant"
-      date="April 5, 2018"
-      description="Dinner at fancy restaurant"
-    />
+    {
+      entries.map(entry => (
+        <Entry
+          key={entry.id}
+          amount={entry.amount}
+          category={entry.category}
+          date={entry.date}
+          description={entry.description}
+        />
+      ))
+    }
   </div>
 );
+
+EntryList.propTypes = {
+  entries: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      amount: PropTypes.number,
+      category: PropTypes.string,
+      date: PropTypes.string,
+      description: PropTypes.description
+    })
+  ).isRequired
+};
 
 export default EntryList;
