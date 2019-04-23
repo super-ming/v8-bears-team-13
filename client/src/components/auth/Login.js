@@ -80,8 +80,8 @@ class Login extends React.Component {
           <h1 className="heading-main">Login</h1>
           <form className="form" onSubmit={this.handleSubmit}>
             <div className="form__group">
-              <label htmlFor="name" className="form__label">
-                Username
+              <label htmlFor="name" className="form__label">Username:</label>
+              <div className="form__input-container">
                 <input
                   className="form__input"
                   name="username"
@@ -89,12 +89,12 @@ class Login extends React.Component {
                   value={this.state.username}
                   onChange={this.handleChange}
                 />
-              </label>
+              </div>
               <div className="error">{this.state.usernameError}</div>
             </div>
             <div className="form__group">
-              <label htmlFor="password" className="form__label">
-                Password
+              <label htmlFor="password" className="form__label">Password:</label>
+              <div className="form__input-container">
                 <input
                   className="form__input"
                   type="password"
@@ -103,7 +103,7 @@ class Login extends React.Component {
                   value={this.state.password}
                   onChange={this.handleChange}
                 />
-              </label>
+              </div>
               <div className="error">{this.state.passwordError}</div>
             </div>
             <button className="button" type="submit">
