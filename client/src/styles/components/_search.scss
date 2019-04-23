@@ -1,0 +1,30 @@
+.search {
+  &__input {
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    box-shadow: $box-shadow-light;
+    font-size: $font-size-medium;
+    padding: 2rem;
+
+    height: 5.4rem;
+    width: 25rem;
+
+    &:active,
+    &:focus {
+      outline-color: #bbb;
+    }
+  }
+
+  &__icon {
+    color: #666;
+    font-size: 2.4rem;
+    opacity: 1;
+    position: absolute;
+    transform: translate(-23rem, 1.5rem);
+    transition: opacity .1s ease-in;
+
+    &--hidden {
+      opacity: 0;
+    }
+  }
+}
