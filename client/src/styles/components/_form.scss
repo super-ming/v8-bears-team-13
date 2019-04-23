@@ -7,7 +7,7 @@
 
   &__input {
     border: 1px solid black;
-    border-radius: 3px;
+    border-radius: $rounded-borders-small;
     height: 3rem;
     width: 20rem;
   }

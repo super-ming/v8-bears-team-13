@@ -1,7 +1,7 @@
 .search-bar {
   &__input {
     border: 1px solid #aaa;
-      border-radius: 5px;
+      border-radius: $rounded-borders-medium;
     box-shadow: $box-shadow-light;
     font-size: $font-size-medium;
     padding: 2rem;
