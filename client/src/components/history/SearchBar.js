@@ -25,15 +25,15 @@ class SearchBar extends Component {
   }
 
   render() {
-    const searchIconClasses = classnames('search__icon', {
-      'search__icon--hidden': this.state.isTyping || this.state.searchText
+    const searchIconClasses = classnames('search-bar__icon', {
+      'search-bar__icon--hidden': this.state.isTyping || this.state.searchText
     });
 
     return (
-      <div className="search">
+      <div className="search-bar">
         <input
           type="text"
-          className="search__input"
+          className="search-bar__input"
           value={this.state.searchText}
           onChange={this.handleChange}
           onFocus={this.handleFocus}

@@ -1,7 +1,6 @@
 import React from 'react';
 import DashboardSummary from './DashboardSummary';
 import EntryList from '../entries/EntryList';
-import Entry from '../entries/Entry';
 
 const initialState = {
   monthlyAmountSaved: 999.99,
@@ -31,22 +30,7 @@ class Dashboard extends React.Component {
             Add Entry
           </button>
           <h2 className="heading-sub">Recent Entries</h2>
-          <div className="entry__container">
-            <Entry
-              id={1}
-              amount={100.25}
-              category="lucky"
-              date="April 7, 2018"
-              description="Won the lottery and became a millionaire"
-            />
-            <Entry
-              id={2}
-              amount={-100.25}
-              category="restaurant"
-              date="April 5, 2018"
-              description="Dinner at fancy restaurant"
-            />
-          </div>
+          <EntryList />
         </div>
       </div>
     );

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 
 import FilterBar from './FilterBar';
+import SavingsCard from './SavingsCard';
+import EntryList from '../entries/EntryList';
 
 class History extends Component {
   state = {}
@@ -8,11 +10,13 @@ class History extends Component {
   render() {
     return (
       <div className="content">
+        <h1 className="heading-main">History</h1>
         <div className="history">
-          <h1 className="heading-main">History</h1>
-          <div className="content">
-            <FilterBar />
-          </div>
+          <FilterBar />
+          <h2 className="heading-sub">Showing results from...</h2>
+          <SavingsCard income={1000} expenses={900} />
+          <h2 className="heading-sub">Entries</h2>
+          <EntryList />
         </div>
       </div>
     );
