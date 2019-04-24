@@ -17,6 +17,12 @@ const initialState = {
 class Login extends React.Component {
   state = initialState;
 
+  componentDidMount() {
+    if (this.props.auth.username) {
+      this.setState({ redirectToDashboard: true });
+    }
+  }
+
   handleChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value
@@ -126,7 +132,15 @@ class Login extends React.Component {
 }
 
 Login.propTypes = {
-  setCurrentUser: PropTypes.func.isRequired
+  auth: PropTypes.shape({
+    username: PropTypes.string,
+    expires: PropTypes.string
+  }).isRequired,
+  loginUser: PropTypes.func.isRequired
 };
 
-export default connect(null, { loginUser })(Login);
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect(mapStateToProps, { loginUser })(Login);

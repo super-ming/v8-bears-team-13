@@ -1,5 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const initialState = {
   username: '',
@@ -15,6 +17,12 @@ const initialState = {
 
 class Register extends React.Component {
   state = initialState;
+
+  componentDidMount() {
+    if (this.props.auth.username) {
+      this.setState({ redirectToLogin: true });
+    }
+  }
 
   handleChange = (event) => {
     const { name, value } = event.target;
@@ -210,4 +218,15 @@ class Register extends React.Component {
   }
 }
 
-export default Register;
+Register.propTypes = {
+  auth: PropTypes.shape({
+    username: PropTypes.string,
+    expires: PropTypes.string
+  }).isRequired
+};
+
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect(mapStateToProps)(Register);
