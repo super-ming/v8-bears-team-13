@@ -25,7 +25,7 @@ const PrivateRoute = ({ component: Component, auth, ...rest }) => {
 PrivateRoute.propTypes = {
   // There's no `component` type
   component: PropTypes.func.isRequired,
-  auth: PropTypes.objectOf({
+  auth: PropTypes.shape({
     username: PropTypes.string,
     expires: PropTypes.string
   }).isRequired

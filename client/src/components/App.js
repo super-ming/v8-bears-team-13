@@ -26,7 +26,6 @@ import '../styles/styles.scss';
 // userData: { username: string, expires: string }
 if (localStorage.userData) {
   const parsedData = JSON.parse(localStorage.userData);
-  console.log('EXPIRES', parsedData.expires);
   store.dispatch(loginUser(parsedData));
 
   if (moment() > parsedData.expires) {

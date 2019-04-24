@@ -9,6 +9,7 @@ const EntryList = ({ entries }) => (
       entries.map(entry => (
         <Entry
           key={entry.id}
+          id={entry.id}
           amount={entry.amount}
           category={entry.category}
           date={entry.date}
