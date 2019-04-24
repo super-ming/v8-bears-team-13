@@ -94,22 +94,27 @@ class Login extends React.Component {
           { this.state.redirectToDashboard && <Redirect to="/dashboard" />}
           <form className="form" onSubmit={this.handleSubmit}>
             <div className="form__group">
-              <label htmlFor="name" className="form__label">Username:</label>
+              <label htmlFor="username" className="form__label">Username:</label>
               <div className="form__input-container">
                 <input
+                  required
+                  id="username"
                   className="form__input"
+                  type="text"
                   name="username"
                   placeholder="Username"
                   value={this.state.username}
                   onChange={this.handleChange}
                 />
+                <div className="error">{this.state.usernameError}</div>
               </div>
-              <div className="error">{this.state.usernameError}</div>
             </div>
             <div className="form__group">
               <label htmlFor="password" className="form__label">Password:</label>
               <div className="form__input-container">
                 <input
+                  required
+                  id="password"
                   className="form__input"
                   type="password"
                   name="password"
@@ -117,13 +122,13 @@ class Login extends React.Component {
                   value={this.state.password}
                   onChange={this.handleChange}
                 />
+                <div className="error">{this.state.passwordError}</div>
               </div>
-              <div className="error">{this.state.passwordError}</div>
             </div>
             <button className="button" type="submit">
               Login
             </button>
-            <div className="error">{this.state.serverError}</div>
+            <div className="error error--server">{this.state.serverError}</div>
           </form>
         </div>
       </div>
