@@ -28,7 +28,7 @@ if (localStorage.userData) {
   const parsedData = JSON.parse(localStorage.userData);
   store.dispatch(loginUser(parsedData));
 
-  if (moment() > parsedData.expires) {
+  if (moment() > moment(parsedData.expires)) {
     store.dispatch(logoutUser());
     window.location.href = '/login';
   }
