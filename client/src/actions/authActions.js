@@ -1,11 +1,22 @@
-import { SET_CURRENT_USER, LOGOUT_USER } from './types';
+import { SET_CURRENT_USER } from './types';
 
-// `userTokenData` includes the username + token expiration time
-export const setCurrentUser = userTokenData => ({
-  type: SET_CURRENT_USER,
-  payload: userTokenData
-});
+// userData = { username: string, expires: string }
+export const loginUser = userData => (dispatch) => {
+  const stringifiedData = JSON.stringify(userData);
 
-export const logoutUser = () => ({
-  type: LOGOUT_USER
-});
+  localStorage.setItem('userData', stringifiedData);
+
+  dispatch({
+    type: SET_CURRENT_USER,
+    payload: userData
+  });
+};
+
+export const logoutUser = () => (dispatch) => {
+  localStorage.removeItem('userData');
+
+  dispatch({
+    type: SET_CURRENT_USER,
+    payload: { username: '', expires: '' }
+  });
+};

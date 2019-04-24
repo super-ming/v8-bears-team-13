@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import { setCurrentUser } from '../../actions/authActions';
+import { loginUser } from '../../actions/authActions';
 
 const initialState = {
   username: '',
@@ -65,8 +65,8 @@ class Login extends React.Component {
       .then(this.handleFetchErrors)
       .then(res => res.json())
       .then((userData) => {
+        this.props.loginUser(userData);
         this.setState({ redirectToDashboard: true });
-        this.props.setCurrentUser(userData);
       })
       .catch(err => console.log(err));
   };
@@ -129,4 +129,4 @@ Login.propTypes = {
   setCurrentUser: PropTypes.func.isRequired
 };
 
-export default connect(null, { setCurrentUser })(Login);
+export default connect(null, { loginUser })(Login);

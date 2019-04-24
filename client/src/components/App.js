@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux'; // Provide app with Store/State. Wrap around everything
+import moment from 'moment';
 
 // Services
 import store from '../store/store';
+import { loginUser, logoutUser } from '../actions/authActions';
 
 // Components
 import PrivateRoute from './auth/PrivateRoute';
@@ -20,6 +22,18 @@ import Register from './auth/Register';
 // CSS
 import 'normalize.css';
 import '../styles/styles.scss';
+
+// userData: { username: string, expires: string }
+if (localStorage.userData) {
+  const parsedData = JSON.parse(localStorage.userData);
+  console.log('EXPIRES', parsedData.expires);
+  store.dispatch(loginUser(parsedData));
+
+  if (moment() > parsedData.expires) {
+    store.dispatch(logoutUser());
+    window.location.href = '/login';
+  }
+}
 
 // Main container that holds everything else
 // eslint-disable-next-line react/prefer-stateless-function
