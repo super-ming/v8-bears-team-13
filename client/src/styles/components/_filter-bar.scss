@@ -1,0 +1,19 @@
+.filter-bar {
+  margin: 0 auto;
+  width: 63rem;
+
+  display: flex;
+  justify-content: space-around;
+
+  &__select {
+    border: 1px solid #aaa;
+    height: 5.4rem;
+    font-size: 2rem;
+    width: 15rem;
+
+    &:active,
+    &:focus {
+      outline-color: #bbb;
+    }
+  }
+}

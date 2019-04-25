@@ -11,48 +11,27 @@
   }
 
   &__link {
+    background-color: #232222;
+    border: 2px solid $color-cream;
+    border-radius: $rounded-borders-medium;
+    color: $color-cream;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 1.6rem;
+    margin: -1.5rem 0.5rem;
+    padding: .7rem .8rem;
+    transition: background-color .1s ease-in, color .1s ease-in;
+    text-align: center;
     text-decoration: none;
-    color: black;
-
-    &:hover {
-      color: $color-green;
-    }
-
+    
+    &:hover,
     &--active {
-      color: $color-green;
+      background-color: $color-cream;
+      border: 2px solid $color-cream;
+      color: #282c34;
     }
   }
 }
-
-.navbutton {
-  background-color: #232222;
-  border: 2px solid #fefadc;
-  border-radius: 5px;
-  color: #fefadc;
-  padding: 7px 8px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: -15px 2px;
-  cursor: pointer;
-}
-
-.navbutton:hover {
-  background-color: #fefadc;
-  border: 2px solid #fefadc;
-  border-radius: 5px;
-  color: #282c34;
-  padding: 7px 8px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  margin: -15px 2px;
-  cursor: pointer;
-}
-
-
-
 
 .checkbox
 {
