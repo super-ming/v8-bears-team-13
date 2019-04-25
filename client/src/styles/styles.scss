@@ -8,8 +8,15 @@
 
 @import "components/app";
 @import "components/button";
+@import "components/dash";
+@import "components/entry";
 @import "components/error";
 @import "components/form";
+
+@import "components/history";
+@import "components/filter-bar";
+@import "components/search-bar";
+@import "components/savings-card";
 
 @import "layout/container";
 @import "layout/footer";

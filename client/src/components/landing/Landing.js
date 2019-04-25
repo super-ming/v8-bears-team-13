@@ -4,7 +4,7 @@ const Landing = () => (
   <>
     <div>
       <div className="headandnav">
-        <h2 className="heading__main">KA-Chingu</h2>
+        <h2 className="heading--main">KA-Chingu</h2>
       </div>
     </div>
     <div className="content">

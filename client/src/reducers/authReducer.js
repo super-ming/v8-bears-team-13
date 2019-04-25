@@ -2,7 +2,7 @@ import { SET_CURRENT_USER } from '../actions/types';
 
 const initialState = {
   username: '',
-  expirationTime: ''
+  expires: ''
 };
 
 // Actions are dispatched to this reducer...
@@ -11,7 +11,8 @@ export default function (state = initialState, action) {
     case SET_CURRENT_USER:
       return {
         ...state,
-        currentUser: action.payload // payload === userData
+        username: action.payload.username,
+        expires: action.payload.expires
       };
     default:
       return state;

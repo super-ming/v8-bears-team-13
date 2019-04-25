@@ -1,30 +1,57 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Redirect, Route } from 'react-router-dom';
+import { connect } from 'react-redux';
+import moment from 'moment';
 import PropTypes from 'prop-types';
+
+import { logoutUser } from '../../actions/authActions';
 
 // Higher-order component that checks authentication status
 // If authenticated, render the private component
 // If not authenticated, redirect to /login
 // See: https://tylermcginnis.com/react-router-protected-routes-authentication/
-const PrivateRoute = ({ component: Component, ...rest }) => {
-  // const isAuthenticated = cookies.get('jwt');
-  const isAuthenticated = true;
 
-  return (
-    <Route
-      {...rest}
-      render={props => (
-        isAuthenticated
-          ? <Component {...props} />
-          : <Redirect to="/login" />
-      )}
-    />
-  );
-};
+class PrivateRoute extends Component {
+  componentDidMount() {
+    if (!this.isAuthenticated()) {
+      this.props.logoutUser();
+    }
+  }
+
+  isAuthenticated = () => {
+    const { username, expires } = this.props.auth;
+
+    return username !== '' && moment() < moment(expires);
+  }
+
+  render() {
+    const { component: ComponentToRender, ...rest } = this.props;
+
+    return (
+      <Route
+        {...rest}
+        render={props => (
+          this.isAuthenticated()
+            ? <ComponentToRender {...props} />
+            : <Redirect to="/login" />
+        )}
+      />
+    );
+  }
+}
 
 PrivateRoute.propTypes = {
   // There's no `component` type
-  component: PropTypes.func.isRequired
+  component: PropTypes.func.isRequired,
+  logoutUser: PropTypes.func.isRequired,
+  auth: PropTypes.shape({
+    username: PropTypes.string,
+    expires: PropTypes.string
+  }).isRequired
 };
 
-export default PrivateRoute;
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect(mapStateToProps, { logoutUser })(PrivateRoute);

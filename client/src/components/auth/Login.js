@@ -1,15 +1,27 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
+
+import { loginUser } from '../../actions/authActions';
 
 const initialState = {
   username: '',
   password: '',
   usernameError: '',
   passwordError: '',
-  serverError: ''
+  serverError: '',
+  redirectToDashboard: false
 };
 
 class Login extends React.Component {
   state = initialState;
+
+  componentDidMount() {
+    if (this.props.auth.username) {
+      this.setState({ redirectToDashboard: true });
+    }
+  }
 
   handleChange = (event) => {
     this.setState({
@@ -58,8 +70,9 @@ class Login extends React.Component {
     })
       .then(this.handleFetchErrors)
       .then(res => res.json())
-      .then((res) => {
-        this.props.history.push('/dashboard');
+      .then((userData) => {
+        this.props.loginUser(userData);
+        this.setState({ redirectToDashboard: true });
       })
       .catch(err => console.log(err));
   };
@@ -77,25 +90,31 @@ class Login extends React.Component {
     return (
       <div className="content">
         <div className="form__container">
-          <h1 className="heading__main">Login</h1>
+          <h1 className="heading--main">Login</h1>
+          { this.state.redirectToDashboard && <Redirect to="/dashboard" />}
           <form className="form" onSubmit={this.handleSubmit}>
             <div className="form__group">
-              <label htmlFor="name" className="form__label">
-                Username
+              <label htmlFor="username" className="form__label">Username:</label>
+              <div className="form__input-container">
                 <input
+                  required
+                  id="username"
                   className="form__input"
+                  type="text"
                   name="username"
                   placeholder="Username"
                   value={this.state.username}
                   onChange={this.handleChange}
                 />
-              </label>
-              <div className="error">{this.state.usernameError}</div>
+                <div className="error">{this.state.usernameError}</div>
+              </div>
             </div>
             <div className="form__group">
-              <label htmlFor="password" className="form__label">
-                Password
+              <label htmlFor="password" className="form__label">Password:</label>
+              <div className="form__input-container">
                 <input
+                  required
+                  id="password"
                   className="form__input"
                   type="password"
                   name="password"
@@ -103,13 +122,13 @@ class Login extends React.Component {
                   value={this.state.password}
                   onChange={this.handleChange}
                 />
-              </label>
-              <div className="error">{this.state.passwordError}</div>
+                <div className="error">{this.state.passwordError}</div>
+              </div>
             </div>
             <button className="button" type="submit">
               Login
             </button>
-            <div className="error">{this.state.serverError}</div>
+            <div className="error error--server">{this.state.serverError}</div>
           </form>
         </div>
       </div>
@@ -117,4 +136,16 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+Login.propTypes = {
+  auth: PropTypes.shape({
+    username: PropTypes.string,
+    expires: PropTypes.string
+  }).isRequired,
+  loginUser: PropTypes.func.isRequired
+};
+
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect(mapStateToProps, { loginUser })(Login);

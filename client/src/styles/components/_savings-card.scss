@@ -1,0 +1,22 @@
+.savings-card {
+  border: 1px solid #999;
+    border-radius: $rounded-borders-large;
+  box-shadow: $box-shadow-light;
+  margin: 0 auto;
+  width: 33rem;
+
+  &__heading {
+    font-size: $font-size-extra-large;
+    font-weight: normal;
+    text-align: left;
+    
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+
+  &__divider {
+    background-color: #aaa;
+    height: 1px;
+    width: 100%;
+  }
+}
