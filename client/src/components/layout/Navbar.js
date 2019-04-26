@@ -17,7 +17,7 @@ class Navbar extends Component {
 
     if (isLoggedIn) {
       dynamicNavbar = (
-        <ul className="navbar" id="navbar">
+        <ul className="navbar__menu" id="navbar-menu">
           <li className="navbar__item">
             <NavLink to="/dashboard" className="navbar__link" activeClassName="navbar__link--active">
               Dashboard
@@ -35,7 +35,7 @@ class Navbar extends Component {
       );
     } else {
       dynamicNavbar = (
-        <ul className="navbar" id="navbar">
+        <ul className="navbar__menu" id="navbar-menu">
           <li className="navbar__item">
             <NavLink to="/" className="navbar__link" exact activeClassName="navbar__link--active">
               Landing
@@ -56,12 +56,15 @@ class Navbar extends Component {
     }
 
     return (
-      <div id="toggle">
-        <input className="checkbox" type="checkbox" />
-        <span />
-        <span />
-        <span />
-        { dynamicNavbar }
+      <div className="navbar" id="navbar">
+        <h2>Kachingu</h2>
+        <div id="toggle">
+          <input className="checkbox" type="checkbox" />
+          <span />
+          <span />
+          <span />
+          { dynamicNavbar }
+        </div>
       </div>
     );
   }
