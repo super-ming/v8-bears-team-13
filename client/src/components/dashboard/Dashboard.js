@@ -1,9 +1,23 @@
 import React from 'react';
+
 import Add from './Add.js';
 // need connect function to be able to connect to store from Provider
 import {connect} from 'react-redux';
 
 import {addEntry, dashDefault} from '../../actions/dashActions';
+
+import DashboardSummary from './DashboardSummary';
+import EntryList from '../entries/EntryList';
+
+// Dummy Data
+import entries from '../../data/entries';
+
+const initialState = {
+  entries,
+  monthlyAmountSaved: 999.99,
+  monthlyIncome: 299.0,
+  monthlyExpenses: 99.99
+};
 
 class Container extends React.Component {
   constructor(props) {
@@ -13,9 +27,11 @@ class Container extends React.Component {
     // this.state = {
     //   status: 'dash'
     // };
+    this.state = initialState;
   }
   componentDidMount() {
   }
+
 
   // statusAdd = () => {
   //   this.setState({status:'add'});
@@ -39,15 +55,28 @@ class Container extends React.Component {
                 Add
               </button>
           </div>
-            <p className="body-text">This is what logged in users will see</p>
+          <div className="dash__saved">
+            <p>
+              You have saved <span className="dash__saved--big">${this.state.monthlyAmountSaved}</span> so far this month.
+            </p>
+          </div>
+          <DashboardSummary
+            income={this.state.monthlyIncome}
+            expense={this.state.monthlyExpenses}
+          />
+          <button className="button dash__button" type="button">
+            Add Entry
+          </button>
+          <h2 className="heading--sub">Recent Entries</h2>
+          <EntryList entries={this.state.entries} />
           </div>
         )
       }
     }
     
     return (
-      <div className="dashboard">
-        <h1 className="heading__main">Dashboard</h1>
+      <div className="dash">
+        <h1 className="heading--main">Dashboard</h1>
         <div className="content">
           {index()}
         </div>

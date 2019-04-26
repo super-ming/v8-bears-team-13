@@ -1,12 +1,29 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-const History = () => (
-  <div className="content">
-    <div className="history">
-      <h1 className="heading__main">History</h1>
-      <p className="body-text">This is where logged in users can view their previous entries.</p>
-    </div>
-  </div>
-);
+import FilterBar from './FilterBar';
+import SavingsCard from './SavingsCard';
+import EntryList from '../entries/EntryList';
+
+// Dummy Data
+import entries from '../../data/entries';
+
+class History extends Component {
+  state = {}
+
+  render() {
+    return (
+      <div className="content">
+        <h1 className="heading--main">History</h1>
+        <div className="history">
+          <FilterBar />
+          <h2 className="heading--sub">Showing results from...</h2>
+          <SavingsCard income={1000} expenses={900} />
+          <h2 className="heading--sub">Entries</h2>
+          <EntryList entries={entries} />
+        </div>
+      </div>
+    );
+  }
+}
 
 export default History;
