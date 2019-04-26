@@ -10,15 +10,15 @@ Font Awesome Icon Usage: https://github.com/FortAwesome/react-fontawesome#explic
 const Entry = ({ id, amount, category, date, description }) => (
   <div className="entry">
     <div className="entry__row">
-      <div className="entry__description">{ description }</div>
-      <div className="entry__amount">${ amount }</div>
+      <div className="entry__description">{description}</div>
+      <div className="entry__amount">${amount}</div>
     </div>
     <div className="entry__row">
       <div className="entry__column">
         <div className="entry__group">
-          <div className="entry__date">{ date }</div>
+          <div className="entry__date">{date}</div>
           <div className="entry__category-container">
-            <div className="entry__category">{ category }</div>
+            <div className="entry__category">{category}</div>
           </div>
         </div>
       </div>

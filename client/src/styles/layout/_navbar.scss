@@ -54,11 +54,6 @@
   }
 }
 
-#toggle
-{
-  height: 50px;
-}
-
 .checkbox
 {
   opacity: 0;
@@ -66,7 +61,8 @@
 
 //1rem = 10px and 0.1rem is = 1px
 
- @media only screen and (max-width: 900px){
+ @media only screen and (max-width: 550px){
+
  
  .navbar__item
  {
@@ -80,7 +76,7 @@
  #toggle
  {
    position: fixed;
-   top: 5%;
+   top: -4%;
    left: 90%;
    
    z-index: 1;
@@ -109,8 +105,8 @@
  {
    display: block;
    width: 33px;
-   height: 20px;
-   margin-top: 10px;
+   height: 4px;
+   margin-top: 5px;
    position: relative;
 
    background: black;
@@ -131,12 +127,12 @@
 
  #toggle span:first-child
  {
-   transform-origin: 100% 0%;
+   transform-origin: 0% 0%;
  }
  
  #toggle span:nth-last-child(2)
  {
-   transform-origin: 0% 100%;
+  transform-origin: 0% 100%;
  }
  
  #toggle input:checked ~ span
@@ -157,12 +153,12 @@
    transform: rotate(-45deg) translate(0, -1px);
  }
  
-#navbar
+#navbar-menu
  {
    position: fixed;
    width: 50%;
    height: 50%;
-   margin: -100px 0 0 -50%;
+   margin: -100px 0 0 -40%;
    padding: 50px;
    padding-top: 125px;
    
