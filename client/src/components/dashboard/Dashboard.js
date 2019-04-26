@@ -17,9 +17,9 @@ class Dashboard extends React.Component {
 
   render() {
     return (
-      <div className="dash">
+      <div className="content">
         <h1 className="heading--main">Dashboard</h1>
-        <div className="content">
+        <div className="dash">
           <div className="dash__saved">
             <p>
               You have saved <span className="dash__saved--big">${this.state.monthlyAmountSaved}</span> so far this month.
