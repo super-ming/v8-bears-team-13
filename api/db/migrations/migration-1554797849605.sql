@@ -48,4 +48,4 @@ CREATE TABLE IF NOT EXISTS entries (
   recurring BOOLEAN
 );
 
-CREATE UNIQUE INDEX idx_entries ON entries(user_id);
+CREATE INDEX idx_entries ON entries(user_id);
