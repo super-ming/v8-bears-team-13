@@ -1,11 +1,12 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
-import Add from './Add.js';
 // need connect function to be able to connect to store from Provider
-import {connect} from 'react-redux';
 
-import {addEntry, dashDefault} from '../../actions/dashActions';
+import { addEntry, dashDefault } from '../../actions/dashActions';
 
+import Add from './Add';
 import DashboardSummary from './DashboardSummary';
 import EntryList from '../entries/EntryList';
 
@@ -29,9 +30,8 @@ class Container extends React.Component {
     // };
     this.state = initialState;
   }
-  componentDidMount() {
-  }
 
+  componentDidMount() {}
 
   // statusAdd = () => {
   //   this.setState({status:'add'});
@@ -40,67 +40,65 @@ class Container extends React.Component {
 
   render() {
     const index = () => {
-      const status = this.props.status;
-      if(status === 'add') {
+      const { status } = this.props;
+      if (status === 'add') {
         return (
           <div>
             <Add />
           </div>
-        )
-      } else if(status === 'dash') {
+        );
+      } if (status === 'dash') {
         return (
           <div>
-            <div className='add-entry'>
-              <button onClick={this.props.addNewEntry}>
-                Add
-              </button>
+            <div className="dash__saved">
+              <p>
+                You have saved{' '}
+                <span className="dash__saved--big">${this.state.monthlyAmountSaved}</span> so far
+                this month.
+              </p>
+            </div>
+            <DashboardSummary
+              income={this.state.monthlyIncome}
+              expense={this.state.monthlyExpenses}
+            />
+            <button className="button dash__button" type="button" onClick={this.props.addNewEntry}>
+              Add Entry
+            </button>
+            <h2 className="heading--sub">Recent Entries</h2>
+            <EntryList entries={this.state.entries} />
           </div>
-          <div className="dash__saved">
-            <p>
-              You have saved <span className="dash__saved--big">${this.state.monthlyAmountSaved}</span> so far this month.
-            </p>
-          </div>
-          <DashboardSummary
-            income={this.state.monthlyIncome}
-            expense={this.state.monthlyExpenses}
-          />
-          <button className="button dash__button" type="button">
-            Add Entry
-          </button>
-          <h2 className="heading--sub">Recent Entries</h2>
-          <EntryList entries={this.state.entries} />
-          </div>
-        )
+        );
       }
-    }
-    
+    };
+
     return (
-      <div className="dash">
+      <div className="content">
         <h1 className="heading--main">Dashboard</h1>
-        <div className="content">
-          {index()}
-        </div>
+        <div className="dash">{index()}</div>
       </div>
     );
   }
 }
 
-const mapStateToProps = (state) => {
-  return state.dash;
+Container.propTypes = {
+  status: PropTypes.string.isRequired,
+  addNewEntry: PropTypes.func.isRequired
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-      addNewEntry: () => {
-          dispatch(addEntry());
-      },
-      setDashDefault: () => {
-          dispatch(dashDefault());
-      }
+const mapStateToProps = state => state.dash;
+
+const mapDispatchToProps = dispatch => ({
+  addNewEntry: () => {
+    dispatch(addEntry());
+  },
+  setDashDefault: () => {
+    dispatch(dashDefault());
   }
-}
+});
 
-
-const Dashboard = connect(mapStateToProps, mapDispatchToProps)(Container);
+const Dashboard = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Container);
 
 export default Dashboard;

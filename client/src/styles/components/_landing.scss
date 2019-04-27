@@ -1,0 +1,17 @@
+.landing-body {
+    display: flex;
+    padding: 60px 0 0 0;
+}
+
+.landing-img {
+    width: 50%;
+    height: 50vw;
+    svg {
+        width: 70%;
+        height: 40vw;
+    }
+}
+
+.landing-text {
+    padding: 11em 5em 2em 1em;
+}
