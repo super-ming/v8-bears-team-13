@@ -19,6 +19,11 @@ class Navbar extends Component {
       dynamicNavbar = (
         <ul className="navbar__menu" id="navbar-menu">
           <li className="navbar__item">
+            <NavLink to="/" className="navbar__link" exact activeClassName="navbar__link--active">
+              Landing
+            </NavLink>
+          </li>
+          <li className="navbar__item">
             <NavLink to="/dashboard" className="navbar__link" activeClassName="navbar__link--active">
               Dashboard
             </NavLink>
