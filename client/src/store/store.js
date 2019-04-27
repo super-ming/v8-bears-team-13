@@ -16,4 +16,10 @@ const store = createStore(
   composeEnhancers(applyMiddleware(...middleware))
 );
 
+// unsubscribe
+// will let us see state everytime it changes
+const unsubscribe = store.subscribe( () => {
+  console.log('New state is ', store.getState());
+});
+
 export default store;
