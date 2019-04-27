@@ -12,6 +12,11 @@ html {
   -webkit-font-smoothing: antialiased;
 }
 
+body
+{
+  background-color: $color-cream;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
