@@ -24,6 +24,8 @@ class Container extends React.Component {
             let value = data[1];
             obj[key] = value;
         }
+
+        obj.username = this.props.auth.username;
         
         const url = 'http://localhost:5000/api/auth/add-entry';
         fetch(url, {
@@ -45,8 +47,12 @@ class Container extends React.Component {
     }
 
     render() {
+        const whatState = () => {
+            console.log(this.props);
+        }
         return(
             <div>
+                {whatState()}
                 <form onSubmit={this.submitForm} id='form-add'>
                     <select name='transaction' defaultValue={'DEFAULT'}>
                         <option value='DEFAULT' disabled>Select Transaction Type</option>
@@ -82,7 +88,7 @@ class Container extends React.Component {
 };
 
 const mapStateToProps = (state) => {
-    return state.dash;
+    return state;
   };
   
   const mapDispatchToProps = (dispatch) => {
