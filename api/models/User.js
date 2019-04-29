@@ -11,3 +11,4 @@ exports.findOne = username => db.oneOrNone('SELECT 1 FROM users where lower(user
 exports.findById = id => db.oneOrNone('SELECT * FROM users WHERE id = $1', [id]);
 exports.findByEmail = email => db.oneOrNone('SELECT 1 FROM users where lower(email)=$1', [email.toLowerCase()]);
 exports.findPassword = username => db.oneOrNone('SELECT password from users where lower(username)=$1', [username.toLowerCase()]);
+exports.findUserId = username => db.one('SELECT id FROM users WHERE username=$1', [username.toLowerCase()]);
