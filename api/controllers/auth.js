@@ -111,14 +111,16 @@ exports.getUserById = (req, res) => {
 exports.postLogin = (req, res, next) => {
   const { user } = req;
   const { username, password } = req.body;
-  passport.authenticate('local', { session: false }, (error, user) => {
+  passport.authenticate('local', { session: false }, async (error, user) => {
     if (error) {
       res.status(400).json({ error });
       res.end();
     } else {
       // create payload for JWT token
+      const userId = await User.findUserId(username);
       const payload = {
         username,
+        userId: userId.id,
         expires: moment().add(1, 'day')
       };
 
@@ -141,7 +143,6 @@ exports.postLogin = (req, res, next) => {
 };
 
 exports.getCurrentUser = (req, res) => res.json({ msg: 'Current user' });
-
 exports.addEntry = async (req, res) => {
     const entryData = req.body;
     entryData.created_at = moment();
