@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS balances (
 );
 
 CREATE TABLE IF NOT EXISTS entries (
-  entry_id SERIAL PRIMARY KEY,
+  id SERIAL PRIMARY KEY,
   user_id BIGSERIAL, 
   transact_id BOOLEAN,
   category_id BIGSERIAL,
@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS entries (
   FOREIGN KEY ("transact_id") REFERENCES "public"."transactions"("id") ON DELETE RESTRICT ON UPDATE RESTRICT,
   FOREIGN KEY ("category_id") REFERENCES "public"."categories"("id") ON DELETE RESTRICT ON UPDATE RESTRICT,
   entry_desc TEXT NOT NULL,
-  amount INT NOT NULL,
+  amount NUMERIC NOT NULL,
   full_date DATE,
   created_at TIMESTAMP without time zone DEFAULT now(),
   recurring BOOLEAN
