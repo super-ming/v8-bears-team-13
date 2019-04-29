@@ -3,6 +3,7 @@ const cors = require('cors');
 const passport = require('passport');
 
 const authController = require('../controllers/auth');
+const entryController = require('../controllers/entry');
 
 const router = express.Router();
 
@@ -47,10 +48,5 @@ router.post('/login', authController.postLogin);
 // @desc    Return current user
 // @access  Private
 router.get('/current', authController.getCurrentUser);
-
-// @route   GET api/auth/add-entry
-// @desc    add an entry
-// @access  Private
-router.post('/add-entry', passport.authenticate('jwt', { session: false }), authController.addEntry);
 
 module.exports = router;
