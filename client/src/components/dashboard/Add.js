@@ -72,7 +72,7 @@ class Container extends React.Component {
                     </div>
                     <div>
                         <label htmlFor='amount'>Amount:</label>
-                        <input type='number' name='amount' id='amount'></input>
+                        <input type='number' name='amount' id='amount' min="0.00" step="0.01"></input>
                     </div>
                     <input type='date' name='full_date' defaultValue={moment().format('YYYY-MM-DD')}></input>
                     <div>

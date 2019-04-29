@@ -33,8 +33,8 @@ const Entry = ({ id, amount, category, date, description }) => (
 );
 
 Entry.propTypes = {
-  id: PropTypes.number.isRequired,
-  amount: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
+  amount: PropTypes.string.isRequired,
   category: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired
