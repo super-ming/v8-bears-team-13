@@ -12,6 +12,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         username: action.payload.username,
+        userId: action.payload.userId,
         expires: action.payload.expires
       };
     default:

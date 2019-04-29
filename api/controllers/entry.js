@@ -1,7 +1,7 @@
 const Entry = require('../models/Entry');
 
 exports.getLatestEntries = async (req, res) => {
-  const userData = req.body;
+  const userData = req.params.id;
   try {
     const latestEntries = await Entry.getLatestEntries(userData);
     res.json(latestEntries);

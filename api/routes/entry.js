@@ -7,12 +7,14 @@ const entryController = require('../controllers/entry');
 
 const router = express.Router();
 
-// @route   GET api/auth/entries
+// @route   GET api/entries
 // @desc    get current entries
 // @access  Private
-router.get('/entries', passport.authenticate('jwt', { session: false }), entryController.getLatestEntries);
+router.get('/latest-entries/:id', passport.authenticate('jwt', { session: false }), entryController.getLatestEntries);
 
-// @route   GET api/auth/add-entry
+// @route   GET api/entries/add-entry
 // @desc    add an entry
 // @access  Private
 router.post('/add-entry', passport.authenticate('jwt', { session: false }), authController.addEntry);
+
+module.exports = router;
