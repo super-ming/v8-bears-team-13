@@ -22,6 +22,10 @@ class Container extends React.Component {
   }
 
   componentDidMount() {
+    this.fetchEntries();
+  }
+
+  fetchEntries = () => {
     this.props.getLatestEntries(this.props.auth.userId);
   }
 
@@ -52,7 +56,7 @@ class Container extends React.Component {
       if (status === 'add') {
         return (
           <div>
-            <Add />
+            <Add getLatestEntries={this.fetchEntries} />
           </div>
         );
       } if (status === 'edit') {
