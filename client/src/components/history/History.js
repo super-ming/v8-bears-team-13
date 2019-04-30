@@ -4,6 +4,8 @@ import FilterBar from './FilterBar';
 import SavingsCard from './SavingsCard';
 import EntryList from '../entries/EntryList';
 
+import formatMoney from '../../helpers/formatMoney';
+
 // Dummy Data
 import entries from '../../data/entries';
 

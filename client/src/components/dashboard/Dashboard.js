@@ -11,6 +11,8 @@ import EditEntry from './EditEntry';
 import DashboardSummary from './DashboardSummary';
 import EntryList from '../entries/EntryList';
 
+import formatMoney from '../../helpers/formatMoney';
+
 class Container extends React.Component {
   constructor(props) {
     super(props);
@@ -71,7 +73,7 @@ class Container extends React.Component {
             <div className="dash__saved">
               <p>
                 You have saved{' '}
-                <span className="dash__saved--big">${savings}</span> so far
+                <span className="dash__saved--big">${formatMoney(savings)}</span> so far
                 this month.
               </p>
             </div>

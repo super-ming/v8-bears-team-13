@@ -3,15 +3,17 @@ import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPencilAlt, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
+import formatMoney from '../../helpers/formatMoney';
+
 /*
 Font Awesome Icon Usage: https://github.com/FortAwesome/react-fontawesome#explicit-import
 */
 
-const Entry = ({ id, amount, category, date, description, editEntry }) => (
+const Entry = ({ id, amount, category, date, description, type, editEntry }) => (
   <div className="entry">
     <div className="entry__row">
       <div className="entry__description">{description}</div>
-      <div className="entry__amount">${amount}</div>
+      <div className="entry__amount">{ type == 1 && '-' }${formatMoney(amount)}</div>
     </div>
     <div className="entry__row">
       <div className="entry__column">
@@ -24,7 +26,7 @@ const Entry = ({ id, amount, category, date, description, editEntry }) => (
       </div>
       <div className="entry__column">
         <div className="entry__icons">
-          <FontAwesomeIcon className="entry__icon entry__icon--edit" icon={faPencilAlt} onClick={editEntry}/>
+          <FontAwesomeIcon className="entry__icon entry__icon--edit" icon={faPencilAlt} onClick={editEntry} />
           <FontAwesomeIcon className="entry__icon entry__icon--delete" icon={faTrashAlt} />
         </div>
       </div>
