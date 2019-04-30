@@ -8,9 +8,14 @@ import {dashDefault} from '../../actions/dashActions';
 import moment from 'moment';
 
 class Container extends React.Component {
-    constructor(props) {
-        super(props);
-        // this.setDashDefault = this.setDashDefault.bind(this);
+    state = {
+        transaction: 0
+    }
+
+    handleTransactionTypeChange = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value
+        });
     }
 
     submitForm = (e) => {
@@ -45,25 +50,45 @@ class Container extends React.Component {
         });
     }
 
+    getCategoryOptions = () => {
+        // Income
+        if (this.state.transaction === "0") {
+            return <option value='1'>Salary</option>;
+        }
+
+        // Expense
+        return (
+            <>
+                <option value='2'>Groceries</option>
+                <option value='3'>Transportation</option>
+                <option value='4'>Utilities</option>
+            </>
+        );
+
+    }
+
     render() {
         const whatState = () => {
             console.log(this.props);
         }
+
         return(
             <div>
                 {whatState()}
                 <form onSubmit={this.submitForm} id='form-add'>
-                    <select name='transaction' defaultValue={'DEFAULT'}>
+                    <select 
+                        name='transaction'
+                        defaultValue={'DEFAULT'}
+                        value={this.state.transactionType}
+                        onChange={this.handleTransactionTypeChange}
+                    >
                         <option value='DEFAULT' disabled>Select Transaction Type</option>
                         <option value='0'>Income</option>
                         <option value='1'>Expense</option>
                     </select>
                     <select name='category' defaultValue={'DEFAULT'}>
                         <option value='DEFAULT' disabled>Select Category Type</option>
-                        <option value='1'>Salary</option>
-                        <option value='2'>Groceries</option>
-                        <option value='3'>Transportation</option>
-                        <option value='4'>Utilities</option>
+                        { this.getCategoryOptions() }
                     </select>
                     <div>
                         <label htmlFor='entry'>Entry:</label>
