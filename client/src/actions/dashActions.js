@@ -1,4 +1,4 @@
-import { ADD_ENTRY, DASH_DEFAULT, GET_LATEST_ENTRIES, GET_LATEST_ENTRIES_FAILURE } from './types';
+import { ADD_ENTRY, EDIT_ENTRY, DASH_DEFAULT, GET_LATEST_ENTRIES, GET_LATEST_ENTRIES_FAILURE } from './types';
 
 export const handleErrors = (response) => {
     if (!response.ok) {
@@ -10,6 +10,10 @@ export const handleErrors = (response) => {
 // `userTokenData` includes the username + token expiration time
 export const addEntry = () => ({
     type: ADD_ENTRY
+});
+
+export const editEntry = () => ({
+    type: EDIT_ENTRY
 });
 
 export const getLatestEntriesSuccess = entries => ({

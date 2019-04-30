@@ -1,4 +1,4 @@
-import { ADD_ENTRY, DASH_DEFAULT, GET_LATEST_ENTRIES, GET_LATEST_ENTRIES_FAILURE } from '../actions/types';
+import { ADD_ENTRY, EDIT_ENTRY, DASH_DEFAULT, GET_LATEST_ENTRIES, GET_LATEST_ENTRIES_FAILURE } from '../actions/types';
 
 // Actions are dispatched to this reducer...
 export default function (state = {status: 'dash'}, action) {
@@ -6,6 +6,10 @@ export default function (state = {status: 'dash'}, action) {
         case ADD_ENTRY:
             return {
                 status: 'add'
+            };
+        case EDIT_ENTRY:
+            return {
+                status: 'edit'
             };
         case DASH_DEFAULT: 
             return {
