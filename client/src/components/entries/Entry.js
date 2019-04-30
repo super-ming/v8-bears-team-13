@@ -9,11 +9,11 @@ import formatMoney from '../../helpers/formatMoney';
 Font Awesome Icon Usage: https://github.com/FortAwesome/react-fontawesome#explicit-import
 */
 
-const Entry = ({ id, amount, category, date, description, editEntry }) => (
+const Entry = ({ id, amount, category, date, description, type, editEntry }) => (
   <div className="entry">
     <div className="entry__row">
       <div className="entry__description">{description}</div>
-      <div className="entry__amount">${formatMoney(amount)}</div>
+      <div className="entry__amount">{ type == 1 && '-' }${formatMoney(amount)}</div>
     </div>
     <div className="entry__row">
       <div className="entry__column">

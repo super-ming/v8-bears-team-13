@@ -14,6 +14,7 @@ const EntryList = ({ entries, editEntry }) => (
           category={entry.category_desc}
           date={entry.full_date.substring(0, 10)}
           description={entry.entry_desc}
+          type={entry.transact_id}
           editEntry={editEntry}
         />
       ))
