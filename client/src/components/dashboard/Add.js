@@ -3,7 +3,7 @@ import React from 'react';
 // need connect function to be able to connect to store from Provider
 import {connect} from 'react-redux';
 
-import {dashDefault} from '../../actions/dashActions';
+import {getLatestEntries} from '../../actions/dashActions';
 
 import moment from 'moment';
 
@@ -80,7 +80,7 @@ class Container extends React.Component {
                     </div>
                     <button>Submit</button>
                 </form>
-                <button onClick={this.props.setDashDefault}>Back</button>
+                <button onClick={this.props.getLatestEntries}>Back</button>
             </div>
         )
     }
@@ -92,8 +92,8 @@ const mapStateToProps = (state) => {
   
   const mapDispatchToProps = (dispatch) => {
     return {
-        setDashDefault: () => {
-            dispatch(dashDefault());
+        setGetLatestEntries: () => {
+            dispatch(getLatestEntries());
         }
     }
   }
