@@ -1,10 +1,14 @@
 const moment = require('moment');
 const db = require('../db/config');
-const User = require('./User');
 
 exports.addEntry = async (data) => {
-  const { username, transaction, category, entry, amount, full_date, created_at, recurring } = data;
-  const userId = await User.findUserId(username).then(user => user.id);
+  const { userId, transaction, category, entry, amount, full_date, created_at, recurring } = data;
+  return db.one('INSERT INTO entries (user_id, transact_id, category_id, entry_desc, amount, full_date, created_at, recurring) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *',
+    [userId, transaction, category, entry, amount, full_date, created_at, recurring]);
+};
+
+exports.editEntry = async (data) => {
+  const { userId, transaction, category, entry, amount, full_date, created_at, recurring } = data;
   return db.one('INSERT INTO entries (user_id, transact_id, category_id, entry_desc, amount, full_date, created_at, recurring) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *',
     [userId, transaction, category, entry, amount, full_date, created_at, recurring]);
 };
