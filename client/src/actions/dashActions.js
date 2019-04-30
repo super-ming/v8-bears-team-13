@@ -12,8 +12,9 @@ export const addEntry = () => ({
     type: ADD_ENTRY
 });
 
-export const editEntry = () => ({
-    type: EDIT_ENTRY
+export const editEntry = entry => ({
+    type: EDIT_ENTRY,
+    payload: entry
 });
 
 export const getLatestEntriesSuccess = entries => ({
