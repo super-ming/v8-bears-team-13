@@ -4,21 +4,12 @@ import PropTypes from 'prop-types';
 
 // need connect function to be able to connect to store from Provider
 
-import { addEntry, dashDefault } from '../../actions/dashActions';
+import { addEntry, editEntry, dashDefault, getLatestEntries } from '../../actions/dashActions';
 
 import Add from './Add';
+import EditEntry from './EditEntry';
 import DashboardSummary from './DashboardSummary';
 import EntryList from '../entries/EntryList';
-
-// Dummy Data
-import entries from '../../data/entries';
-
-const initialState = {
-  entries,
-  monthlyAmountSaved: 999.99,
-  monthlyIncome: 299.0,
-  monthlyExpenses: 99.99
-};
 
 class Container extends React.Component {
   constructor(props) {
@@ -28,10 +19,11 @@ class Container extends React.Component {
     // this.state = {
     //   status: 'dash'
     // };
-    this.state = initialState;
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    this.props.getLatestEntries(this.props.auth.userId);
+  }
 
   // statusAdd = () => {
   //   this.setState({status:'add'});
@@ -39,12 +31,34 @@ class Container extends React.Component {
   // }
 
   render() {
+    console.log(this.props);
     const index = () => {
-      const { status } = this.props;
+      const { status, latestEntries } = this.props;
+      let income = 0;
+      let expense = 0;
+      let savings = 0;
+      if (latestEntries) {
+        latestEntries.map((entry) => {
+          if (!entry.transact_id) {
+            income += parseFloat(entry.amount);
+          }
+          if (entry.transact_id) {
+            expense += parseFloat(entry.amount);
+          }
+        });
+        savings = income - expense;
+      }
+     
       if (status === 'add') {
         return (
           <div>
             <Add />
+          </div>
+        );
+      } if (status === 'edit') {
+        return (
+          <div>
+            <EditEntry />
           </div>
         );
       } if (status === 'dash') {
@@ -53,19 +67,21 @@ class Container extends React.Component {
             <div className="dash__saved">
               <p>
                 You have saved{' '}
-                <span className="dash__saved--big">${this.state.monthlyAmountSaved}</span> so far
+                <span className="dash__saved--big">${savings}</span> so far
                 this month.
               </p>
             </div>
             <DashboardSummary
-              income={this.state.monthlyIncome}
-              expense={this.state.monthlyExpenses}
+              income={income}
+              expense={expense}
             />
             <button className="button dash__button" type="button" onClick={this.props.addNewEntry}>
               Add Entry
             </button>
             <h2 className="heading--sub">Recent Entries</h2>
-            <EntryList entries={this.state.entries} />
+            { latestEntries !== undefined && (
+              <EntryList entries={latestEntries} editEntry={this.props.editEntry} />
+            )}
           </div>
         );
       }
@@ -82,17 +98,30 @@ class Container extends React.Component {
 
 Container.propTypes = {
   status: PropTypes.string.isRequired,
-  addNewEntry: PropTypes.func.isRequired
+  addNewEntry: PropTypes.func.isRequired,
+  editEntry: PropTypes.func.isRequired,
+  getLatestEntries: PropTypes.func.isRequired,
+  latestEntries: PropTypes.array,
 };
 
-const mapStateToProps = state => state.dash;
+const mapStateToProps = state => ({
+  status: state.dash.status,
+  auth: state.auth,
+  latestEntries: state.dash.latestEntries
+});
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   addNewEntry: () => {
     dispatch(addEntry());
   },
+  editEntry: () => {
+    dispatch(editEntry());
+  },
   setDashDefault: () => {
     dispatch(dashDefault());
+  },
+  getLatestEntries: (userId) => {
+    dispatch(getLatestEntries(userId));
   }
 });
 

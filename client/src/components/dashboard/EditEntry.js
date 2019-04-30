@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 
 // need connect function to be able to connect to store from Provider
 import {connect} from 'react-redux';
@@ -15,7 +16,7 @@ class Container extends React.Component {
 
     submitForm = (e) => {
         e.preventDefault();
-        const formData = new FormData(document.getElementById('form-add'));
+        const formData = new FormData(document.getElementById('form-edit'));
         // this.props.setDashDefault();
         let obj = {};
         for(let data of formData.entries()) {
@@ -24,12 +25,13 @@ class Container extends React.Component {
             let value = data[1];
             obj[key] = value;
         }
-        
+
+        obj.username = this.props.auth.username;
         obj.userId = this.props.auth.userId;
         
-        const url = 'http://localhost:5000/api/entries/add-entry';
+        const url = 'http://localhost:5000/api/entries/edit-entry';
         fetch(url, {
-            method: 'POST',
+            method: 'PUT',
             body: JSON.stringify(obj),
             headers: { 'Content-type': 'application/json' },
             credentials: 'include'
@@ -43,16 +45,19 @@ class Container extends React.Component {
         .catch((err) => {
             throw err;
         });
+
     }
 
     render() {
         const whatState = () => {
             console.log(this.props);
         }
+        console.log(this.props);
         return(
             <div>
                 {whatState()}
-                <form onSubmit={this.submitForm} id='form-add'>
+                <form onSubmit={this.submitForm} id='form-edit'>
+                    <h3>Entry Edit</h3>
                     <select name='transaction' defaultValue={'DEFAULT'}>
                         <option value='DEFAULT' disabled>Select Transaction Type</option>
                         <option value='0'>Income</option>
@@ -90,13 +95,13 @@ const mapStateToProps = (state) => {
     return state;
   };
   
-  const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch) => {
     return {
         setDashDefault: () => {
             dispatch(dashDefault());
         }
     }
-  }
+}
   
 const Add = connect(mapStateToProps, mapDispatchToProps)(Container);
 

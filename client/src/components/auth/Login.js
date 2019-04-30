@@ -91,7 +91,7 @@ class Login extends React.Component {
       <div className="content">
         <div className="form__container">
           <h1 className="heading--main">Login</h1>
-          { this.state.redirectToDashboard && <Redirect to="/dashboard" />}
+          { this.state.redirectToDashboard && <Redirect to={`/dashboard/${this.props.auth.userId}`} />}
           <form className="form" onSubmit={this.handleSubmit}>
             <div className="form__group">
               <label htmlFor="username" className="form__label">Username:</label>
@@ -139,7 +139,8 @@ class Login extends React.Component {
 Login.propTypes = {
   auth: PropTypes.shape({
     username: PropTypes.string,
-    expires: PropTypes.string
+    userId: PropTypes.string,
+    expires: PropTypes.string, 
   }).isRequired,
   loginUser: PropTypes.func.isRequired
 };

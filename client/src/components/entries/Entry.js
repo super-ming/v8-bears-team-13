@@ -7,7 +7,7 @@ import { faPencilAlt, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 Font Awesome Icon Usage: https://github.com/FortAwesome/react-fontawesome#explicit-import
 */
 
-const Entry = ({ id, amount, category, date, description }) => (
+const Entry = ({ id, amount, category, date, description, editEntry }) => (
   <div className="entry">
     <div className="entry__row">
       <div className="entry__description">{description}</div>
@@ -24,7 +24,7 @@ const Entry = ({ id, amount, category, date, description }) => (
       </div>
       <div className="entry__column">
         <div className="entry__icons">
-          <FontAwesomeIcon className="entry__icon entry__icon--edit" icon={faPencilAlt} />
+          <FontAwesomeIcon className="entry__icon entry__icon--edit" icon={faPencilAlt} onClick={editEntry}/>
           <FontAwesomeIcon className="entry__icon entry__icon--delete" icon={faTrashAlt} />
         </div>
       </div>
@@ -33,8 +33,7 @@ const Entry = ({ id, amount, category, date, description }) => (
 );
 
 Entry.propTypes = {
-  id: PropTypes.number.isRequired,
-  amount: PropTypes.number.isRequired,
+  amount: PropTypes.string.isRequired,
   category: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired

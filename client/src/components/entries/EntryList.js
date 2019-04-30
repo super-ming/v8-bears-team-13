@@ -3,17 +3,18 @@ import PropTypes from 'prop-types';
 
 import Entry from './Entry';
 
-const EntryList = ({ entries }) => (
+const EntryList = ({ entries, editEntry }) => (
   <div className="entry__container">
-    {
+    { entries && 
       entries.map(entry => (
         <Entry
           key={entry.id}
-          id={entry.id}
+          id={entry.userId}
           amount={entry.amount}
-          category={entry.category}
-          date={entry.date}
-          description={entry.description}
+          category={entry.category_desc}
+          date={entry.full_date.substring(0, 10)}
+          description={entry.entry_desc}
+          editEntry={editEntry}
         />
       ))
     }
@@ -23,13 +24,14 @@ const EntryList = ({ entries }) => (
 EntryList.propTypes = {
   entries: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.number,
-      amount: PropTypes.number,
+      id: PropTypes.string,
+      amount: PropTypes.string,
       category: PropTypes.string,
       date: PropTypes.string,
       description: PropTypes.description
     })
-  ).isRequired
+  ).isRequired, 
+  editEntry: PropTypes.func
 };
 
 export default EntryList;
