@@ -143,14 +143,3 @@ exports.postLogin = (req, res, next) => {
 };
 
 exports.getCurrentUser = (req, res) => res.json({ msg: 'Current user' });
-exports.addEntry = async (req, res) => {
-    const entryData = req.body;
-    entryData.created_at = moment();
-    try {
-      const newEntry = await Entry.addEntry(entryData);
-      res.json(newEntry);
-    } 
-    catch (err) {
-      throw new Error(err);
-    }
-};
