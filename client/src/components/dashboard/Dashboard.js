@@ -4,9 +4,10 @@ import PropTypes from 'prop-types';
 
 // need connect function to be able to connect to store from Provider
 
-import { addEntry, dashDefault, getLatestEntries } from '../../actions/dashActions';
+import { addEntry, editEntry, dashDefault, getLatestEntries } from '../../actions/dashActions';
 
 import Add from './Add';
+import EditEntry from './EditEntry';
 import DashboardSummary from './DashboardSummary';
 import EntryList from '../entries/EntryList';
 
@@ -54,6 +55,12 @@ class Container extends React.Component {
             <Add />
           </div>
         );
+      } if (status === 'edit') {
+        return (
+          <div>
+            <EditEntry />
+          </div>
+        );
       } if (status === 'dash') {
         return (
           <div>
@@ -73,13 +80,11 @@ class Container extends React.Component {
             </button>
             <h2 className="heading--sub">Recent Entries</h2>
             { latestEntries !== undefined && (
-              <EntryList entries={latestEntries} />
+              <EntryList entries={latestEntries} editEntry={this.props.editEntry} />
             )}
-            
           </div>
         );
       }
-      console.log(this.props);
     };
 
     return (
@@ -94,6 +99,7 @@ class Container extends React.Component {
 Container.propTypes = {
   status: PropTypes.string.isRequired,
   addNewEntry: PropTypes.func.isRequired,
+  editEntry: PropTypes.func.isRequired,
   getLatestEntries: PropTypes.func.isRequired,
   latestEntries: PropTypes.array,
 };
@@ -107,6 +113,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = (dispatch) => ({
   addNewEntry: () => {
     dispatch(addEntry());
+  },
+  editEntry: () => {
+    dispatch(editEntry());
   },
   setDashDefault: () => {
     dispatch(dashDefault());
