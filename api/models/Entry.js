@@ -9,8 +9,8 @@ exports.addEntry = async (data) => {
 
 exports.editEntry = async (data) => {
   const { userId, transaction, category, entry, amount, full_date, created_at, recurring } = data;
-  return db.one('INSERT INTO entries (user_id, transact_id, category_id, entry_desc, amount, full_date, created_at, recurring) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *',
-    [userId, transaction, category, entry, amount, full_date, created_at, recurring]);
+  return db.one('UPDATE entries SET (user_id, transact_id, category_id, entry_desc, amount, full_date, created_at, recurring) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) WHERE entries.id = $9 RETURNING * ',
+    [userId, transaction, category, entry, amount, full_date, created_at, recurring, data.id]);
 };
 
 exports.getLatestEntries = async (id) => {
