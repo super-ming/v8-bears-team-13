@@ -69,7 +69,8 @@ class Container extends React.Component {
         );
       } if (status === 'dash') {
         return (
-          <div>
+          <>
+            <h1 className="heading--main">Dashboard</h1>
             <div className="dash__saved">
               <p>
                 You have saved{' '}
@@ -88,14 +89,13 @@ class Container extends React.Component {
             { latestEntries !== undefined && (
               <EntryList entries={latestEntries} editEntry={this.props.editEntry} />
             )}
-          </div>
+          </>
         );
       }
     };
 
     return (
       <div className="content">
-        <h1 className="heading--main">Dashboard</h1>
         <div className="dash">{index()}</div>
       </div>
     );
