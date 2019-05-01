@@ -35,7 +35,7 @@ class Container extends React.Component {
     const entries = () => {
       const { latestEntries } = this.props;
 
-      if (this.state.loading) return <Loader />;
+      if (this.props.loading) return <Loader />;
       if (latestEntries !== undefined) {
         return <EntryList entries={latestEntries} editEntry={this.props.editEntry} />;
       }
@@ -107,13 +107,15 @@ Container.propTypes = {
   editEntry: PropTypes.func.isRequired,
   getLatestEntries: PropTypes.func.isRequired,
   latestEntries: PropTypes.array.isRequired,
-  auth: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired,
+  loading: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = state => ({
   status: state.dash.status,
   auth: state.auth,
-  latestEntries: state.dash.latestEntries
+  latestEntries: state.dash.latestEntries,
+  loading: state.loading.isLoading
 });
 
 const mapDispatchToProps = dispatch => ({
