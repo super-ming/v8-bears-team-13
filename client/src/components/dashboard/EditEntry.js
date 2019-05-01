@@ -1,5 +1,4 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
 
 // need connect function to be able to connect to store from Provider
 import {connect} from 'react-redux';
@@ -7,17 +6,40 @@ import {connect} from 'react-redux';
 import {dashDefault} from '../../actions/dashActions';
 
 import moment from 'moment';
+import { checkServerIdentity } from 'tls';
 
 class Container extends React.Component {
-    constructor(props) {
-        super(props);
-        // this.setDashDefault = this.setDashDefault.bind(this);
+    state = {
+        transaction: this.props.dash.entry.transact_id,
+        entry: this.props.dash.entry.entry_desc ,
+        amount: this.props.dash.entry.amount
+    }
+
+    handleTransactionTypeChange = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value
+        });
+    }
+
+    getCategoryOptions = () => {
+        // Income
+        if (this.state.transaction === "0" || this.state.transaction === false) {
+            return <option value='1'>Salary</option>;
+        }
+
+        // Expense
+        return (
+            <>
+                <option value='2'>Groceries</option>
+                <option value='3'>Transportation</option>
+                <option value='4'>Utilities</option>
+            </>
+        );
     }
 
     submitForm = (e) => {
         e.preventDefault();
         const formData = new FormData(document.getElementById('form-edit'));
-        // this.props.setDashDefault();
         let obj = {};
         for(let data of formData.entries()) {
             // data is in key-value pairs
@@ -28,6 +50,7 @@ class Container extends React.Component {
 
         obj.username = this.props.auth.username;
         obj.userId = this.props.auth.userId;
+        obj.id = this.props.dash.entry.id;
         
         const url = 'http://localhost:5000/api/entries/edit-entry';
         fetch(url, {
@@ -40,52 +63,62 @@ class Container extends React.Component {
             res.json()
         )
         .then((data) => {
-            console.log(data);
+            this.props.getLatestEntries();
         })
         .catch((err) => {
             throw err;
         });
+    };
 
+    getReccuringDefault = () => {
+        if (this.props.dash.entry.recurring) {
+            return <input type='checkbox' name='recurring' id='recurring' onClick={this.handleTransactionTypeChange} checked ></input>;
+        }
+
+        return (<input type='checkbox' name='recurring' id='recurring' onClick={this.handleTransactionTypeChange}></input>)
     }
 
     render() {
         const whatState = () => {
             console.log(this.props);
         }
-        console.log(this.props);
+        
+        const { transact_id, category_id, entry_desc, amount } = this.props.dash.entry;
+        
         return(
             <div>
                 {whatState()}
                 <form onSubmit={this.submitForm} id='form-edit'>
                     <h3>Entry Edit</h3>
-                    <select name='transaction' defaultValue={'DEFAULT'}>
+                    <select name='transaction' 
+                            defaultValue={transact_id}
+                            value={this.state.transactionType}
+                            onChange={this.handleTransactionTypeChange}
+                    >
                         <option value='DEFAULT' disabled>Select Transaction Type</option>
                         <option value='0'>Income</option>
                         <option value='1'>Expense</option>
                     </select>
-                    <select name='category' defaultValue={'DEFAULT'}>
+                    <select name='category' defaultValue={category_id} onClick={this.handleTransactionTypeChange}>
                         <option value='DEFAULT' disabled>Select Category Type</option>
-                        <option value='1'>Salary</option>
-                        <option value='2'>Groceries</option>
-                        <option value='3'>Transportation</option>
-                        <option value='4'>Utilities</option>
+                        { this.getCategoryOptions() }
                     </select>
                     <div>
                         <label htmlFor='entry'>Entry:</label>
-                        <input type='text' name='entry' id='entry'></input>  
+                        <input type='text' name='entry' id='entry' value={this.state.entry} onInput={this.handleTransactionTypeChange}></input>  
                     </div>
                     <div>
                         <label htmlFor='amount'>Amount:</label>
-                        <input type='number' name='amount' id='amount' min="0.00" step="0.01"></input>
+                        <input type='number' name='amount' id='amount' min="0.00" step="0.01" value={this.state.amount} onInput={this.handleTransactionTypeChange}></input>
                     </div>
                     <input type='date' name='full_date' defaultValue={moment().format('YYYY-MM-DD')}></input>
                     <div>
-                        <input type='checkbox' name='recurring' id='recurring'></input>
                         <label htmlFor='recurring'>Recurring</label>
+                        { this.getReccuringDefault() }
                     </div>
                     <button>Submit</button>
                 </form>
-                <button onClick={this.props.setDashDefault}>Back</button>
+                <button onClick={this.props.getLatestEntries}>Back</button>
             </div>
         )
     }

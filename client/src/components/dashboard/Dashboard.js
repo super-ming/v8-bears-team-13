@@ -25,13 +25,7 @@ class Container extends React.Component {
     this.props.getLatestEntries(this.props.auth.userId);
   };
 
-  // statusAdd = () => {
-  //   this.setState({status:'add'});
-  //   console.log(this.state.status);
-  // }
-
   render() {
-    console.log(this.props);
     const entries = () => {
       const { latestEntries } = this.props;
 
@@ -47,7 +41,7 @@ class Container extends React.Component {
       let expense = 0;
       let savings = 0;
       if (latestEntries) {
-        latestEntries.map((entry) => {
+        latestEntries.map(entry => {
           if (!entry.transact_id) {
             income += parseFloat(entry.amount);
           }
@@ -77,7 +71,7 @@ class Container extends React.Component {
           <div>
             <div className="dash__saved">
               <p>
-                You have saved <span className="dash__saved--big">${formatMoney(savings)}</span> so
+                You have saved <span className="dash__saved--big">{formatMoney(savings)}</span> so
                 far this month.
               </p>
             </div>
@@ -122,8 +116,8 @@ const mapDispatchToProps = dispatch => ({
   addNewEntry: () => {
     dispatch(addEntry());
   },
-  editEntry: () => {
-    dispatch(editEntry());
+  editEntry: (entry) => {
+    dispatch(editEntry(entry));
   },
   setDashDefault: () => {
     dispatch(dashDefault());

@@ -9,13 +9,16 @@ const EntryList = ({ entries, editEntry }) => (
       entries.map(entry => (
         <Entry
           key={entry.id}
-          id={entry.userId}
+          entryId={entry.id}
+          userId={entry.userId}
           amount={entry.amount}
-          category={entry.category_desc}
+          categoryId={entry.category_id}
+          categoryDesc={entry.category_desc}
           date={entry.full_date.substring(0, 10)}
           description={entry.entry_desc}
           type={entry.transact_id}
           editEntry={editEntry}
+          entryDetails={entry}
         />
       ))
     }
