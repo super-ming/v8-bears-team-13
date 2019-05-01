@@ -33,9 +33,17 @@
     }
   }
 
-  &__description,
-  &__amount {
+  &__description {
+    font-size: $font-size-extra-large
+  }
+  &__incomeAmount {
     font-size: $font-size-extra-large;
+    color: $color-green;
+  }
+
+  &__expenseAmount {
+    font-size: $font-size-extra-large;
+    color: $color-red;
   }
 
   &__group {

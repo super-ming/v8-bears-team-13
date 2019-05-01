@@ -17,7 +17,7 @@ const Entry = ({ amount, categoryDesc, date, description, type, editEntry, entry
   <div className="entry">
     <div className="entry__row">
       <div className="entry__description">{description}</div>
-      <div className="entry__amount">{ type === 1 && '-' }{formatMoney(amount)}</div>
+      { type ? <div className="entry__expenseAmount">-{formatMoney(amount)}</div> : <div className="entry__incomeAmount">{formatMoney(amount)}</div> }
     </div>
     <div className="entry__row">
       <div className="entry__column">
