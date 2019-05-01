@@ -37,7 +37,7 @@ exports.getLatestEntries = async (id) => {
   try {
     return db.task('getLatestEntries', async (t) => {
       const previousMonthStart = moment().date(0).startOf('month').startOf('day').format('YYYY-MM-DD HH:mm:ss');
-      return db.any('SELECT * from entries JOIN categories on entries.category_id = categories.id WHERE entries.user_id = $1 AND entries.created_at >= $2', [id, previousMonthStart])
+      return db.any('SELECT * from entries JOIN categories on entries.category_id = categories.id WHERE entries.user_id = $1 AND entries.created_at >= $2 ORDER BY entries.created_at DESC', [id, previousMonthStart])
         .then(data => {
           return data;
         })
