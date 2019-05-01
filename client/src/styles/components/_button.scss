@@ -13,4 +13,20 @@
     background-color: $color-green;
     color: $color-white;
   }
+
+  &__back {
+    background-color: $color-white;
+    border: 1px solid $color-red;
+    border-radius: 3px;
+    color: $color-red;
+    cursor: pointer;
+    font-size: 1.8rem;
+    height: 4.4rem;
+    width: 9.4rem;
+    transition: all 0.2s ease;
+    &:hover {
+      background-color: $color-red;
+      color: $color-white;
+    }
+  }
 }

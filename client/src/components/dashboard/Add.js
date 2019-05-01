@@ -68,44 +68,66 @@ class Container extends React.Component {
     }
 
     render() {
-        const whatState = () => {
-            console.log(this.props);
-        }
-
         return(
-            <div>
-                {whatState()}
-                <form onSubmit={this.submitForm} id='form-add'>
-                    <select 
-                        name='transaction'
-                        defaultValue={'DEFAULT'}
-                        value={this.state.transactionType}
-                        onChange={this.handleTransactionTypeChange}
-                    >
-                        <option value='DEFAULT' disabled>Select Transaction Type</option>
-                        <option value='0'>Income</option>
-                        <option value='1'>Expense</option>
-                    </select>
-                    <select name='category' defaultValue={'DEFAULT'}>
-                        <option value='DEFAULT' disabled>Select Category Type</option>
-                        { this.getCategoryOptions() }
-                    </select>
-                    <div>
-                        <label htmlFor='entry'>Entry:</label>
-                        <input type='text' name='entry' id='entry'></input>  
-                    </div>
-                    <div>
-                        <label htmlFor='amount'>Amount:</label>
-                        <input type='number' name='amount' id='amount' min="0.00" step="0.01"></input>
-                    </div>
-                    <input type='date' name='full_date' defaultValue={moment().format('YYYY-MM-DD')}></input>
-                    <div>
-                        <input type='checkbox' name='recurring' id='recurring'></input>
-                        <label htmlFor='recurring'>Recurring</label>
-                    </div>
-                    <button>Submit</button>
+            <div className="add-entry">
+                <form onSubmit={this.submitForm} id='form__add' className="form__add">
+                    <fieldset>
+                        <legend>Add a new entry</legend>
+                        <div className="form__container">
+                            <div className="form__group">
+                                <label htmlFor="transaction" className="form__label">Transaction Type: </label>
+                                <div className="form__input-container">
+                                    <select 
+                                        id='transaction'
+                                        name='transaction'
+                                        defaultValue={'DEFAULT'}
+                                        value={this.state.transactionType}
+                                        onChange={this.handleTransactionTypeChange}
+                                    >
+                                        <option value='DEFAULT' disabled>Select Transaction Type</option>
+                                        <option value='0'>Income</option>
+                                        <option value='1'>Expense</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div className="form__group">
+                                <label htmlFor="category" className="form__label">Category Type: </label>
+                                <div className="form__input-container">
+                                    <select id="category" name='category' defaultValue={'DEFAULT'}>
+                                        <option value='DEFAULT' disabled>Select Category Type</option>
+                                        { this.getCategoryOptions() }
+                                    </select>
+                                </div>
+                            </div>
+                            <div className="form__group">
+                                <label htmlFor="entry" className="form__label">Entry Description: </label>
+                                <div className="form__input-container">
+                                    <input type='text' name='entry' id='entry'></input>
+                                </div>
+                            </div>
+                            <div className="form__group">
+                                <label htmlFor="amount" className="form__label">Amount: </label>
+                                <div className="form__input-container">
+                                    <input type='number' name='amount' id='amount' min="0.00" step="0.01"></input>
+                                </div>
+                            </div>
+                            <div className="form__group">
+                                <label htmlFor="date" className="form__label">Date: </label>
+                                <div className="form__input-container">
+                                    <input type='date' name='full_date' id="date" defaultValue={moment().format('YYYY-MM-DD')}></input>
+                                </div>
+                            </div>
+                            <div className="form__group">
+                                <label htmlFor="recurring" className="form__label">Recurring: </label>
+                                <div className="form__input-container">
+                                    <input type='checkbox' name='recurring' id='recurring'></input>
+                                </div>
+                            </div>
+                            <button className="button">Submit</button>
+                        </div>
+                    </fieldset>
                 </form>
-                <button onClick={this.props.getLatestEntries}>Back</button>
+                <button className="button__back" onClick={this.props.getLatestEntries}>Back</button>
             </div>
         )
     }
