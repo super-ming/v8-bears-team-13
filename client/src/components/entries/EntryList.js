@@ -34,8 +34,8 @@ EntryList.propTypes = {
       date: PropTypes.string,
       description: PropTypes.description
     })
-  ).isRequired, 
-  editEntry: PropTypes.func
+  ).isRequired,
+  editEntry: PropTypes.func.isRequired
 };
 
 export default EntryList;

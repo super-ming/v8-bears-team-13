@@ -11,13 +11,17 @@ Font Awesome Icon Usage: https://github.com/FortAwesome/react-fontawesome#explic
 
 const handleEditClick = (editEntry, entryDetails) => {
   editEntry(entryDetails);
-}
+};
 
 const Entry = ({ amount, categoryDesc, date, description, type, editEntry, entryDetails }) => (
   <div className="entry">
     <div className="entry__row">
       <div className="entry__description">{description}</div>
-      { type ? <div className="entry__expenseAmount">-{formatMoney(amount)}</div> : <div className="entry__incomeAmount">{formatMoney(amount)}</div> }
+      {
+        type
+          ? <div className="entry__amount entry__amount--expense">-{formatMoney(amount)}</div>
+          : <div className="entry__amount entry__amount--income">{formatMoney(amount)}</div>
+      }
     </div>
     <div className="entry__row">
       <div className="entry__column">
@@ -42,7 +46,10 @@ Entry.propTypes = {
   amount: PropTypes.string.isRequired,
   categoryDesc: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired
+  description: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  editEntry: PropTypes.func.isRequired,
+  entryDetails: PropTypes.object.isRequired
 };
 
 export default Entry;

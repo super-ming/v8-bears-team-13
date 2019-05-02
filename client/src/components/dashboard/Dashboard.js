@@ -72,7 +72,8 @@ class Container extends React.Component {
       }
       if (status === 'dash') {
         return (
-          <div>
+          <>
+            <h1 className="heading--main">Dashboard</h1>
             <div className="dash__saved">
               <p>
                 You have saved <span className="dash__saved--big">{formatMoney(savings)}</span> so
@@ -85,14 +86,13 @@ class Container extends React.Component {
             </button>
             <h2 className="heading--sub">Recent Entries</h2>
             {entries()}
-          </div>
+          </>
         );
       }
     };
 
     return (
       <div className="content">
-        <h1 className="heading--main">Dashboard</h1>
         <div className="dash">{index()}</div>
       </div>
     );
