@@ -1,8 +1,13 @@
 .entry__container {
+  margin: 0 0 10vw 0;
+
   display: flex;
     align-items: center;
     flex-direction: column;
-    margin: 0 0 10vw 0;
+  
+  @include respond(tab-port) {
+    margin-bottom: 12.5rem;
+  }
 }
 
 .entry {
@@ -20,6 +25,14 @@
     margin-top: 3rem;
   }
 
+  @include respond(desktop) {
+    width: 90%;
+  }
+
+  @include respond(tab-land) {
+    width: 80%;
+  }
+
   &__row {
     padding-left: 3rem;
     padding-right: 3rem;
@@ -31,29 +44,50 @@
     &:not(:first-of-type) {
       margin-top: 1.5rem;
     }
+
+    @include respond(tab-port) {
+      display: block;
+      text-align: center;
+    }
   }
 
   &__description {
     font-size: $font-size-extra-large
   }
-  &__incomeAmount {
-    font-size: $font-size-extra-large;
-    color: $color-green;
-  }
 
-  &__expenseAmount {
+  &__amount {
     font-size: $font-size-extra-large;
-    color: $color-red;
+
+    @include respond(tab-port) {
+      margin-top: 1.5rem;
+    }
+
+    &--expense {
+      color: $color-red;
+    }
+
+    &--income {
+      color: $color-green;
+    }
   }
 
   &__group {
     display: flex;
       align-items: center;
+
+    @include respond(tab-port) {
+      display: block;
+    }
   }
 
   &__date {
     font-size: $font-size-small;
     margin-right: 2rem;
+
+    @include respond(tab-port) {
+      text-align: center;
+      margin-right: 0;
+    }
   }
 
   &__category-container {
@@ -65,11 +99,22 @@
     display: flex;
       align-items: center;
       justify-content: center;
+    
+    @include respond(tab-port) {
+      margin: 0 auto;
+      margin-top: 1.5rem;
+    }
   }
 
   &__category {
     color: $color-cream;
     font-size: $font-size-small;
+  }
+
+  &__icons {
+    @include respond(tab-port) {
+      margin-top: 1.5rem;
+    }
   }
 
   &__icon {
