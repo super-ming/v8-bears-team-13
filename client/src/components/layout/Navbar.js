@@ -68,7 +68,7 @@ class Navbar extends Component {
           <span />
           <span />
           <span />
-          { dynamicNavbar }
+          {dynamicNavbar}
         </div>
       </div>
     );

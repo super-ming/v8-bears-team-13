@@ -1,9 +1,9 @@
 import React from 'react';
 
 // need connect function to be able to connect to store from Provider
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
-import {getLatestEntries} from '../../actions/dashActions';
+import { getLatestEntries } from '../../actions/dashActions';
 
 import moment from 'moment';
 
@@ -23,15 +23,15 @@ class Container extends React.Component {
         const formData = new FormData(document.getElementById('form-add'));
         // this.props.setDashDefault();
         let obj = {};
-        for(let data of formData.entries()) {
+        for (let data of formData.entries()) {
             // data is in key-value pairs
             let key = data[0];
             let value = data[1];
             obj[key] = value;
         }
-        
+
         obj.userId = this.props.auth.userId;
-        
+
         const url = 'http://localhost:5000/api/entries/add-entry';
         fetch(url, {
             method: 'POST',
@@ -39,16 +39,16 @@ class Container extends React.Component {
             headers: { 'Content-type': 'application/json' },
             credentials: 'include'
         })
-        .then((res) => 
-            res.json()
-        )
-        .then((data) => {
-            console.log(data);
-            this.props.getLatestEntries();
-        })
-        .catch((err) => {
-            throw err;
-        });
+            .then((res) =>
+                res.json()
+            )
+            .then((data) => {
+                console.log(data);
+                this.props.getLatestEntries();
+            })
+            .catch((err) => {
+                throw err;
+            });
     }
 
     getCategoryOptions = () => {
@@ -135,16 +135,16 @@ class Container extends React.Component {
 
 const mapStateToProps = (state) => {
     return state;
-  };
-  
-  const mapDispatchToProps = (dispatch) => {
+};
+
+const mapDispatchToProps = (dispatch) => {
     return {
         setGetLatestEntries: () => {
             dispatch(getLatestEntries());
         }
     }
-  }
-  
+}
+
 const Add = connect(mapStateToProps, mapDispatchToProps)(Container);
 
 export default Add;

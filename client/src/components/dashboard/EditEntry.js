@@ -1,16 +1,16 @@
 import React from 'react';
 
 // need connect function to be able to connect to store from Provider
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
-import {dashDefault} from '../../actions/dashActions';
+import { dashDefault } from '../../actions/dashActions';
 
 import moment from 'moment';
 
 class Container extends React.Component {
     state = {
         transaction: this.props.dash.entry.transact_id,
-        entry: this.props.dash.entry.entry_desc ,
+        entry: this.props.dash.entry.entry_desc,
         amount: this.props.dash.entry.amount
     }
 
@@ -40,7 +40,7 @@ class Container extends React.Component {
         e.preventDefault();
         const formData = new FormData(document.getElementById('form-edit'));
         let obj = {};
-        for(let data of formData.entries()) {
+        for (let data of formData.entries()) {
             // data is in key-value pairs
             let key = data[0];
             let value = data[1];
@@ -50,7 +50,7 @@ class Container extends React.Component {
         obj.username = this.props.auth.username;
         obj.userId = this.props.auth.userId;
         obj.id = this.props.dash.entry.id;
-        
+
         const url = 'http://localhost:5000/api/entries/edit-entry';
         fetch(url, {
             method: 'PUT',
@@ -58,15 +58,15 @@ class Container extends React.Component {
             headers: { 'Content-type': 'application/json' },
             credentials: 'include'
         })
-        .then((res) => 
-            res.json()
-        )
-        .then((data) => {
-            this.props.getLatestEntries();
-        })
-        .catch((err) => {
-            throw err;
-        });
+            .then((res) =>
+                res.json()
+            )
+            .then((data) => {
+                this.props.getLatestEntries();
+            })
+            .catch((err) => {
+                throw err;
+            });
     };
 
     getReccuringDefault = () => {
@@ -144,8 +144,8 @@ class Container extends React.Component {
 
 const mapStateToProps = (state) => {
     return state;
-  };
-  
+};
+
 const mapDispatchToProps = (dispatch) => {
     return {
         setDashDefault: () => {
@@ -153,7 +153,7 @@ const mapDispatchToProps = (dispatch) => {
         }
     }
 }
-  
+
 const Add = connect(mapStateToProps, mapDispatchToProps)(Container);
 
 export default Add;
