@@ -5,7 +5,7 @@ import Entry from './Entry';
 
 const EntryList = ({ entries, editEntry }) => (
   <div className="entry__container">
-    { entries && 
+    { entries &&
       entries.map(entry => (
         <Entry
           key={entry.id}
@@ -34,8 +34,8 @@ EntryList.propTypes = {
       date: PropTypes.string,
       description: PropTypes.description
     })
-  ).isRequired, 
-  editEntry: PropTypes.func
+  ).isRequired,
+  editEntry: PropTypes.func.isRequired
 };
 
 export default EntryList;
