@@ -45,7 +45,7 @@ class Container extends React.Component {
       let expense = 0;
       let savings = 0;
       if (latestEntries) {
-        latestEntries.map(entry => {
+        latestEntries.map((entry) => {
           if (!entry.transact_id) {
             income += parseFloat(entry.amount);
           }
@@ -66,7 +66,7 @@ class Container extends React.Component {
       if (status === 'edit') {
         return (
           <div>
-            <EditEntry />
+            <EditEntry getLatestEntries={this.fetchEntries} />
           </div>
         );
       }

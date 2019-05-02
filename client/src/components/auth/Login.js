@@ -5,13 +5,17 @@ import PropTypes from 'prop-types';
 
 import { loginUser } from '../../actions/authActions';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye } from '@fortawesome/free-solid-svg-icons';
+
 const initialState = {
   username: '',
   password: '',
   usernameError: '',
   passwordError: '',
   serverError: '',
-  redirectToDashboard: false
+  redirectToDashboard: false,
+  hidden: ''
 };
 
 class Login extends React.Component {
@@ -82,8 +86,11 @@ class Login extends React.Component {
       response.text().then((body) => { this.setState({ serverError: JSON.parse(body).error }); });
       throw Error(response.statusText);
     }
-
     return response;
+  }
+
+  toggleMask = () => {
+    this.setState({ hidden: !this.state.hidden })
   }
 
   render() {
@@ -116,12 +123,15 @@ class Login extends React.Component {
                   required
                   id="password"
                   className="form__input"
-                  type="password"
+                  type={this.state.hidden ? 'text' : 'password'}
                   name="password"
                   placeholder="Password"
                   value={this.state.password}
                   onChange={this.handleChange}
                 />
+                <button className="hidden" type="button" title="Mask/Unmask password to check content" onClick={this.toggleMask}> 
+                  <FontAwesomeIcon icon={faEye} />
+                </button>
                 <div className="error">{this.state.passwordError}</div>
               </div>
             </div>

@@ -5,7 +5,7 @@ import Entry from './Entry';
 
 const EntryList = ({ entries, editEntry }) => (
   <div className="entry__container">
-    { entries && 
+    { entries &&
       entries.map(entry => (
         <Entry
           key={entry.id}
