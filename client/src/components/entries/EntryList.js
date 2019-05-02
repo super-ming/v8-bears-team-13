@@ -28,7 +28,7 @@ const EntryList = ({ entries, editEntry }) => (
 EntryList.propTypes = {
   entries: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.string,
+      id: PropTypes.number,
       amount: PropTypes.string,
       category: PropTypes.string,
       date: PropTypes.string,

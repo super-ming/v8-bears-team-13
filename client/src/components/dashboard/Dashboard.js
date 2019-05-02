@@ -17,6 +17,10 @@ import Loader from '../loader/Loader';
 import formatMoney from '../../helpers/formatMoney';
 
 class Container extends React.Component {
+  static defaultProps = {
+    latestEntries: []
+  }
+
   componentDidMount() {
     this.fetchEntries();
   }
