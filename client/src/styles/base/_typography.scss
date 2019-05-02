@@ -17,3 +17,9 @@
 
 .paragraph {
 }
+
+@media only screen and (max-width: 550px){
+  .body-text {
+    font-size: $font-size-small;
+  }
+}

@@ -33,9 +33,17 @@
     }
   }
 
-  &__description,
-  &__amount {
+  &__description {
+    font-size: $font-size-extra-large
+  }
+  &__incomeAmount {
     font-size: $font-size-extra-large;
+    color: $color-green;
+  }
+
+  &__expenseAmount {
+    font-size: $font-size-extra-large;
+    color: $color-red;
   }
 
   &__group {
@@ -52,7 +60,7 @@
     background-color: #333;
     border-radius: $rounded-borders-large;
     height: 4rem;
-    width: 10rem;
+    width: 12rem;
 
     display: flex;
       align-items: center;

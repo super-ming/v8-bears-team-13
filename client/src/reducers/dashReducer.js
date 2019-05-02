@@ -9,7 +9,8 @@ export default function (state = {status: 'dash'}, action) {
             };
         case EDIT_ENTRY:
             return {
-                status: 'edit'
+                status: 'edit',
+                entry: action.payload
             };
         case DASH_DEFAULT: 
             return {

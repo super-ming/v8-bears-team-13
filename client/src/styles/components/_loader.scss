@@ -1,0 +1,47 @@
+// CREDIT: https://codepen.io/havardob/pen/VjjJey
+
+.loader {
+  // position: absolute;
+  margin: 6rem auto;
+  // top: 50%;
+  // left: 50%;
+  // transform: translate(-50%, -50%);
+  width: 5rem;
+  height: 1rem;
+  background: #3498DB;
+  border-radius: 5px;
+  animation: load 1.7s ease-in-out infinite; 
+
+  &:before, &:after {
+    position: absolute; 
+    display: block;
+    content: "";
+    animation: load 1.7s ease-in-out infinite;
+    height: 1rem;
+    border-radius: 5px;
+  }
+    &:before {
+    top: -2rem;
+    left: 1rem;
+    width: 4rem;
+    background: #EF4836;
+  }
+  &:after {
+    bottom: -2rem;
+    width: 3.5rem;
+    background: #F5AB35; 
+  }
+}
+
+@keyframes load {
+  0% {
+    transform: translateX(6rem);
+  }
+  
+  50% {
+    transform: translateX(-5rem);
+  }
+  100% {
+    transform: translateX(6rem);
+  }
+}
