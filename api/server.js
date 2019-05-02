@@ -14,7 +14,7 @@ const PORT = process.env.PORT || 5000;
 
 // general error handler
 const errorHandler = (err, req, res, next) => {
-  res.send({error: err.message.split(',')})
+  res.send({ error: err.message.split(',') })
 }
 
 // Setup body-parser

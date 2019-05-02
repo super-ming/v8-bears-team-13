@@ -32,4 +32,30 @@
     height: 3rem;
     width: 20rem;
   }
+
+  &__add, &__edit { 
+    .form__group {
+      width: 100%;
+    }
+    .form__label {
+      width: 55%;
+    }
+    button{
+      margin: 10px 0 10px 0;
+    }
+  }
 }
+
+.add-entry, .edit-entry {
+  margin: 0 0 100px 0;
+  button {
+    margin: 20px 0 0 20px;
+  }
+}
+
+fieldset {
+  width: 50%;
+  margin: 0 0 0 25%;
+  font-size: $font-size-medium;
+}
+
