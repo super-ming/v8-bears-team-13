@@ -28,7 +28,10 @@ class Container extends Component {
       body: {userid: this.props.state.auth.userId},
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include'
-    });
+    })
+    .then(data => data)
+    .catch(err => console.log(err))
+    ;
     
   };
 
