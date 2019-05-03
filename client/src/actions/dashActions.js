@@ -46,7 +46,7 @@ export const getLatestEntries = userId => (dispatch) => {
   const url = `http://localhost:5000/api/entries/latest-entries/${userId}`;
   fetch(url, {
     method: 'GET',
-    headers: { 'Content-type': 'application/json' },
+    headers: { 'Content-Type': 'application/json' },
     credentials: 'include'
   })
     .then(handleErrors)
@@ -77,25 +77,18 @@ export const deleteEntryFailure = error => ({
 });
 
 export const deleteEntry = entryId => (dispatch) => {
-  dispatch(startLoading());
-  console.log('DELETING ENTRY');
-
   const url = `http://localhost:5000/api/entries/${entryId}`;
 
   fetch(url, {
     method: 'DELETE',
-    headers: { 'Content-type': 'application/json' },
+    headers: { 'Content-Type': 'application/json' },
     credentials: 'include'
   })
     .then(handleErrors)
-    .then(response => response.json())
-    .then(() => {
+    .then((response) => {
       dispatch(deleteEntrySuccess(entryId));
-      dispatch(stopLoading());
     })
     .catch((error) => {
-      console.log(error);
-      dispatch(stopLoading());
       dispatch(deleteEntryFailure(error));
     });
 };
