@@ -20,7 +20,7 @@ class Container extends React.Component {
 
     submitForm = (e) => {
         e.preventDefault();
-        const formData = new FormData(document.getElementById('form-add'));
+        const formData = new FormData(document.getElementById('form__add'));
         // this.props.setDashDefault();
         let obj = {};
         for (let data of formData.entries()) {
