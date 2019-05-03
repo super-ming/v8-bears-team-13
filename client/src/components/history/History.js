@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import FilterBar from './FilterBar';
 import SavingsCard from './SavingsCard';
@@ -9,8 +10,20 @@ import formatMoney from '../../helpers/formatMoney';
 // Dummy Data
 import entries from '../../data/entries';
 
-class History extends Component {
-  state = {}
+
+
+class Container extends Component {
+  state = {
+    history: []
+  }
+
+  componentDidMount() {
+    this.fetchCurrMonth();
+  }
+
+  fetchCurrMonth = () => {
+    this.props.getLatestEntries(this.props.auth.userId);
+  };
 
   render() {
     return (
@@ -27,5 +40,22 @@ class History extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  auth: state.auth,
+  loading: state.loading.isLoading
+});
+
+const mapDispatchToProps = dispatch => ({
+
+  // getLatestEntries: (userId) => {
+  //   dispatch(getLatestEntries(userId));
+  // }
+});
+
+const History = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Container);
 
 export default History;
