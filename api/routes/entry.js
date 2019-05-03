@@ -22,4 +22,9 @@ router.post('/add-entry', passport.authenticate('jwt', { session: false }), entr
 // @access  Private
 router.put('/edit-entry', passport.authenticate('jwt', { session: false }), entryController.editEntry);
 
+// @route   DELETE api/entries/:id
+// @desc    Delete an entry
+// @access  Private
+router.delete('/:id', passport.authenticate('jwt', { session: false }), entryController.deleteEntry);
+
 module.exports = router;

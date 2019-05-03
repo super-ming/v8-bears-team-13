@@ -48,5 +48,20 @@ exports.getLatestEntries = async (id) => {
   } catch (err) {
     console.log(err);
   }
+};
 
+exports.getEntryById = (entryId) => {
+  try {
+    return db.one('SELECT * FROM entries WHERE id = $1', [entryId]);
+  } catch (err) {
+    throw new Error(err);
+  }
+};
+
+exports.deleteEntry = (entryId) => {
+  try {
+    return db.one('DELETE FROM entries WHERE id = $1', [entryId]);
+  } catch (err) {
+    throw new Error(err);
+  }
 };
