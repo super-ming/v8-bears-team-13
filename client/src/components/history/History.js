@@ -22,7 +22,8 @@ class Container extends Component {
   }
 
   fetchCurrMonth = () => {
-    this.props.getLatestEntries(this.props.auth.userId);
+    // this.props.getLatestEntries(this.props.auth.userId);
+    const url = ``;
   };
 
   render() {
