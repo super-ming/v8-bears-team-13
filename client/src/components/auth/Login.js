@@ -118,7 +118,7 @@ class Login extends React.Component {
             </div>
             <div className="form__group">
               <label htmlFor="password" className="form__label">Password:</label>
-              <div className="form__input-container">
+              <div className="form__input-container password">
                 <input
                   required
                   id="password"
