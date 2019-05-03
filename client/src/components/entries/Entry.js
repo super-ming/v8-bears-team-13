@@ -13,15 +13,31 @@ const handleEditClick = (editEntry, entryDetails) => {
   editEntry(entryDetails);
 };
 
-const Entry = ({ amount, categoryDesc, date, description, type, editEntry, entryDetails }) => (
+const handleDeleteClick = (deleteEntry, entryId) => {
+  if (window.confirm('Are you sure you want to delete this entry?')) {
+    deleteEntry(entryId);
+  }
+};
+
+const Entry = ({
+  amount,
+  categoryDesc,
+  date,
+  description,
+  type,
+  entryId,
+  entryDetails,
+  editEntry,
+  deleteEntry
+}) => (
   <div className="entry">
     <div className="entry__row">
       <div className="entry__description">{description}</div>
-      {
-        type
-          ? <div className="entry__amount entry__amount--expense">-{formatMoney(amount)}</div>
-          : <div className="entry__amount entry__amount--income">{formatMoney(amount)}</div>
-      }
+      {type ? (
+        <div className="entry__amount entry__amount--expense">-{formatMoney(amount)}</div>
+      ) : (
+        <div className="entry__amount entry__amount--income">{formatMoney(amount)}</div>
+      )}
     </div>
     <div className="entry__row">
       <div className="entry__column">
@@ -34,8 +50,16 @@ const Entry = ({ amount, categoryDesc, date, description, type, editEntry, entry
       </div>
       <div className="entry__column">
         <div className="entry__icons">
-          <FontAwesomeIcon className="entry__icon entry__icon--edit" icon={faPencilAlt} onClick={() => handleEditClick(editEntry, entryDetails)} />
-          <FontAwesomeIcon className="entry__icon entry__icon--delete" icon={faTrashAlt} />
+          <FontAwesomeIcon
+            className="entry__icon entry__icon--edit"
+            icon={faPencilAlt}
+            onClick={() => handleEditClick(editEntry, entryDetails)}
+          />
+          <FontAwesomeIcon
+            className="entry__icon entry__icon--delete"
+            icon={faTrashAlt}
+            onClick={() => handleDeleteClick(deleteEntry, entryId)}
+          />
         </div>
       </div>
     </div>
@@ -47,9 +71,11 @@ Entry.propTypes = {
   categoryDesc: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
+  entryId: PropTypes.number.isRequired,
+  type: PropTypes.bool.isRequired,
+  entryDetails: PropTypes.object.isRequired,
   editEntry: PropTypes.func.isRequired,
-  entryDetails: PropTypes.object.isRequired
+  deleteEntry: PropTypes.func.isRequired
 };
 
 export default Entry;

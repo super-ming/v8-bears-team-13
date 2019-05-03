@@ -1,5 +1,8 @@
-const Entry = require('../models/Entry');
 const moment = require('moment');
+const jwt = require('jsonwebtoken');
+
+const Entry = require('../models/Entry');
+const keys = require('../config/keys');
 
 exports.getLatestEntries = async (req, res) => {
   const userData = req.params.id;
@@ -17,8 +20,7 @@ exports.addEntry = async (req, res) => {
   try {
     const newEntry = await Entry.addEntry(entryData);
     res.json(newEntry);
-  } 
-  catch (err) {
+  } catch (err) {
     throw new Error(err);
   }
 };
@@ -31,6 +33,33 @@ exports.editEntry = async (req, res) => {
     res.json(updatedEntry);
   } 
   catch (err) {
+    throw new Error(err);
+  }
+};
+
+exports.deleteEntry = async (req, res) => {
+  // Convert entryId to a number
+  const entryId = req.params.id - 0;
+
+  let decodedJwt;
+  try {
+    decodedJwt = jwt.verify(req.cookies.jwt, keys.secret);
+  } catch (err) {
+    throw new Error(err);
+  }
+
+  // Convert to a number
+  const { userId } = decodedJwt;
+
+  try {
+    const entryToDelete = await Entry.getEntryById(entryId);
+
+    // This entry doesn't belong to the current user
+    if (!entryToDelete.user_id === userId) throw new Error('Not authorized to do that.');
+
+    await Entry.deleteEntry(entryId);
+    res.status(204).json({ message: 'Entry successfully deleted' });
+  } catch (err) {
     throw new Error(err);
   }
 };

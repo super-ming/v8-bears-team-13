@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 // need connect function to be able to connect to store from Provider
 
 import {
-  addEntry, editEntry, dashDefault, getLatestEntries
+  addEntry, editEntry, deleteEntry, dashDefault, getLatestEntries
 } from '../../actions/dashActions';
 
 import Add from './Add';
@@ -35,7 +35,7 @@ class Container extends React.Component {
 
       if (this.props.loading) return <Loader />;
       if (latestEntries !== undefined) {
-        return <EntryList entries={latestEntries} editEntry={this.props.editEntry} />;
+        return <EntryList entries={latestEntries} editEntry={this.props.editEntry} deleteEntry={this.props.deleteEntry} />;
       }
     };
 
@@ -103,8 +103,9 @@ Container.propTypes = {
   status: PropTypes.string.isRequired,
   addNewEntry: PropTypes.func.isRequired,
   editEntry: PropTypes.func.isRequired,
+  deleteEntry: PropTypes.func.isRequired,
   getLatestEntries: PropTypes.func.isRequired,
-  latestEntries: PropTypes.array.isRequired,
+  latestEntries: PropTypes.array,
   auth: PropTypes.object.isRequired,
   loading: PropTypes.bool.isRequired
 };
@@ -122,6 +123,9 @@ const mapDispatchToProps = dispatch => ({
   },
   editEntry: (entry) => {
     dispatch(editEntry(entry));
+  },
+  deleteEntry: (entryId) => {
+    dispatch(deleteEntry(entryId));
   },
   setDashDefault: () => {
     dispatch(dashDefault());
