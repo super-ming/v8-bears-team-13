@@ -60,7 +60,8 @@ exports.getEntryById = (entryId) => {
 
 exports.deleteEntry = (entryId) => {
   try {
-    return db.one('DELETE FROM entries WHERE id = $1', [entryId]);
+    db.one('DELETE FROM entries WHERE id = $1 RETURNING *', [entryId])
+      .then(data => data);
   } catch (err) {
     throw new Error(err);
   }
