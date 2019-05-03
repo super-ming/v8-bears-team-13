@@ -78,6 +78,7 @@ export const deleteEntryFailure = error => ({
 
 export const deleteEntry = entryId => (dispatch) => {
   dispatch(startLoading());
+  console.log('DELETING ENTRY');
 
   const url = `http://localhost:5000/api/entries/${entryId}`;
 
