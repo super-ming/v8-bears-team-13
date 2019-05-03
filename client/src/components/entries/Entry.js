@@ -13,9 +13,11 @@ const handleEditClick = (editEntry, entryDetails) => {
   editEntry(entryDetails);
 };
 
-// const handleDeleteClick = (deleteEntry, entryId) => {
-//   deleteEntry(entryId);
-// };
+const handleDeleteClick = (deleteEntry, entryId) => {
+  if (window.confirm('Are you sure you want to delete this entry?')) {
+    deleteEntry(entryId);
+  }
+};
 
 const Entry = ({
   amount,
@@ -56,7 +58,7 @@ const Entry = ({
           <FontAwesomeIcon
             className="entry__icon entry__icon--delete"
             icon={faTrashAlt}
-            onClick={() => deleteEntry(entryId)}
+            onClick={() => handleDeleteClick(deleteEntry, entryId)}
           />
         </div>
       </div>
