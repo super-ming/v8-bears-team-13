@@ -13,17 +13,23 @@ import entries from '../../data/entries';
 
 
 class Container extends Component {
-  state = {
-    history: []
-  }
+  // state = {
+  //   history: []
+  // }
 
   componentDidMount() {
     this.fetchCurrMonth();
   }
 
   fetchCurrMonth = () => {
-    // this.props.getLatestEntries(this.props.auth.userId);
-    const url = ``;
+    const url = 'http://localhost:5000/api/history/current-month';
+    fetch(url, {
+      method: 'GET',
+      body: {userid: this.props.state.auth.userId},
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include'
+    });
+    
   };
 
   render() {
