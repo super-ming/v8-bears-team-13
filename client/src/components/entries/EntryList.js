@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import Entry from './Entry';
 
-const EntryList = ({ entries, editEntry }) => (
+const EntryList = ({ entries, editEntry, deleteEntry }) => (
   <div className="entry__container">
     { entries &&
       entries.map(entry => (
@@ -18,6 +18,7 @@ const EntryList = ({ entries, editEntry }) => (
           description={entry.entry_desc}
           type={entry.transact_id}
           editEntry={editEntry}
+          deleteEntry={deleteEntry}
           entryDetails={entry}
         />
       ))
@@ -35,7 +36,8 @@ EntryList.propTypes = {
       description: PropTypes.description
     })
   ).isRequired,
-  editEntry: PropTypes.func.isRequired
+  editEntry: PropTypes.func.isRequired,
+  deleteEntry: PropTypes.func.isRequired
 };
 
 export default EntryList;
