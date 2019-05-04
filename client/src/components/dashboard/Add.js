@@ -1,5 +1,6 @@
 import React from 'react';
 import moment from 'moment';
+import PropTypes from 'prop-types';
 
 // need connect function to be able to connect to store from Provider
 import { connect } from 'react-redux';
@@ -8,10 +9,22 @@ import { dashDefault, getLatestEntries } from '../../actions/dashActions';
 
 class Container extends React.Component {
   state = {
-    transaction: 0
+    transaction: 'DEFAULT',
+    category: 'DEFAULT',
+    entry: '', // description
+    amount: null,
+
+    // Errors
+    errors: {
+      transaction: '',
+      category: '',
+      entry: '',
+      amount: '',
+      server: ''
+    }
   };
 
-  handleTransactionTypeChange = (e) => {
+  handleChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value
     });
@@ -19,6 +32,16 @@ class Container extends React.Component {
 
   submitForm = (e) => {
     e.preventDefault();
+
+    let errors = this.getErrors();
+
+    // Errors present
+    if (Object.keys(errors).length > 0) {
+      errors = { ...errors, server: '' };
+      this.setState({ errors });
+      return;
+    }
+
     const formData = new FormData(document.getElementById('form__add'));
     // this.props.setDashDefault();
     const obj = {};
@@ -44,11 +67,26 @@ class Container extends React.Component {
         this.props.getLatestEntries();
       })
       .catch((err) => {
-        throw err;
+        errors = { ...errors, server: err.message };
+        this.setState({ errors }, () => { throw new Error(err); });
       });
   };
 
+  getErrors = () => {
+    const errors = {};
+
+    if (this.state.transaction === 'DEFAULT') errors.transaction = 'Transaction type is required.';
+    if (this.state.category === 'DEFAULT') errors.category = 'Category is required.';
+    if (this.state.entry === '') errors.entry = 'Description is required.';
+    if (this.state.amount === null) errors.amount = 'Amount is required.';
+
+    return errors;
+  }
+
   getCategoryOptions = () => {
+    // Default
+    if (this.state.transaction === 'DEFAULT') return null;
+
     // Income
     if (this.state.transaction === '0') {
       return <option value="1">Salary</option>;
@@ -65,6 +103,8 @@ class Container extends React.Component {
   };
 
   render() {
+    const { errors } =  this.state;
+
     return (
       <div className="add-entry">
         <form onSubmit={this.submitForm} id="form__add" className="form__add">
@@ -73,7 +113,7 @@ class Container extends React.Component {
             <div className="form__container">
               <div className="form__group">
                 <label htmlFor="transaction" className="form__label">
-                  Transaction Type:{' '}
+                  Transaction Type:
                 </label>
                 <div className="form__input-container">
                   <select
@@ -81,8 +121,8 @@ class Container extends React.Component {
                     id="transaction"
                     name="transaction"
                     defaultValue="DEFAULT"
-                    value={this.state.transactionType}
-                    onChange={this.handleTransactionTypeChange}
+                    value={this.state.transaction}
+                    onChange={this.handleChange}
                   >
                     <option value="DEFAULT" disabled>
                       Select Transaction Type
@@ -90,11 +130,12 @@ class Container extends React.Component {
                     <option value="0">Income</option>
                     <option value="1">Expense</option>
                   </select>
+                  <div className="error">{errors.transaction}</div>
                 </div>
               </div>
               <div className="form__group">
                 <label htmlFor="category" className="form__label">
-                  Category Type:{' '}
+                  Category Type:
                 </label>
                 <div className="form__input-container">
                   <select
@@ -102,25 +143,36 @@ class Container extends React.Component {
                     id="category"
                     name="category"
                     defaultValue="DEFAULT"
+                    value={this.state.category}
+                    onChange={this.handleChange}
                   >
                     <option value="DEFAULT" disabled>
                       Select Category Type
                     </option>
                     {this.getCategoryOptions()}
                   </select>
+                  <div className="error">{errors.category}</div>
                 </div>
               </div>
               <div className="form__group">
                 <label htmlFor="entry" className="form__label">
-                  Entry Description:{' '}
+                  Entry Description:
                 </label>
                 <div className="form__input-container">
-                  <input className="form__input" type="text" name="entry" id="entry" />
+                  <input
+                    className="form__input"
+                    type="text"
+                    name="entry"
+                    id="entry"
+                    value={this.state.entry}
+                    onChange={this.handleChange}
+                  />
+                  <div className="error">{errors.entry}</div>
                 </div>
               </div>
               <div className="form__group">
                 <label htmlFor="amount" className="form__label">
-                  Amount:{' '}
+                  Amount:
                 </label>
                 <div className="form__input-container">
                   <input
@@ -130,12 +182,15 @@ class Container extends React.Component {
                     id="amount"
                     min="0.00"
                     step="0.01"
+                    value={this.state.amount}
+                    onChange={this.handleChange}
                   />
+                  <div className="error">{errors.amount}</div>
                 </div>
               </div>
               <div className="form__group">
                 <label htmlFor="date" className="form__label">
-                  Date:{' '}
+                  Date:
                 </label>
                 <div className="form__input-container">
                   <input
@@ -149,23 +204,29 @@ class Container extends React.Component {
               </div>
               <div className="form__group">
                 <label htmlFor="recurring" className="form__label">
-                  Recurring:{' '}
+                  Recurring:
                 </label>
                 <div className="form__input-container">
                   <input className="form__checkbox" type="checkbox" name="recurring" id="recurring" />
                 </div>
               </div>
-              <button className="button">Submit</button>
+              <button className="button" type="submit">Submit</button>
+              <div className="error">{this.state.serverError}</div>
             </div>
           </fieldset>
         </form>
-        <button className="button__back" onClick={this.props.getLatestEntries}>
+        <button className="button__back" onClick={this.props.getLatestEntries} type="button">
           Back
         </button>
       </div>
     );
   }
 }
+
+Container.propTypes = {
+  auth: PropTypes.object.isRequired,
+  getLatestEntries: PropTypes.func.isRequired
+};
 
 const mapStateToProps = state => state;
 
