@@ -80,6 +80,7 @@ class Container extends React.Component {
         />
       );
     }
+
     return (
       <input
         className="form__checkbox"
