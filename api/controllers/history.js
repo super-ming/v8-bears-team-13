@@ -5,7 +5,7 @@ const History = require('../models/History');
 const keys = require('../config/keys');
 
 exports.getCurrentMonth = async (req, res) => {
-  const userid = req.body.userid;
+  const userid = req.params.userid;
   try {
     const histCurrMonth = await History.getCurrentMonth(userid);
     res.json(histCurrMonth);

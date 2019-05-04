@@ -23,10 +23,8 @@ const db = require('../db/config');
 exports.getCurrentMonth = async (userid) => {
   const currentMonth = moment().format('YYYY-MM');
   try {
-    return db.any('SELECT entries.*, categories.category_desc FROM entries INNER JOIN categories ON entries.category_id = categories.id WHERE entries.user_id=$1 AND TO_CHAR(entries.full_date, "YYYY-MM")=$2', [userid, currentMonth])
-      .then(data => {
-        data;
-      })
+    return db.query('SELECT entries.*, categories.category_desc FROM entries INNER JOIN categories ON entries.category_id = categories.id WHERE entries.user_id=$1 AND TO_CHAR(entries.full_date, \'YYYY-MM\')=$2', [userid, currentMonth])
+      .then(data =>  data)
       .catch(err => {
         console.log(err);
       });
