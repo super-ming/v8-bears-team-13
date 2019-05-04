@@ -70,7 +70,7 @@ class Container extends React.Component {
       <div className="add-entry">
         <form onSubmit={this.submitForm} id="form__add" className="form__add">
           <fieldset>
-            <legend>Add a new entry</legend>
+            <legend>Add A New Entry</legend>
             <div className="form__container">
               <div className="form__group">
                 <label htmlFor="transaction" className="form__label">
