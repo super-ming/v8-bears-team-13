@@ -4,7 +4,11 @@
   }
 
   &--sub {
-    font-size: 4rem;
+    font-size: 3.8rem;
+
+    @include respond(tab-port) {
+      font-size: 3rem;
+    }
   }
 }
 

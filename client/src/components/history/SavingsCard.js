@@ -5,10 +5,10 @@ import formatMoney from '../../helpers/formatMoney';
 
 const SavingsCard = ({ income, expenses }) => (
   <div className="savings-card">
-    <h2 className="savings-card__heading">Total Income: {formatMoney(income)}</h2>
-    <h2 className="savings-card__heading">Total Expenses: {formatMoney(expenses)}</h2>
+    <h2 className="savings-card__heading">Total Income: <span className="savings-card__amount">{formatMoney(income)}</span></h2>
+    <h2 className="savings-card__heading">Total Expenses: <span className="savings-card__amount">{formatMoney(expenses)}</span></h2>
     <div className="savings-card__divider" />
-    <h2 className="savings-card__heading">Total Savings: {formatMoney(income - expenses)}</h2>
+    <h2 className="savings-card__heading">Total Savings: <span className="savings-card__amount">{formatMoney(income - expenses)}</span></h2>
   </div>
 );
 

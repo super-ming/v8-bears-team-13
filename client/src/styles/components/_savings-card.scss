@@ -6,13 +6,26 @@
   margin: 0 auto;
   width: 33rem;
 
+  @include respond(phone-only) {
+    width: 80%;
+  }
+
   &__heading {
-    font-size: $font-size-extra-large;
+    font-size: $font-size-small;
+    font-weight: bold;
+    text-align: center;
+
+    padding: .75rem 3rem;
+  }
+
+  &__amount {
+    display: block;
     font-weight: normal;
-    text-align: left;
-    
-    padding-left: 3rem;
-    padding-right: 3rem;
+    font-size: 3.6rem;
+
+    @include respond(tab-port) {
+      font-size: 3rem;
+    }
   }
 
   &__divider {

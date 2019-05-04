@@ -18,12 +18,15 @@
   position: fixed;
   height: 60px;
   box-shadow: 0 0 10px $color-black;
+  z-index: 999;
+
   h2 {
     width: 73%;
     text-align: left;
     padding: 0 0 0 3rem;
     margin: 15px 0 15px 0;
   }
+  
   &__item {
     z-index: 1;
     margin: 0.5rem 0.5rem;
@@ -76,11 +79,9 @@
  
  #toggle
  {
-   position: fixed;
-   top: -4%;
-   left: 90%;
-   
-   z-index: 1;
+   position: absolute;
+   right: 3rem;
+   top: -38%;
    
    -webkit-user-select: none;
    user-select: none;
@@ -155,27 +156,27 @@
  }
  
 #navbar-menu
- {
-   position: fixed;
-   width: 50%;
-   height: 75%;
-   margin: -100px 0 0 -40%;
-   padding: 50px;
-   padding-top: 125px;
+{
+  padding: 7.5rem 3rem 5rem 3rem;
+
+  position: absolute;
+    right: -4.5rem;
+    top: -1.5rem;
    
-   background: white;
-   list-style-type: none;
-   -webkit-font-smoothing: antialiased;
-   
-   transform-origin: 0% 0%;
-   transform: translate(100%, 0);
-   
-   transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
- }
+  background-color: white;
+  list-style-type: none;
+  -webkit-font-smoothing: antialiased;
+  
+  transform-origin: 0% 0%;
+  transform: translate(100%, 0);
+  
+  transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+}
 
  #navbar-menu {
   display: flex;
-  flex-flow: row wrap;
+  flex-direction: column;
+  align-items: flex-end;
  }
  
  #menu li
