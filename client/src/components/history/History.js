@@ -1,33 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import FilterBar from './FilterBar';
 import SavingsCard from './SavingsCard';
 import EntryList from '../entries/EntryList';
+import EditEntry from '../dashboard/EditEntry';
+import Loader from '../loader/Loader';
 
 import formatMoney from '../../helpers/formatMoney';
 
-import { getHistory } from '../../actions/historyActions';
-
-import PropTypes from 'prop-types';
-
-// need connect function to be able to connect to store from Provider
-
-import {
-  addEntry, editEntry, deleteEntry, dashDefault, getLatestEntries
-} from '../../actions/dashActions';
-
-import Add from '../dashboard/Add';
-import EditEntry from '../dashboard/EditEntry';
-import DashboardSummary from '../dashboard/DashboardSummary';
-import Loader from '../loader/Loader';
+import { getHistory, deleteEntry } from '../../actions/historyActions';
+import { editEntry} from '../../actions/dashActions';
 
 
 // Dummy Data
 // import entries from '../../data/entries';
-
-
-
 class Container extends Component {
   componentDidMount() {
     this.fetchHistory(1);
@@ -62,7 +50,7 @@ class Container extends Component {
           <h2 className="heading--sub">Showing results from...</h2>
           <SavingsCard income={1000} expenses={900} />
           <h2 className="heading--sub">Entries</h2>
-          <EntryList entries={this.props.history} editEntry={this.props.editEntry} deleteEntry={this.props.deleteEntry} />
+          <EntryList entries={this.props.entries} editEntry={this.props.editEntry} deleteEntry={this.props.deleteEntry} />
         </div>
       </div>
     );
@@ -74,8 +62,7 @@ const mapStateToProps = state => ({
   auth: state.auth,
   latestEntries: state.dash.latestEntries,
   loading: state.loading.isLoading,
-  history: state.history
-  
+  entries: state.history.entries
 });
 
 const mapDispatchToProps = dispatch => {

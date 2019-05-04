@@ -1,11 +1,23 @@
-import { GET_HISTORY } from '../actions/types';
+import { GET_HISTORY, DELETE_ENTRY, DELETE_ENTRY_FAILURE } from '../actions/types';
 
-export default function(state = [], action) {
-    switch(action.type) {
-        case GET_HISTORY:
-            return action.history;
-        default:
-            return state;
-    }
+export default function (state = { status: 'history', entries: [] }, action) {
+  switch (action.type) {
+    case GET_HISTORY:
+      return {
+        ...state,
+        entries: action.payload
+      };
+    case DELETE_ENTRY:
+      return {
+        ...state,
+        entries: state.entries.filter(entry => entry.id !== action.payload)
+      };
+    case DELETE_ENTRY_FAILURE:
+      return {
+        ...state,
+        error: action.payload.error
+      };
+    default:
+      return state;
+  }
 }
-
