@@ -6,10 +6,20 @@ import PropTypes from 'prop-types';
 import { logoutUser } from '../../actions/authActions';
 
 class Navbar extends Component {
+  state = {
+    checkboxChecked: false
+  };
+
   handleLogout = (evt) => {
     evt.preventDefault();
     this.props.logoutUser();
-  }
+  };
+
+  toggleCheckboxState = (evt) => {
+    this.setState(st => ({
+      checkboxChecked: !st.checkboxChecked
+    }));
+  };
 
   render() {
     const isLoggedIn = this.props.auth.username !== '';
@@ -17,14 +27,18 @@ class Navbar extends Component {
 
     if (isLoggedIn) {
       dynamicNavbar = (
-        <ul className="navbar__menu" id="navbar-menu">
+        <ul className="navbar__menu" id="navbar-menu" onClick={this.toggleCheckboxState}>
           <li className="navbar__item">
             <NavLink to="/" className="navbar__link" exact activeClassName="navbar__link--active">
               Landing
             </NavLink>
           </li>
           <li className="navbar__item">
-            <NavLink to="/dashboard" className="navbar__link" activeClassName="navbar__link--active">
+            <NavLink
+              to="/dashboard"
+              className="navbar__link"
+              activeClassName="navbar__link--active"
+            >
               Dashboard
             </NavLink>
           </li>
@@ -34,20 +48,27 @@ class Navbar extends Component {
             </NavLink>
           </li>
           <li className="navbar__item">
-            <a href="/logout" onClick={this.handleLogout} className="navbar__link">Logout</a>
+            <a href="/logout" onClick={this.handleLogout} className="navbar__link">
+              Logout
+            </a>
           </li>
         </ul>
       );
     } else {
       dynamicNavbar = (
-        <ul className="navbar__menu" id="navbar-menu">
+        <ul className="navbar__menu" id="navbar-menu" onClick={this.toggleCheckboxState}>
           <li className="navbar__item">
             <NavLink to="/" className="navbar__link" exact activeClassName="navbar__link--active">
               Landing
             </NavLink>
           </li>
           <li className="navbar__item">
-            <NavLink to="/login" className="navbar__link" exact activeClassName="navbar__link--active">
+            <NavLink
+              to="/login"
+              className="navbar__link"
+              exact
+              activeClassName="navbar__link--active"
+            >
               Login
             </NavLink>
           </li>
@@ -64,7 +85,12 @@ class Navbar extends Component {
       <div className="navbar" id="navbar">
         <h2>Kachingu</h2>
         <div id="toggle">
-          <input className="checkbox" type="checkbox" />
+          <input
+            className="checkbox"
+            type="checkbox"
+            checked={this.state.checkboxChecked}
+            onClick={this.toggleCheckboxState}
+          />
           <span />
           <span />
           <span />
@@ -87,4 +113,7 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps, { logoutUser })(Navbar);
+export default connect(
+  mapStateToProps,
+  { logoutUser }
+)(Navbar);
