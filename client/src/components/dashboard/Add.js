@@ -153,7 +153,7 @@ class Container extends React.Component {
                   Recurring:{' '}
                 </label>
                 <div className="form__input-container">
-                  <input type="checkbox" name="recurring" id="recurring" />
+                  <input className="form__checkbox" type="checkbox" name="recurring" id="recurring" />
                 </div>
               </div>
               <button className="button">Submit</button>

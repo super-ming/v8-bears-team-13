@@ -71,9 +71,9 @@ class Container extends React.Component {
 
     getReccuringDefault = () => {
         if (this.props.dash.entry.recurring) {
-            return <input type='checkbox' name='recurring' id='recurring' onClick={this.handleTransactionTypeChange} checked ></input>;
+            return <input className="form__checkbox" type='checkbox' name='recurring' id='recurring' onClick={this.handleTransactionTypeChange} checked ></input>;
         }
-        return (<input type='checkbox' name='recurring' id='recurring' onClick={this.handleTransactionTypeChange}></input>)
+        return (<input className="form__checkbox" type='checkbox' name='recurring' id='recurring' onClick={this.handleTransactionTypeChange}></input>)
     }
 
     render() {
@@ -87,7 +87,8 @@ class Container extends React.Component {
                             <div className="form__group">
                                 <label htmlFor="transaction" className="form__label">Transaction Type: </label>
                                 <div className="form__input-container">
-                                    <select name="transaction"
+                                    <select className="form__input" 
+                                            name="transaction"
                                             id="transaction"
                                             defaultValue={transact_id}
                                             value={this.state.transactionType}
@@ -102,7 +103,7 @@ class Container extends React.Component {
                             <div className="form__group">
                                 <label htmlFor="category" className="form__label">Category Type: </label>
                                 <div className="form__input-container">
-                                    <select name='category' id="category" defaultValue={category_id} onClick={this.handleTransactionTypeChange}>
+                                    <select className="form__input" name='category' id="category" defaultValue={category_id} onClick={this.handleTransactionTypeChange}>
                                         <option value='DEFAULT' disabled>Select Category Type</option>
                                         { this.getCategoryOptions() }
                                     </select>
@@ -111,19 +112,19 @@ class Container extends React.Component {
                             <div className="form__group">
                                 <label htmlFor="entry" className="form__label">Entry Description: </label>
                                 <div className="form__input-container">
-                                    <input type='text' name='entry' id='entry' value={this.state.entry} onInput={this.handleTransactionTypeChange}></input>  
+                                    <input className="form__input" type='text' name='entry' id='entry' value={this.state.entry} onInput={this.handleTransactionTypeChange}></input>  
                                 </div>
                             </div>
                             <div className="form__group">
                                 <label htmlFor="amount" className="form__label">Amount: </label>
                                 <div className="form__input-container">
-                                    <input type='number' name='amount' id='amount' min="0.00" step="0.01" value={this.state.amount} onInput={this.handleTransactionTypeChange}></input>
+                                    <input className="form__input" type='number' name='amount' id='amount' min="0.00" step="0.01" value={this.state.amount} onInput={this.handleTransactionTypeChange}></input>
                                 </div>
                             </div>
                             <div className="form__group">
                                 <label htmlFor="date" className="form__label">Date: </label>
                                 <div className="form__input-container">
-                                    <input type='date' name='full_date' id="date" defaultValue={moment().format('YYYY-MM-DD')}></input>
+                                    <input className="form__input" type='date' name='full_date' id="date" defaultValue={moment().format('YYYY-MM-DD')}></input>
                                 </div>
                             </div>
                             <div className="form__group">
