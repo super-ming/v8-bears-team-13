@@ -8,6 +8,7 @@ const cookieParser = require('cookie-parser');
 // Routes
 const authRoutes = require('./routes/auth');
 const entryRoutes = require('./routes/entry');
+const historyRoutes = require('./routes/history');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -36,6 +37,7 @@ require('./auth/auth');
 // Routes will begin with `/api/auth`
 app.use('/api/auth', authRoutes);
 app.use('/api/entries', entryRoutes);
+app.use('/api/history', historyRoutes);
 
 app.use(errorHandler);
 
