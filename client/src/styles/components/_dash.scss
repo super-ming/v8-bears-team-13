@@ -41,8 +41,10 @@
 }
 
 .dash__summary {
+  background-color: white;
   border: 1px solid $color-black;
   border-radius: $rounded-borders-medium;
+  box-shadow: $box-shadow-light;
 
   margin: 0 auto;
   margin-top: 3rem;
