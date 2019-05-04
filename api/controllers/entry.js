@@ -17,8 +17,18 @@ exports.getLatestEntries = async (req, res) => {
 exports.addEntry = async (req, res) => {
   const entryData = req.body;
   entryData.created_at = moment();
+
+  let decodedJwt;
   try {
-    const newEntry = await Entry.addEntry(entryData);
+    decodedJwt = jwt.verify(req.cookies.jwt, keys.secret);
+  } catch (err) {
+    throw new Error(err);
+  }
+
+  const { userId } = decodedJwt;
+
+  try {
+    const newEntry = await Entry.addEntry(entryData, userId);
     res.json(newEntry);
   } catch (err) {
     throw new Error(err);
