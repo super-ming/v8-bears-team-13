@@ -20,10 +20,28 @@ const db = require('../db/config');
 //   }
 // };
 
-exports.getCurrentMonth = async (userid) => {
-  const currentMonth = moment().subtract(1, 'month').format('YYYY-MM-DD');
+exports.getHistory = async (userid, num) => {
+  let time;
+  console.log(num, typeof num);
+  if(num === '1') {
+    // 1 month
+    time = moment().subtract(1, 'month').format('YYYY-MM-DD');
+  } else if(num === '3') {
+    // 3 months
+    time = moment().subtract(3, 'month').format('YYYY-MM-DD');
+  } else if(num === '6') {
+    // 6 months
+    time = moment().subtract(6, 'month').format('YYYY-MM-DD');
+  } else if(num === '12') {
+    // 12 months
+    time = moment().subtract(12, 'month').format('YYYY-MM-DD');
+  } else if(num === '9999') {
+    // all-time
+    time = moment().subtract(9999, 'month').format('YYYY-MM-DD');
+  }
+  
   try {
-    return db.query('SELECT entries.*, categories.category_desc FROM entries INNER JOIN categories ON entries.category_id = categories.id WHERE entries.user_id=$1 AND entries.full_date >= $2', [userid, currentMonth])
+    return db.query('SELECT entries.*, categories.category_desc FROM entries INNER JOIN categories ON entries.category_id = categories.id WHERE entries.user_id=$1 AND entries.full_date >= $2', [userid, time])
       .then(data =>  data)
       .catch(err => {
         console.log(err);

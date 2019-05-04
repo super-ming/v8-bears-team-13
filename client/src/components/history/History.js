@@ -26,37 +26,32 @@ import Loader from '../loader/Loader';
 // Dummy Data
 // import entries from '../../data/entries';
 
-let entries = [];
+
 
 class Container extends Component {
-  // state = {
-  //   history: []
-  // }
-
   componentDidMount() {
-    this.fetchCurrMonth();
+    this.fetchHistory(1);
   }
 
-  fetchCurrMonth = async () => {
-    const url = 'http://localhost:5000/api/history/current-month/';
+  fetchHistory = async (num) => {
+    const url = 'http://localhost:5000/api/history/month/' + num;
     fetch(url, {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include'
     })
     .then(data => data.json())
-    .then(results => this.props.setGetHistory(results))
+    .then(results => {
+      this.props.setGetHistory(results)
+      
+      })
     .catch(err => console.log(err))
     ;
-
+    
     // change state so component refreshes
     // this.props.setGetHistory(entries);
   };
 
-  reqEntries = () => {
-    entries = this.props.history;
-    return entries;
-  }
 
   render() {
     return (
@@ -67,7 +62,7 @@ class Container extends Component {
           <h2 className="heading--sub">Showing results from...</h2>
           <SavingsCard income={1000} expenses={900} />
           <h2 className="heading--sub">Entries</h2>
-          <EntryList entries={this.reqEntries()} editEntry={this.props.editEntry} deleteEntry={this.props.deleteEntry} />
+          <EntryList entries={this.props.history} editEntry={this.props.editEntry} deleteEntry={this.props.deleteEntry} />
         </div>
       </div>
     );
@@ -95,9 +90,6 @@ const mapDispatchToProps = dispatch => {
       dispatch(deleteEntry(entryId));
     }  
   }
-  // getLatestEntries: (userId) => {
-  //   dispatch(getLatestEntries(userId));
-  // }
 };
 
 const History = connect(
