@@ -1,10 +1,20 @@
 .filter-bar {
   margin: 0 auto;
+  padding-top: 5rem;
   width: 63rem;
 
   display: flex;
-  justify-content: space-around;
-  padding-top: 50px;
+    justify-content: space-around;
+
+  @include respond(tab-land) {
+    width: 100%;
+  }
+
+  @include respond(tab-port) {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
 
   &__select {
     border: 1px solid #aaa;
@@ -12,6 +22,10 @@
     font-size: 2rem;
     // Filter for Income/Expense
     width: 12rem;
+
+    @include respond(tab-port) {
+      margin-top: 1rem;
+    }
 
     // Filter for Date
     &:nth-of-type(2) {
