@@ -69,7 +69,7 @@ class Container extends React.Component {
             });
     };
 
-    getReccuringDefault = () => {
+    getRecurringDefault = () => {
         if (this.props.dash.entry.recurring) {
             return <input type='checkbox' name='recurring' id='recurring' onClick={this.handleTransactionTypeChange} checked ></input>;
         }
@@ -129,14 +129,14 @@ class Container extends React.Component {
                             <div className="form__group">
                                 <label htmlFor="recurring" className="form__label">Recurring: </label>
                                 <div className="form__input-container">
-                                    { this.getReccuringDefault() }
+                                    { this.getRecurringDefault() }
                                 </div>
                             </div>
                         </div>
                         <button className="button">Submit</button>
                     </fieldset>
                 </form>
-                <button className="button__back" onClick={this.props.getLatestEntries}>Back</button>
+                <button className="button__back" onClick={this.props.setDashDefault}>Back</button>
             </div>
         )
     }

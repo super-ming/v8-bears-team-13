@@ -13,24 +13,29 @@ export default function (state = { status: 'dash', latestEntries: [] }, action) 
   switch (action.type) {
     case ADD_ENTRY:
       return {
+        ...state,
         status: 'add'
       };
     case EDIT_ENTRY:
       return {
+        ...state,
         status: 'edit',
         entry: action.payload
       };
     case DASH_DEFAULT:
       return {
+        ...state,
         status: 'dash'
       };
     case GET_LATEST_ENTRIES:
       return {
+        ...state,
         status: 'dash',
         latestEntries: action.payload
       };
     case GET_LATEST_ENTRIES_FAILURE:
       return {
+        ...state,
         status: 'dash',
         error: action.payload.error
       };

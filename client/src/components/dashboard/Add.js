@@ -1,11 +1,11 @@
 import React from 'react';
+import moment from 'moment';
 
 // need connect function to be able to connect to store from Provider
 import { connect } from 'react-redux';
 
-import { getLatestEntries } from '../../actions/dashActions';
+import { dashDefault, getLatestEntries } from '../../actions/dashActions';
 
-import moment from 'moment';
 
 class Container extends React.Component {
     state = {
@@ -127,7 +127,7 @@ class Container extends React.Component {
                         </div>
                     </fieldset>
                 </form>
-                <button className="button__back" onClick={this.props.getLatestEntries}>Back</button>
+                <button className="button__back" onClick={this.props.setDashDefault}>Back</button>
             </div>
         )
     }
@@ -141,11 +141,13 @@ const mapDispatchToProps = (dispatch) => {
     return {
         setGetLatestEntries: () => {
             dispatch(getLatestEntries());
+        },
+        setDashDefault: () => {
+            dispatch(dashDefault());
         }
     }
-}
+};
 
 const Add = connect(mapStateToProps, mapDispatchToProps)(Container);
 
 export default Add;
-
