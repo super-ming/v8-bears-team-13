@@ -3,61 +3,118 @@
 
   &__group {
     margin: 2rem 0 2rem 0;
+    width: 100%;
+
     display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
+      align-items: center;
+      flex-direction: row;
+      justify-content: center;
+    
+    
+    @include respond(tab-port) {
+      flex-direction: column;
+      margin: 1.5rem 0;
+    }
   }
 
   &__container {
+    background-color: white;
+    border: 1px solid gray;
+    border-radius: 5px;
+    width: 100%;
+
     display: flex;
-    flex-flow: row wrap;
-    justify-content: center;
-    width: 35%;
+      flex-flow: row wrap;
+      justify-content: center;
   }
 
   &__label {
-    text-align: right;
-    width: 35%;
     margin-right: 1rem;
+    font-weight: bold;
+    text-align: right;
+    width: 55%;
+
+
+    @include respond(tab-port) {
+      text-align: center;
+      margin-right: 0;
+      margin-bottom: 1rem;
+      width: 90%;
+    }
   }
 
   &__input-container {
     text-align: left;
     width: 65%;
+
+    @include respond(tab-port) {
+      margin: 0 auto;
+      text-align: center;
+    }
   }
 
   &__input {
     border: 1px solid black;
     border-radius: $rounded-borders-small;
     height: 3rem;
-    width: 30rem;
-  }
+    padding-left: .8rem;
+    width: 90%;
 
-  &__add, &__edit { 
-    .form__group {
+    @include respond(tab-port) {
+      padding-left: 0;
+      text-align: center;
       width: 100%;
     }
-    .form__label {
-      width: 55%;
+  }
+
+  &__add,
+  &__edit {
+    width: 55rem;
+    margin: 0 auto;
+
+    @include respond(tab-port) {
+      width: 100%;
     }
-    button{
-      margin: 10px 0 10px 0;
-    }
+  }
+
+  &__checkbox {
+    height: 2rem;
+    width: 2rem;
+    transform: translateY(5px);
   }
 }
 
-.add-entry, .edit-entry {
-  margin: 0 0 100px 0;
+.add-entry,
+.edit-entry {
+  margin: 0 0 10px 0;
+  
   button {
-    margin: 20px 0 0 20px;
+    margin: 20px 0 2rem 20px;
+
+    @include respond(tab-port) {
+      margin: 0;
+      margin-bottom: 1rem;
+
+      &:last-of-type {
+        margin-top: 1rem;
+      }
+    }
+  }
+
+  @include respond(tab-port) {
+    margin-bottom: 10rem;
   }
 }
 
 fieldset {
-  width: 50%;
-  margin: 0 0 0 25%;
+  border-radius: 5px;
+  width: 100%;
   font-size: $font-size-medium;
+
+  @include respond(tab-port) {
+    margin: 0 auto;
+    width: 95%;
+  }
 }
 
 .password {
@@ -74,30 +131,3 @@ fieldset {
     fill: purple;
   }
 }
-
-@include respond(phone-only) {
-  .form {
-    &__container {
-      width: 80%;
-    }
-  }
-}
-
-@include respond(tab-land) {
-  .form {
-    &__container {
-      width: 70%;
-    }
-    &__label {
-      text-align: right;
-      width: 25%;
-      margin-right: 1rem;
-    }
-  
-    &__input-container {
-      text-align: left;
-      width: 65%;
-    }
-  }
-}
-
