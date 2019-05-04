@@ -38,8 +38,18 @@ exports.addEntry = async (req, res) => {
 exports.editEntry = async (req, res) => {
   const entryData = req.body;
   entryData.created_at = moment();
+
+  let decodedJwt;
   try {
-    const updatedEntry = await Entry.editEntry(entryData);
+    decodedJwt = jwt.verify(req.cookies.jwt, keys.secret);
+  } catch (err) {
+    throw new Error(err);
+  }
+
+  const { userId } = decodedJwt;
+
+  try {
+    const updatedEntry = await Entry.editEntry(entryData, userId);
     res.json(updatedEntry);
   } 
   catch (err) {

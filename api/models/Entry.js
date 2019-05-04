@@ -7,9 +7,9 @@ exports.addEntry = async (data, userId) => {
     [userId, transaction, category, entry, amount, full_date, created_at, recurring]);
 };
 
-exports.editEntry = async (data) => {
+exports.editEntry = async (data, userId) => {
   try {
-    const { id, userId, transaction, category, entry, amount, full_date, created_at, recurring } = data;
+    const { id, transaction, category, entry, amount, full_date, created_at, recurring } = data;
     const user_id = userId;
     const transact_id = transaction;
     const category_id = category;
