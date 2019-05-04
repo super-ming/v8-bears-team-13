@@ -66,7 +66,7 @@ class Container extends React.Component {
       if (status === 'edit') {
         return (
           <div>
-            <EditEntry getLatestEntries={this.fetchEntries} />
+            <EditEntry getEntries={this.fetchEntries} />
           </div>
         );
       }

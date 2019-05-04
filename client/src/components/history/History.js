@@ -8,7 +8,8 @@ import EntryList from '../entries/EntryList';
 import EditEntry from '../dashboard/EditEntry';
 import Loader from '../loader/Loader';
 
-import { getHistory, editEntry, deleteEntry } from '../../actions/historyActions';
+import { editEntry } from '../../actions/dashActions';
+import { getHistory, deleteEntry } from '../../actions/historyActions';
 
 class Container extends Component {
   componentDidMount() {
@@ -63,7 +64,7 @@ class Container extends Component {
       }
 
       if (status === 'edit') {
-        return <EditEntry getLatestEntries={this.fetchHistory} />;
+        return <EditEntry getEntries={() => this.fetchHistory(1)} />;
       }
 
       if (status === 'history') {

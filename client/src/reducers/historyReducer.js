@@ -1,7 +1,7 @@
 import {
   GET_HISTORY,
   HISTORY_DEFAULT,
-  HISTORY_EDIT,
+  EDIT_ENTRY,
   DELETE_ENTRY,
   DELETE_ENTRY_FAILURE
 } from '../actions/types';
@@ -11,6 +11,7 @@ export default function (state = { status: 'history', entries: [] }, action) {
     case GET_HISTORY:
       return {
         ...state,
+        status: 'history',
         entries: action.payload
       };
     case HISTORY_DEFAULT:
@@ -18,7 +19,7 @@ export default function (state = { status: 'history', entries: [] }, action) {
         ...state,
         status: 'history'
       };
-    case HISTORY_EDIT:
+    case EDIT_ENTRY:
       return {
         ...state,
         status: 'edit'

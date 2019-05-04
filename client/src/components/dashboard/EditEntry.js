@@ -1,9 +1,10 @@
 import React from 'react';
+import moment from 'moment';
+import PropTypes from 'prop-types';
 
 // need connect function to be able to connect to store from Provider
 import { connect } from 'react-redux';
 
-import moment from 'moment';
 import { dashDefault } from '../../actions/dashActions';
 
 
@@ -60,7 +61,7 @@ class Container extends React.Component {
     })
       .then(res => res.json())
       .then((data) => {
-        this.props.getLatestEntries();
+        this.props.getEntries();
       })
       .catch((err) => {
         throw err;
@@ -196,13 +197,17 @@ class Container extends React.Component {
             </div>
           </fieldset>
         </form>
-        <button className="button__back" onClick={this.props.getLatestEntries}>
+        <button className="button__back" onClick={this.props.getEntries} type="button">
           Back
         </button>
       </div>
     );
   }
 }
+
+Container.propTypes = {
+  getEntries: PropTypes.func.isRequired
+};
 
 const mapStateToProps = state => state;
 
