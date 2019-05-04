@@ -1,4 +1,4 @@
-import { GET_HISTORY, DELETE_ENTRY, DELETE_ENTRY_FAILURE } from './types';
+import { GET_HISTORY, DELETE_ENTRY, DELETE_ENTRY_FAILURE, HISTORY_EDIT } from './types';
 
 export const handleErrors = (response) => {
   if (!response.ok) {
@@ -15,6 +15,11 @@ export const getHistory = data => ({
 export const deleteEntrySuccess = entryId => ({
   type: DELETE_ENTRY,
   payload: entryId
+});
+
+export const editEntry = entry => ({
+  type: HISTORY_EDIT,
+  payload: entry
 });
 
 export const deleteEntryFailure = error => ({
@@ -35,7 +40,6 @@ export const deleteEntry = entryId => (dispatch) => {
       dispatch(deleteEntrySuccess(entryId));
     })
     .catch((error) => {
-      console.log("ERROR", error);
       dispatch(deleteEntryFailure(error));
     });
 };

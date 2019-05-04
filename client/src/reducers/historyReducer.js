@@ -1,4 +1,10 @@
-import { GET_HISTORY, DELETE_ENTRY, DELETE_ENTRY_FAILURE } from '../actions/types';
+import {
+  GET_HISTORY,
+  HISTORY_DEFAULT,
+  HISTORY_EDIT,
+  DELETE_ENTRY,
+  DELETE_ENTRY_FAILURE
+} from '../actions/types';
 
 export default function (state = { status: 'history', entries: [] }, action) {
   switch (action.type) {
@@ -6,6 +12,16 @@ export default function (state = { status: 'history', entries: [] }, action) {
       return {
         ...state,
         entries: action.payload
+      };
+    case HISTORY_DEFAULT:
+      return {
+        ...state,
+        status: 'history'
+      };
+    case HISTORY_EDIT:
+      return {
+        ...state,
+        status: 'edit'
       };
     case DELETE_ENTRY:
       return {

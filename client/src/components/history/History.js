@@ -8,14 +8,8 @@ import EntryList from '../entries/EntryList';
 import EditEntry from '../dashboard/EditEntry';
 import Loader from '../loader/Loader';
 
-import formatMoney from '../../helpers/formatMoney';
+import { getHistory, editEntry, deleteEntry } from '../../actions/historyActions';
 
-import { getHistory, deleteEntry } from '../../actions/historyActions';
-import { editEntry} from '../../actions/dashActions';
-
-
-// Dummy Data
-// import entries from '../../data/entries';
 class Container extends Component {
   componentDidMount() {
     this.fetchHistory(1);
@@ -42,25 +36,69 @@ class Container extends Component {
 
 
   render() {
+    const historyEntries = () => {
+      const { entries } = this.props;
+
+      if (this.props.loading) return <Loader />;
+      if (entries !== undefined) {
+        return <EntryList entries={entries} editEntry={this.props.editEntry} deleteEntry={this.props.deleteEntry} />;
+      }
+    };
+
+    const index = () => {
+      const { status, entries } = this.props;
+
+      let income = 0;
+      let expenses = 0;
+
+      if (entries) {
+        entries.map((entry) => {
+          if (!entry.transact_id) {
+            income += parseFloat(entry.amount);
+          }
+          if (entry.transact_id) {
+            expenses += parseFloat(entry.amount);
+          }
+        });
+      }
+
+      if (status === 'edit') {
+        return <EditEntry getLatestEntries={this.fetchHistory} />;
+      }
+
+      if (status === 'history') {
+        return (
+          <>
+            <h1 className="heading--main">History</h1>
+            <FilterBar />
+            <h2 className="heading--sub">Showing results from...</h2>
+            <SavingsCard income={income} expenses={expenses} />
+            <h2 className="heading--sub">Entries</h2>
+            { historyEntries() }
+          </>
+        );
+      }
+    };
+
     return (
       <div className="content">
-        <h1 className="heading--main">History</h1>
-        <div className="history">
-          <FilterBar />
-          <h2 className="heading--sub">Showing results from...</h2>
-          <SavingsCard income={1000} expenses={900} />
-          <h2 className="heading--sub">Entries</h2>
-          <EntryList entries={this.props.entries} editEntry={this.props.editEntry} deleteEntry={this.props.deleteEntry} />
-        </div>
+        <div className="history">{index()}</div>
       </div>
     );
   }
 }
 
+Container.propTypes = {
+  entries: PropTypes.array.isRequired,
+  loading: PropTypes.bool.isRequired,
+  status: PropTypes.string.isRequired,
+  deleteEntry: PropTypes.func.isRequired,
+  editEntry: PropTypes.func.isRequired
+};
+
 const mapStateToProps = state => ({
-  status: state.dash.status,
+  status: state.history.status,
   auth: state.auth,
-  latestEntries: state.dash.latestEntries,
   loading: state.loading.isLoading,
   entries: state.history.entries
 });
