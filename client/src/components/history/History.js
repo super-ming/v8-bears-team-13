@@ -39,21 +39,22 @@ class Container extends Component {
 
   fetchCurrMonth = async () => {
     const url = 'http://localhost:5000/api/history/current-month/';
-    entries = fetch(url, {
+    fetch(url, {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include'
     })
     .then(data => data.json())
-    .then(results => results)
+    .then(results => this.props.setGetHistory(results))
     .catch(err => console.log(err))
     ;
 
     // change state so component refreshes
-    this.props.setGetHistory(entries);
+    // this.props.setGetHistory(entries);
   };
 
   reqEntries = () => {
+    entries = this.props.history;
     return entries;
   }
 
@@ -77,7 +78,8 @@ const mapStateToProps = state => ({
   status: state.dash.status,
   auth: state.auth,
   latestEntries: state.dash.latestEntries,
-  loading: state.loading.isLoading
+  loading: state.loading.isLoading,
+  history: state.history
   
 });
 
