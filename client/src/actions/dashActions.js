@@ -8,6 +8,7 @@ import {
   DELETE_ENTRY_FAILURE
 } from './types';
 import { startLoading, stopLoading } from './loadingActions';
+import { logoutUser } from './authActions';
 
 export const handleErrors = (response) => {
   if (!response.ok) {
@@ -60,6 +61,7 @@ export const getLatestEntries = userId => (dispatch) => {
       console.log(error);
       dispatch(stopLoading());
       dispatch(getLatestEntriesFailure(error));
+      dispatch(logoutUser());
     });
 };
 
