@@ -7,10 +7,26 @@ import EntryList from '../entries/EntryList';
 
 import formatMoney from '../../helpers/formatMoney';
 
+import { getHistory } from '../../actions/historyActions';
+
+import PropTypes from 'prop-types';
+
+// need connect function to be able to connect to store from Provider
+
+import {
+  addEntry, editEntry, deleteEntry, dashDefault, getLatestEntries
+} from '../../actions/dashActions';
+
+import Add from '../dashboard/Add';
+import EditEntry from '../dashboard/EditEntry';
+import DashboardSummary from '../dashboard/DashboardSummary';
+import Loader from '../loader/Loader';
+
+
 // Dummy Data
-import entries from '../../data/entries';
+// import entries from '../../data/entries';
 
-
+let entries = [];
 
 class Container extends Component {
   // state = {
@@ -21,18 +37,25 @@ class Container extends Component {
     this.fetchCurrMonth();
   }
 
-  fetchCurrMonth = () => {
-    const url = 'http://localhost:5000/api/history/current-month/' + this.props.auth.userId;
-    fetch(url, {
+  fetchCurrMonth = async () => {
+    const url = 'http://localhost:5000/api/history/current-month/';
+    entries = fetch(url, {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include'
     })
-    .then(data => data)
+    .then(data => data.json())
+    .then(results => results)
     .catch(err => console.log(err))
     ;
-    
+
+    // change state so component refreshes
+    this.props.setGetHistory(entries);
   };
+
+  reqEntries = () => {
+    return entries;
+  }
 
   render() {
     return (
@@ -43,7 +66,7 @@ class Container extends Component {
           <h2 className="heading--sub">Showing results from...</h2>
           <SavingsCard income={1000} expenses={900} />
           <h2 className="heading--sub">Entries</h2>
-          <EntryList entries={entries} />
+          <EntryList entries={this.reqEntries()} editEntry={this.props.editEntry} deleteEntry={this.props.deleteEntry} />
         </div>
       </div>
     );
@@ -51,16 +74,29 @@ class Container extends Component {
 }
 
 const mapStateToProps = state => ({
+  status: state.dash.status,
   auth: state.auth,
+  latestEntries: state.dash.latestEntries,
   loading: state.loading.isLoading
+  
 });
 
-const mapDispatchToProps = dispatch => ({
-
+const mapDispatchToProps = dispatch => {
+  return {
+    setGetHistory: (data) => {
+      dispatch(getHistory(data));
+    },
+    editEntry: (entry) => {
+      dispatch(editEntry(entry));
+    },
+    deleteEntry: (entryId) => {
+      dispatch(deleteEntry(entryId));
+    }  
+  }
   // getLatestEntries: (userId) => {
   //   dispatch(getLatestEntries(userId));
   // }
-});
+};
 
 const History = connect(
   mapStateToProps,

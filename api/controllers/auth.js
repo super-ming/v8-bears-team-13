@@ -134,7 +134,7 @@ exports.postLogin = (req, res, next) => {
 
         // assign our jwt to the cookie
         // change to secure true in prod, but false in dev for cookie to work
-        res.cookie('jwt', token, { httpOnly: true, secure: false });
+        res.cookie('jwt', token, { httpOnly: true, secure: false, expires: new Date(Date.now() + 900000) });
 
         res.status(200).send(payload);
       });

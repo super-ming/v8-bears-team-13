@@ -13,3 +13,5 @@ export const LOADING_STOP = 'LOADING_STOP';
 
 export const DELETE_ENTRY = 'DELETE_ENTRY';
 export const DELETE_ENTRY_FAILURE = 'DELETE_ENTRY_FAILURE';
+
+export const GET_HISTORY = 'GET_HISTORY';
