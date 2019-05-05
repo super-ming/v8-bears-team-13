@@ -83,7 +83,7 @@ class Navbar extends Component {
 
     return (
       <div className="navbar" id="navbar">
-        <h2><NavLink to={isLoggedIn ? '/dashboard' : '/landing'}>KA-Chingu</NavLink></h2>
+        <h2><NavLink to={isLoggedIn ? '/dashboard' : '/'}>KA-Chingu</NavLink></h2>
         <div id="toggle">
           <input
             className="checkbox"
