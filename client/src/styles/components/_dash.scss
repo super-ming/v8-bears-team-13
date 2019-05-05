@@ -1,0 +1,110 @@
+.dash {
+  margin: 0 auto;
+  width: 100rem;
+
+  @include respond(desktop) {
+    width: 100%;
+  }
+
+  &__button {
+    width: 10rem;
+    margin-top: 3rem;
+  }
+
+  &__saved {
+    font-size: $font-size-medium;
+    margin: 0 auto;
+    text-align: left;
+    width: 100%;
+
+    display: flex;
+      align-items: flex-start;
+      flex-direction: column;
+      justify-content: center;
+    
+    @include respond(desktop) {
+      width: 90%;
+    }
+    
+    @include respond(tab-land) {
+      align-items: center;
+      text-align: center;
+      margin-top: -2rem;
+    }
+
+    &--big {
+      font-size: 4.6rem;
+      display: block;
+      color: $color-green;
+    }
+  }
+}
+
+.dash__summary {
+  background-color: white;
+  border: 1px solid $color-black;
+  border-radius: $rounded-borders-medium;
+  box-shadow: $box-shadow-light;
+
+  margin: 0 auto;
+  margin-top: 3rem;
+  height: 14rem;
+  width: 100%;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  @include respond(desktop) {
+    width: 90%;
+  }
+
+  @include respond(tab-land) {
+    width: 80%;
+  }
+
+  @include respond(tab-port) {
+    height: auto;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+  }
+
+  &__column {
+    display: flex;
+      align-items: flex-start;
+      flex-direction: column;
+      flex-grow: 1;
+    
+    @include respond(tab-port) {
+      align-items: center;
+    }
+
+    &:first-of-type {
+      margin-left: 3rem;
+
+      @include respond(tab-port) {
+        margin-left: 0;
+      }
+    }
+
+    &:last-of-type {
+      margin-right: 3rem;
+
+      @include respond(tab-port) {
+        margin-right: 0;
+      }
+    }
+  }
+
+  &__heading {
+    font-size: $font-size-small;
+    font-weight: bold;
+  }
+
+  &__amount {
+    font-size: 5rem;
+    font-weight: normal;
+    margin-top: -1rem;
+  }
+}

@@ -1,0 +1,140 @@
+.entry__container {
+  margin: 0 0 10vw 0;
+
+  display: flex;
+    align-items: center;
+    flex-direction: column;
+  
+  @include respond(tab-port) {
+    margin-bottom: 12.5rem;
+  }
+}
+
+.entry {
+  border: 1px solid $color-black;
+  border-radius: 2rem;
+  box-shadow: $box-shadow-light;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  width: 100rem;
+  background-color: white;
+
+  display: flex;
+    flex-direction: column;
+
+  &:not(:first-of-type) {
+    margin-top: 3rem;
+  }
+
+  @include respond(desktop) {
+    width: 90%;
+  }
+
+  @include respond(tab-land) {
+    width: 80%;
+  }
+
+  &__row {
+    padding-left: 3rem;
+    padding-right: 3rem;
+
+    display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+    &:not(:first-of-type) {
+      margin-top: 1.5rem;
+    }
+
+    @include respond(tab-port) {
+      display: block;
+      text-align: center;
+    }
+  }
+
+  &__description {
+    font-size: $font-size-extra-large
+  }
+
+  &__amount {
+    font-size: $font-size-extra-large;
+
+    @include respond(tab-port) {
+      margin-top: 1.5rem;
+    }
+
+    &--expense {
+      color: $color-red;
+    }
+
+    &--income {
+      color: $color-green;
+    }
+  }
+
+  &__group {
+    display: flex;
+      align-items: center;
+
+    @include respond(tab-port) {
+      display: block;
+    }
+  }
+
+  &__date {
+    font-size: $font-size-small;
+    margin-right: 2rem;
+
+    @include respond(tab-port) {
+      text-align: center;
+      margin-right: 0;
+    }
+  }
+
+  &__category-container {
+    background-color: #333;
+    border-radius: $rounded-borders-large;
+    height: 4rem;
+    width: 12rem;
+
+    display: flex;
+      align-items: center;
+      justify-content: center;
+    
+    @include respond(tab-port) {
+      margin: 0 auto;
+      margin-top: 1.5rem;
+    }
+  }
+
+  &__category {
+    color: $color-cream;
+    font-size: $font-size-small;
+  }
+
+  &__icons {
+    @include respond(tab-port) {
+      margin-top: 1.5rem;
+    }
+  }
+
+  &__icon {
+    font-size: 2.4rem;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &:first-of-type {
+      margin-right: 1.5rem;
+    }
+
+    &--edit:hover {
+      color: darkorange;
+    }
+
+    &--delete:hover {
+      color: crimson;
+    }
+  }
+}

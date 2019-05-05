@@ -1,6 +1,6 @@
 const options = {
   query: (e) => {
-    console.log(e.query);
+    // console.log('Query Error:', e.query);
   }
 };
 
@@ -13,7 +13,9 @@ const setupDB = () => {
     return pgp({
       database: keys.databaseName,
       port: 5432,
-      host: 'localhost'
+      host: 'localhost',
+      user: keys.user,
+      password: keys.password
     });
   }
 

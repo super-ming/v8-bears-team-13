@@ -1,0 +1,11 @@
+need:
+
+logIn after sign up, then token??
+
+guide image:
+https://cdn-images-1.medium.com/max/800/1*88LV6mHq-M5c-19Q2H72Nw.png
+
+
+// npm install passport-local passport-jwt jsonwebtoken --save in api/
+
+https://blog.usejournal.com/sessionless-authentication-withe-jwts-with-node-express-passport-js-69b059e4b22c

@@ -1,0 +1,8 @@
+.error {
+  color: darken($color-red, 20%);
+
+  &--server {
+    font-size: $font-size-medium;
+    margin: 2rem;
+  }
+}

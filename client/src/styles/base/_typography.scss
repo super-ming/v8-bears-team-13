@@ -1,11 +1,29 @@
 .heading {
+  &--main {
+    font-size: 5rem;
+  }
+
+  &--sub {
+    font-size: 3.8rem;
+
+    @include respond(tab-port) {
+      font-size: 3rem;
+    }
+  }
 }
 
 .text-container {
 }
 
 .body-text {
+  font-size: $font-size-large;
 }
 
 .paragraph {
+}
+
+@media only screen and (max-width: 550px){
+  .body-text {
+    font-size: $font-size-small;
+  }
 }

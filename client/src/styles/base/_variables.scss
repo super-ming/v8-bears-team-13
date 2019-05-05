@@ -2,11 +2,22 @@
 $color-red: #EF6462;
 $color-green: #00B27D;
 $color-blue: #00B1B3;
+$color-cream: #eceef1; 
 
 $color-black: #000;
 $color-white: #FFF;
 
 /* === FONT === */
+$font-size-extra-small: 1.2rem;
+$font-size-small: 1.6rem;
+$font-size-medium: 2rem;
+$font-size-large: 2.4rem;
+$font-size-extra-large: 2.8rem;
+
+/* === BORDERS === */
+$rounded-borders-small: 3px;
+$rounded-borders-medium: 5px;
+$rounded-borders-large: 10px;
 
 /* === SHADOWS === */
 $box-shadow-light: 0 .25rem .75rem rgba($color-black, .2);

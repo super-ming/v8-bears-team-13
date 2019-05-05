@@ -1,18 +1,20 @@
-import { TEST_DISPATCH } from "../actions/types";
+import { SET_CURRENT_USER } from '../actions/types';
 
 const initialState = {
-  isAuthenticated: false,
-  user: {}
-}
+  username: '',
+  expires: ''
+};
 
 // Actions are dispatched to this reducer...
-export default function(state = initialState, action) {
-  switch(action.type) {
-    case TEST_DISPATCH:
+export default function (state = initialState, action) {
+  switch (action.type) {
+    case SET_CURRENT_USER:
       return {
         ...state,
-        user: action.payload // payload === userData
-      }
+        username: action.payload.username,
+        userId: action.payload.userId,
+        expires: action.payload.expires
+      };
     default:
       return state;
   }

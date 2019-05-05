@@ -1,0 +1,87 @@
+.landing-body {
+    display: flex;
+    padding: 0;
+    flex-wrap: wrap;
+    position: relative;
+    margin: 0 0 50px 0;
+    height: auto;
+    @include respond(tab-port) {
+        flex-flow: row wrap;
+        padding: 0;
+        align-content: center;
+        align-items: center;
+        justify-content: center;
+        margin: 20vw 0 0 0;
+        z-index: -1;
+    }
+}
+
+.landing-img {
+    background: url('../assets/piggybank.jpg') no-repeat content-box center;
+    background-size: cover; 
+    width: 100%;
+    height: 40vw;
+    position: absolute;
+    @include respond(tab-port) {
+        height: 100%;
+        z-index: 0;
+    }
+    @include respond(tab-land) {
+        height: 100%;
+    }
+    @include respond(desktop) {
+        height: 80vw;
+    }
+    @include respond(big-desktop) {
+        height: 48vw;
+    }
+}
+
+.landing-text {
+    padding: 11em 5em 2em 1em;
+    width: 50%;
+    margin: 0 0 0 50px;
+    height: 100%;
+    p {
+        font-size: $font-size-small;
+    }
+    @include respond(tab-port) {
+        padding: 0 1em 0 1em;
+        margin: 0 0 0 10px;
+    }
+    @include respond(tab-land) {
+        padding: 0 1em 0 0;
+        margin: 0 0 0 10px;
+    }
+    @include respond(desktop) {
+        padding: 1em;
+        margin: 7em 0 0 10px;
+    }
+}
+
+.landing-chart {
+    width: 70%;
+    height: auto;
+    padding: 20px 20px 113px 50px;
+    margin: 50px 0 0 70px;
+    svg {
+        width: 100%;
+        height: 100%;
+        box-shadow: 4px 4px 4px rgb(148, 148, 148);
+    }
+    @include respond(tab-port) {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+    }
+    @include respond(tab-land) {
+        width: 80%;
+        padding: 1em 0 0 1em;
+        margin: 5em 0 0 1.5em;
+    }
+    @include respond(desktop) {
+        width: 80%;
+        padding: 1em 0 0 5em;
+        margin: 5em 0 0 1.5em;
+    }
+}
