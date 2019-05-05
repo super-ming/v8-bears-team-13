@@ -2,8 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-// need connect function to be able to connect to store from Provider
-
 import {
   addEntry,
   editEntry,
@@ -55,11 +53,10 @@ class Container extends React.Component {
       let expense = 0;
       let savings = 0;
       if (latestEntries) {
-        latestEntries.map((entry) => {
+        latestEntries.forEach((entry) => {
           if (!entry.transact_id) {
             income += parseFloat(entry.amount);
-          }
-          if (entry.transact_id) {
+          } else {
             expense += parseFloat(entry.amount);
           }
         });

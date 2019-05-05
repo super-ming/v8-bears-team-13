@@ -141,7 +141,6 @@ class Container extends React.Component {
 
   render() {
     const { errors } = this.state;
-    const { transact_id, category_id } = this.props.dash.entry;
 
     return (
       <div className="edit-entry">

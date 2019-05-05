@@ -102,11 +102,10 @@ class Container extends Component {
       let expenses = 0;
 
       if (entries) {
-        entries.map((entry) => {
+        entries.forEach((entry) => {
           if (!entry.transact_id) {
             income += parseFloat(entry.amount);
-          }
-          if (entry.transact_id) {
+          } else {
             expenses += parseFloat(entry.amount);
           }
         });

@@ -1,4 +1,6 @@
-import { GET_HISTORY, DELETE_ENTRY, DELETE_ENTRY_FAILURE, HISTORY_EDIT } from './types';
+import {
+  GET_HISTORY, DELETE_ENTRY, DELETE_ENTRY_FAILURE, HISTORY_EDIT
+} from './types';
 
 export const handleErrors = (response) => {
   if (!response.ok) {
@@ -36,7 +38,7 @@ export const deleteEntry = entryId => (dispatch) => {
     credentials: 'include'
   })
     .then(handleErrors)
-    .then((response) => {
+    .then(() => {
       dispatch(deleteEntrySuccess(entryId));
     })
     .catch((error) => {

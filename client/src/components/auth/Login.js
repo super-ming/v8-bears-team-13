@@ -92,7 +92,7 @@ class Login extends React.Component {
   };
 
   toggleMask = () => {
-    this.setState({ hidden: !this.state.hidden });
+    this.setState(st => ({ hidden: !st.hidden }));
   };
 
   render() {
