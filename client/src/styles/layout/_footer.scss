@@ -10,5 +10,9 @@
     bottom: -16px;
     width: 100%;
     text-align: center;
+
+    @include respond(tab-port) {
+      font-size: $font-size-extra-small;
+    }
   }
 }

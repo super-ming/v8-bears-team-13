@@ -36,6 +36,10 @@
     &--big {
       font-size: 4.6rem;
       display: block;
+
+      @include respond(tab-port) {
+        font-size: 4rem;
+      }
     }
 
     &--green {
@@ -114,5 +118,13 @@
     font-size: 5rem;
     font-weight: normal;
     margin-top: -1rem;
+
+    @include respond(tab-land) {
+      font-size: 3.4rem;
+    }
+
+    @include respond(tab-port) {
+      font-size: 3rem;
+    }
   }
 }
