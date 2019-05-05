@@ -22,8 +22,5 @@
   "devDependencies": {
     "concurrently": "^4.1.0",
     "nodemon": "^1.18.10"
-  },
-  "dependencies": {
-    "font-awesome": "^4.7.0"
   }
 }

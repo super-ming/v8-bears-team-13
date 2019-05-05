@@ -47,7 +47,7 @@ class Container extends React.Component {
     if (!dateRegex.test(this.dateRef.current.value)) errors.date = 'Date Format: YYYY-MM-DD';
 
     return errors;
-  }
+  };
 
   getCategoryOptions = () => {
     // Default
@@ -82,6 +82,8 @@ class Container extends React.Component {
 
     const formData = new FormData(document.getElementById('form-edit'));
     const obj = {};
+
+    // eslint-disable-next-line no-restricted-syntax
     for (const data of formData.entries()) {
       // data is in key-value pairs
       const key = data[0];
@@ -106,7 +108,9 @@ class Container extends React.Component {
       })
       .catch((err) => {
         errors = { ...errors, server: err.message };
-        this.setState({ errors }, () => { throw new Error(err); });
+        this.setState({ errors }, () => {
+          throw new Error(err);
+        });
       });
   };
 
@@ -244,7 +248,9 @@ class Container extends React.Component {
                 </label>
                 <div className="form__input-container">{this.getRecurringDefault()}</div>
               </div>
-              <button className="button" type="submit">Submit</button>
+              <button className="button" type="submit">
+                Submit
+              </button>
               <button className="button__back" type="button" onClick={this.props.getEntries}>
                 Back
               </button>

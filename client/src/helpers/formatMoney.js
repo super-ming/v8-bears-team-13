@@ -3,6 +3,6 @@ export default function (amount) {
     style: 'currency',
     currency: 'USD',
     minimumFractionDigits: 2
-  })
+  });
   return formatter.format(amount);
 }

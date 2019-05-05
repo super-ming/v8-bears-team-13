@@ -22,7 +22,7 @@ const db = require('../db/config');
 
 exports.getHistory = async (userid, num) => {
   let time;
-  console.log(num, typeof num);
+
   if(num === '1') {
     // 1 month
     time = moment().subtract(1, 'month').format('YYYY-MM-DD');
