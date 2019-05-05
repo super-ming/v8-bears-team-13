@@ -25,6 +25,11 @@
     text-align: left;
     padding: 0 0 0 3rem;
     margin: 15px 0 15px 0;
+
+    & a {
+      color:white;
+      text-decoration: none;
+    }
   }
   
   &__item {
