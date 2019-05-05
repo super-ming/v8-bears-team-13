@@ -1,8 +1,6 @@
 const express = require('express');
-const cors = require('cors');
 const passport = require('passport');
 
-const authController = require('../controllers/auth');
 const entryController = require('../controllers/entry');
 
 const router = express.Router();

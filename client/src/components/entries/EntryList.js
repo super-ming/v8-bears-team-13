@@ -5,8 +5,8 @@ import Entry from './Entry';
 
 const EntryList = ({ entries, editEntry, deleteEntry }) => (
   <div className="entry__container">
-    { entries &&
-      entries.map(entry => (
+    {entries
+      && entries.map(entry => (
         <Entry
           key={entry.id}
           entryId={entry.id}
@@ -21,8 +21,7 @@ const EntryList = ({ entries, editEntry, deleteEntry }) => (
           deleteEntry={deleteEntry}
           entryDetails={entry}
         />
-      ))
-    }
+      ))}
   </div>
 );
 

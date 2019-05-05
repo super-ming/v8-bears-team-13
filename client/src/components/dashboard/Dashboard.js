@@ -1,12 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import moment from 'moment';
 import PropTypes from 'prop-types';
 
 // need connect function to be able to connect to store from Provider
 
 import {
-  addEntry, editEntry, deleteEntry, dashDefault, getLatestEntries
+  addEntry,
+  editEntry,
+  deleteEntry,
+  dashDefault,
+  getLatestEntries
 } from '../../actions/dashActions';
 
 import Add from './Add';
@@ -20,7 +23,7 @@ import formatMoney from '../../helpers/formatMoney';
 class Container extends React.Component {
   static defaultProps = {
     latestEntries: []
-  }
+  };
 
   componentDidMount() {
     this.fetchEntries();
@@ -36,7 +39,13 @@ class Container extends React.Component {
 
       if (this.props.loading) return <Loader />;
       if (latestEntries !== undefined) {
-        return <EntryList entries={latestEntries} editEntry={this.props.editEntry} deleteEntry={this.props.deleteEntry} />;
+        return (
+          <EntryList
+            entries={latestEntries}
+            editEntry={this.props.editEntry}
+            deleteEntry={this.props.deleteEntry}
+          />
+        );
       }
     };
 
