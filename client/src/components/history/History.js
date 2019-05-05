@@ -17,24 +17,18 @@ class Container extends Component {
   }
 
   fetchHistory = async (num) => {
-    const url = 'http://localhost:5000/api/history/month/' + num;
+    const url = `http://localhost:5000/api/history/month/${num}`;
     fetch(url, {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include'
     })
-    .then(data => data.json())
-    .then(results => {
-      this.props.setGetHistory(results)
-      
+      .then(data => data.json())
+      .then((results) => {
+        this.props.setGetHistory(results);
       })
-    .catch(err => console.log(err))
-    ;
-    
-    // change state so component refreshes
-    // this.props.setGetHistory(entries);
+      .catch(err => console.log(err));
   };
-
 
   render() {
     const historyEntries = () => {
@@ -42,7 +36,13 @@ class Container extends Component {
 
       if (this.props.loading) return <Loader />;
       if (entries !== undefined) {
-        return <EntryList entries={entries} editEntry={this.props.editEntry} deleteEntry={this.props.deleteEntry} />;
+        return (
+          <EntryList
+            entries={entries}
+            editEntry={this.props.editEntry}
+            deleteEntry={this.props.deleteEntry}
+          />
+        );
       }
     };
 
@@ -75,7 +75,7 @@ class Container extends Component {
             <h2 className="heading--sub">Showing results from...</h2>
             <SavingsCard income={income} expenses={expenses} />
             <h2 className="heading--sub">Entries</h2>
-            { historyEntries() }
+            {historyEntries()}
           </>
         );
       }
@@ -94,7 +94,8 @@ Container.propTypes = {
   loading: PropTypes.bool.isRequired,
   status: PropTypes.string.isRequired,
   deleteEntry: PropTypes.func.isRequired,
-  editEntry: PropTypes.func.isRequired
+  editEntry: PropTypes.func.isRequired,
+  setGetHistory: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -104,19 +105,17 @@ const mapStateToProps = state => ({
   entries: state.history.entries
 });
 
-const mapDispatchToProps = dispatch => {
-  return {
-    setGetHistory: (data) => {
-      dispatch(getHistory(data));
-    },
-    editEntry: (entry) => {
-      dispatch(editEntry(entry));
-    },
-    deleteEntry: (entryId) => {
-      dispatch(deleteEntry(entryId));
-    }  
+const mapDispatchToProps = dispatch => ({
+  setGetHistory: (data) => {
+    dispatch(getHistory(data));
+  },
+  editEntry: (entry) => {
+    dispatch(editEntry(entry));
+  },
+  deleteEntry: (entryId) => {
+    dispatch(deleteEntry(entryId));
   }
-};
+});
 
 const History = connect(
   mapStateToProps,

@@ -46,8 +46,9 @@ class Container extends React.Component {
     }
 
     const formData = new FormData(document.getElementById('form__add'));
-    // this.props.setDashDefault();
     const obj = {};
+
+    // eslint-disable-next-line no-restricted-syntax
     for (const data of formData.entries()) {
       // data is in key-value pairs
       const key = data[0];
@@ -70,7 +71,9 @@ class Container extends React.Component {
       })
       .catch((err) => {
         errors = { ...errors, server: err.message };
-        this.setState({ errors }, () => { throw new Error(err); });
+        this.setState({ errors }, () => {
+          throw new Error(err);
+        });
       });
   };
 
@@ -87,7 +90,7 @@ class Container extends React.Component {
     if (!dateRegex.test(this.dateRef.current.value)) errors.date = 'Date Format: YYYY-MM-DD';
 
     return errors;
-  }
+  };
 
   getCategoryOptions = () => {
     // Default
@@ -109,7 +112,7 @@ class Container extends React.Component {
   };
 
   render() {
-    const { errors } =  this.state;
+    const { errors } = this.state;
 
     return (
       <div className="add-entry">
@@ -215,11 +218,18 @@ class Container extends React.Component {
                   Recurring:
                 </label>
                 <div className="form__input-container">
-                  <input className="form__checkbox" type="checkbox" name="recurring" id="recurring" />
+                  <input
+                    className="form__checkbox"
+                    type="checkbox"
+                    name="recurring"
+                    id="recurring"
+                  />
                 </div>
               </div>
-              <button className="button" type="submit">Submit</button>
-              <button className="button__back" type="button" onClick={this.props.getLatestEntries} type="button">
+              <button className="button" type="submit">
+                Submit
+              </button>
+              <button className="button__back" type="button" onClick={this.props.getLatestEntries}>
                 Back
               </button>
               <div className="error">{this.state.serverError}</div>
@@ -238,16 +248,14 @@ Container.propTypes = {
 
 const mapStateToProps = state => state;
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        setGetLatestEntries: () => {
-            dispatch(getLatestEntries());
-        },
-        setDashDefault: () => {
-            dispatch(dashDefault());
-        }
-    }
-};
+const mapDispatchToProps = dispatch => ({
+  setGetLatestEntries: () => {
+    dispatch(getLatestEntries());
+  },
+  setDashDefault: () => {
+    dispatch(dashDefault());
+  }
+});
 
 const Add = connect(
   mapStateToProps,
