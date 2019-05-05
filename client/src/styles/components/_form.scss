@@ -95,6 +95,19 @@
     width: 2rem;
     transform: translateY(5px);
   }
+
+  &__button-container {
+    width: 100%;
+
+    display: flex;
+      align-content: space-around;
+      justify-content: center;
+
+    & .button {
+      margin-left: 1rem;
+      margin-right: 1rem;
+    }
+  }
 }
 
 .add-entry,
@@ -110,6 +123,10 @@
 
       &:last-of-type {
         margin-top: 1rem;
+
+        @include respond(tab-port) {
+          margin-top: 0;
+        }
       }
     }
   }
