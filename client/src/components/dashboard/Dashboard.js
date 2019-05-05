@@ -81,12 +81,16 @@ class Container extends React.Component {
         );
       }
       if (status === 'dash') {
+        const savedClasses = savings >= 0
+          ? 'dash__saved--big dash__saved--green'
+          : 'dash__saved--big dash__saved--red';
+
         return (
           <>
             <h1 className="heading--main">Dashboard</h1>
             <div className="dash__saved">
               <p>
-                You have saved <span className="dash__saved--big">{formatMoney(savings)}</span> so
+                You've saved <span className={savedClasses}>{formatMoney(savings)}</span> so
                 far this month.
               </p>
             </div>

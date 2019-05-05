@@ -35,7 +35,14 @@
     &--big {
       font-size: 4.6rem;
       display: block;
+    }
+
+    &--green {
       color: $color-green;
+    }
+
+    &--red {
+      color: $color-red;
     }
   }
 }

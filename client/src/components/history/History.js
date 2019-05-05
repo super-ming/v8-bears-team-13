@@ -66,7 +66,7 @@ class Container extends Component {
     }
 
     // Getting all entries
-    if (!startDate) return 'Showing results from all entries';
+    if (!startDate) return 'Showing results from all time';
 
     const formattedStartDate = startDate.format('MMM Do, YYYY');
     return `Showing results from ${now} to ${formattedStartDate}`;
