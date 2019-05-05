@@ -32,7 +32,7 @@ class Container extends Component {
     const qTransact = transact ? `&transact=${transact}` : '';
     const qStr = str ? `&str=${str}` : '';
 
-    const url = `http://localhost:5000/api/history/month?num=${num}${qTransact}${qStr}`;
+    const url = `/api/history/month?num=${num}${qTransact}${qStr}`;
 
     fetch(url, {
       method: 'GET',
