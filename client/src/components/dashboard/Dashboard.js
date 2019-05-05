@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import moment from 'moment';
 import PropTypes from 'prop-types';
 
 // need connect function to be able to connect to store from Provider
