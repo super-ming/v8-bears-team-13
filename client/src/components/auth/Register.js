@@ -139,7 +139,7 @@ class Register extends React.Component {
         <div className="form__container">
           <h1 className="heading--main">Register</h1>
           { this.state.redirectToLogin && <Redirect to="/login" /> }
-          <form className="form" onSubmit={this.handleSubmit}>
+          <form className="form form--register" onSubmit={this.handleSubmit}>
             <div className="form__group">
               <label htmlFor="username" className="form__label">Username: </label>
               <div className="form__input-container">
@@ -210,7 +210,7 @@ class Register extends React.Component {
               </div>
             </div>
             <button className="button" type="submit">Register</button>
-            <div className="error">{this.state.serverError}</div>
+            <div className="error error--server">{this.state.serverError}</div>
           </form>
         </div>
       </div>

@@ -1,8 +1,10 @@
 .form {
   font-size: $font-size-small;
+  margin-bottom: 3rem;
   width: 50rem;
 
   @include respond(tab-port) {
+    height: 22rem;
     width: 25rem;
   }
 
@@ -18,7 +20,13 @@
     
     @include respond(tab-port) {
       flex-direction: column;
-      margin: 1.5rem 0;
+      margin: 2rem 0;
+    }
+  }
+
+  &--register {
+    @include respond(tab-port) {
+      height: 47rem;
     }
   }
 
@@ -29,8 +37,8 @@
     width: 100%;
 
     display: flex;
-    flex-flow: row wrap;
-    justify-content: center;
+      flex-flow: row wrap;
+      justify-content: center;
   }
 
   &__label {
@@ -68,7 +76,7 @@
     @include respond(tab-port) {
       padding-left: 0;
       text-align: center;
-      width: 100%;
+      width: 90%;
     }
   }
 
@@ -136,7 +144,7 @@ fieldset {
     right: 3.4rem;
   
   @include respond(tab-port) {
-    right: 1rem;
+    right: 1.5rem;
   }
 
   svg path {

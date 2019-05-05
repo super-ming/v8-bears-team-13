@@ -101,7 +101,7 @@ class Login extends React.Component {
         <div className="form__container">
           <h1 className="heading--main">Login</h1>
           {this.state.redirectToDashboard && (
-            <Redirect to={`/dashboard/${this.props.auth.userId}`} />
+            <Redirect to="/dashboard" />
           )}
           <form className="form" onSubmit={this.handleSubmit}>
             <div className="form__group">
