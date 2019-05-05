@@ -42,10 +42,6 @@ app.use('/api/history', historyRoutes);
 
 app.use(errorHandler);
 
-app.get('/', (req, res) => {
-  res.json({ info: 'Node, Express, Postgres API' });
-});
-
 if (process.env.NODE_ENV === 'production') {
   // Set static folder
   app.use(express.static('client/build'));
