@@ -1,5 +1,6 @@
 .form {
   font-size: $font-size-small;
+  width: 30%;
 
   &__group {
     margin: 2rem 0 2rem 0;
@@ -24,8 +25,8 @@
     width: 100%;
 
     display: flex;
-      flex-flow: row wrap;
-      justify-content: center;
+    flex-flow: row wrap;
+    justify-content: center;
   }
 
   &__label {
@@ -45,7 +46,7 @@
 
   &__input-container {
     text-align: left;
-    width: 65%;
+    width: 100%;
 
     @include respond(tab-port) {
       margin: 0 auto;

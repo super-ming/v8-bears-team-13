@@ -235,13 +235,13 @@ class Container extends React.Component {
                 <div className="form__input-container">{this.getRecurringDefault()}</div>
               </div>
               <button className="button" type="submit">Submit</button>
-              <div className="error">{this.state.serverError}</div>
+              <button className="button__back" type="button" onClick={this.props.getEntries}>
+                Back
+              </button>
             </div>
+            <div className="error">{this.state.serverError}</div>
           </fieldset>
         </form>
-        <button className="button__back" onClick={this.props.getEntries} type="button">
-          Back
-        </button>
       </div>
     );
   }
