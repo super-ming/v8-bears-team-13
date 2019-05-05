@@ -12,8 +12,16 @@ import { editEntry } from '../../actions/dashActions';
 import { getHistory, deleteEntry } from '../../actions/historyActions';
 
 class Container extends Component {
+  state = {
+    resultsString: 'Showing results from...'
+  }
+
   componentDidMount() {
     this.fetchHistory(1);
+  }
+
+  updateResultsString = (updatedText) => {
+    this.setState({ resultsString: updatedText });
   }
 
   fetchHistory = async (num, transact, str) => {
@@ -77,8 +85,8 @@ class Container extends Component {
         return (
           <>
             <h1 className="heading--main">History</h1>
-            <FilterBar fetchHistory={this.fetchHistory}/>
-            <h2 className="heading--sub">Showing results from...</h2>
+            <FilterBar fetchHistory={this.fetchHistory} updateResultsString={this.updateResultsString} />
+            <h2 className="heading--sub">{this.state.resultsString}</h2>
             <SavingsCard income={income} expenses={expenses} />
             <h2 className="heading--sub">Entries</h2>
             {historyEntries()}
@@ -90,7 +98,6 @@ class Container extends Component {
     return (
       <div className="content">
         <div className="history">{index()}</div>
-
       </div>
     );
   }
