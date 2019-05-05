@@ -38,6 +38,7 @@ class SearchBar extends Component {
           onChange={this.handleChange}
           onFocus={this.handleFocus}
           onBlur={this.handleBlur}
+          id="search-bar__history"
         />
         <FontAwesomeIcon icon={faSearch} className={searchIconClasses} />
       </div>
