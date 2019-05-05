@@ -27,7 +27,7 @@ app.use(bodyParser.json());
 app.use(expressValidator());
 
 // enable cors
-app.use(cors({ credentials: true, origin: '*' }));
+app.use(cors({ credentials: true, origin: 'http://localhost:5000' }));
 
 // Need to read cookie
 app.use(cookieParser());
