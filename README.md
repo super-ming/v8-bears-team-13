@@ -13,7 +13,7 @@ This is a web app for:
 
 ### Tech Stack
 **Front End**
-- React
+- React (create-react-app)
 - React Router
 - Redux
 
