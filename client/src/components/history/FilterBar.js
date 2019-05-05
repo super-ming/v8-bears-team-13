@@ -25,37 +25,9 @@ class Container extends Component {
     const transact = obj.type;
     const str = String(document.getElementById('search-bar__history').value);
 
-    const resultString = this.getResultString(num);
-
-    this.props.updateResultsString(resultString);
+    this.props.updateResultsString(num);
     this.props.fetchHistory(num, transact, str);
   };
-
-  getResultString = (numMonths) => {
-    // Last 30 days
-    const now = moment().format('MMM Do, YYYY');
-
-    // Convert string to number
-    const num = numMonths - 0;
-
-    let startDate;
-
-    if (num === 1) {
-      startDate = moment().subtract('1', 'month');
-    } else if (num === 3) {
-      startDate = moment().subtract('3', 'month');
-    } else if (num === 6) {
-      startDate = moment().subtract('6', 'month');
-    } else if (num === 12) {
-      startDate = moment().subtract('1', 'year');
-    }
-
-    // Getting all entries
-    if (!startDate) return 'Showing results from all entries';
-
-    const formattedStartDate = startDate.format('MMM Do, YYYY');
-    return `Showing results from ${now} to ${formattedStartDate}`;
-  }
 
   render() {
     return (
