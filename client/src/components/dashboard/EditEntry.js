@@ -192,13 +192,13 @@ class Container extends React.Component {
                 </label>
                 <div className="form__input-container">{this.getReccuringDefault()}</div>
               </div>
-              <button className="button">Submit</button>
+              <button className="button" type="submit">Submit</button>
+              <button className="button__back" type="button" onClick={this.props.getLatestEntries}>
+                Back
+              </button>
             </div>
           </fieldset>
         </form>
-        <button className="button__back" onClick={this.props.getLatestEntries}>
-          Back
-        </button>
       </div>
     );
   }
