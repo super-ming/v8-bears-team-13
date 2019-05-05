@@ -2,26 +2,11 @@ const moment = require('moment');
 const db = require('../db/config');
 
 
-
-// exports.getCurrentMonth = async (id) => {
-//   try {
-//     return db.task('getLatestEntries', async (t) => {
-//       const previousMonthStart = moment().date(0).startOf('month').startOf('day').format('YYYY-MM-DD HH:mm:ss');
-//       return db.any('SELECT entries.id, user_id, entries.transact_id, category_id, entry_desc, amount, full_date, created_at, recurring, category_desc FROM entries JOIN categories ON entries.category_id = categories.id WHERE entries.user_id = $1 AND entries.created_at >= $2 ORDER BY entries.created_at DESC', [id, previousMonthStart])
-//         .then(data => {
-//           return data;
-//         })
-//           .catch(err => {
-//           console.error(err);
-//         });
-//     })
-//   } catch (err) {
-//     console.log(err);
-//   }
-// };
-
-exports.getHistory = async (userid, num) => {
+exports.getHistory = async (userid, num, transact, str) => {
+  let sqlQuery;
   let time;
+
+  let type;
 
   if(num === '1') {
     // 1 month
@@ -40,8 +25,27 @@ exports.getHistory = async (userid, num) => {
     time = moment().subtract(9999, 'month').format('YYYY-MM-DD');
   }
   
+  if(time && (transact === '2' || !transact)) {
+
+    if(str) {
+      sqlQuery = db.query('SELECT entries.*, categories.category_desc FROM entries INNER JOIN categories ON entries.category_id = categories.id WHERE entries.user_id=$1 AND entries.full_date >= $2 AND entries.entry_desc LIKE \'%$3:value%\'', [userid, time, str]);
+    } else {
+      sqlQuery = db.query('SELECT entries.*, categories.category_desc FROM entries INNER JOIN categories ON entries.category_id = categories.id WHERE entries.user_id=$1 AND entries.full_date >= $2', [userid, time]);
+    }
+
+  } else if(time && (transact === '0' || transact === '1')) {
+    type = transact === '0' ? false : true;
+    console.log('type', type);
+    if(str) {
+      sqlQuery = db.query('SELECT entries.*, categories.category_desc FROM entries INNER JOIN categories ON entries.category_id = categories.id WHERE entries.user_id=$1 AND entries.full_date >= $2 AND entries.transact_id = $3 AND entries.entry_desc LIKE \'%$4:value%\'', [userid, time, type, str]);
+    } else {
+      sqlQuery = db.query('SELECT entries.*, categories.category_desc FROM entries INNER JOIN categories ON entries.category_id = categories.id WHERE entries.user_id=$1 AND entries.full_date >= $2 AND entries.transact_id = $3', [userid, time, type]);
+    }
+  }
+
+
   try {
-    return db.query('SELECT entries.*, categories.category_desc FROM entries INNER JOIN categories ON entries.category_id = categories.id WHERE entries.user_id=$1 AND entries.full_date >= $2', [userid, time])
+    return sqlQuery
       .then(data =>  data)
       .catch(err => {
         console.log(err);

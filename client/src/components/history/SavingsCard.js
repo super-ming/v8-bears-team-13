@@ -13,7 +13,16 @@ const SavingsCard = ({ income, expenses }) => (
     </h2>
     <div className="savings-card__divider" />
     <h2 className="savings-card__heading">
-      Total Savings: <span className="savings-card__amount">{formatMoney(income - expenses)}</span>
+      Total Savings:{' '}
+      <span
+        className={
+          income - expenses >= 0
+            ? 'savings-card__amount green-text'
+            : 'savings-card__amount red-text'
+        }
+      >
+        {formatMoney(income - expenses)}
+      </span>
     </h2>
   </div>
 );

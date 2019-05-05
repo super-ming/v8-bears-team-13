@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import moment from 'moment';
 import PropTypes from 'prop-types';
 
 import FilterBar from './FilterBar';
@@ -12,12 +13,27 @@ import { editEntry } from '../../actions/dashActions';
 import { getHistory, deleteEntry } from '../../actions/historyActions';
 
 class Container extends Component {
+  state = {
+    resultsString: 'Showing results from...'
+  };
+
   componentDidMount() {
     this.fetchHistory(1);
+    this.updateResultsString(1);
   }
 
-  fetchHistory = async (num) => {
-    const url = `/api/history/month/${num}`;
+  updateResultsString = (num) => {
+    const updatedText = this.calculateResultsString(num);
+
+    this.setState({ resultsString: updatedText });
+  };
+
+  fetchHistory = async (num, transact, str) => {
+    const qTransact = transact ? `&transact=${transact}` : '';
+    const qStr = str ? `&str=${str}` : '';
+
+    const url = `http://localhost:5000/api/history/month?num=${num}${qTransact}${qStr}`;
+
     fetch(url, {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
@@ -30,11 +46,44 @@ class Container extends Component {
       .catch(err => console.log(err));
   };
 
+  calculateResultsString = (numMonths) => {
+    // Last 30 days
+    const now = moment().format('MMM Do, YYYY');
+
+    // Convert string to number
+    const num = numMonths - 0;
+
+    let startDate;
+
+    if (num === 1) {
+      startDate = moment().subtract('1', 'month');
+    } else if (num === 3) {
+      startDate = moment().subtract('3', 'month');
+    } else if (num === 6) {
+      startDate = moment().subtract('6', 'month');
+    } else if (num === 12) {
+      startDate = moment().subtract('1', 'year');
+    }
+
+    // Getting all entries
+    if (!startDate) return 'Showing results from all time';
+
+    const formattedStartDate = startDate.format('MMM Do, YYYY');
+    return `Showing results from ${now} to ${formattedStartDate}`;
+  };
+
   render() {
     const historyEntries = () => {
       const { entries } = this.props;
 
-      if (this.props.loading) return <Loader />;
+      if (this.props.loading) {
+        return <Loader />;
+      }
+
+      if (entries.length === 0) {
+        return <h2 className="heading history__no-entries">No entries for this time period...</h2>;
+      }
+
       if (entries !== undefined) {
         return (
           <EntryList
@@ -71,8 +120,11 @@ class Container extends Component {
         return (
           <>
             <h1 className="heading--main">History</h1>
-            <FilterBar />
-            <h2 className="heading--sub">Showing results from...</h2>
+            <FilterBar
+              fetchHistory={this.fetchHistory}
+              updateResultsString={this.updateResultsString}
+            />
+            <h2 className="heading history__subheading">{this.state.resultsString}</h2>
             <SavingsCard income={income} expenses={expenses} />
             <h2 className="heading--sub">Entries</h2>
             {historyEntries()}
