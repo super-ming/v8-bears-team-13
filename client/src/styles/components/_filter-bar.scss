@@ -1,6 +1,6 @@
 .filter-bar {
   margin: 0 auto;
-  padding-top: 5rem;
+  margin-top: 5rem;
   width: 70rem;
 
   display: flex;
@@ -11,13 +11,14 @@
   }
 
   @include respond(tab-port) {
+    margin-top: 1rem;
+
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+      align-items: center;
+      justify-content: center;
   }
 
   &__select {
-    border: 1px solid #aaa;
     height: 5.4rem;
     font-size: 2rem;
     // Filter for Income/Expense
@@ -25,11 +26,18 @@
 
     @include respond(tab-port) {
       margin-top: 1rem;
+      font-size: 1.6rem;
+      width: 25rem;
+      height: 4rem;
     }
 
     // Filter for Date
     &:nth-of-type(2) {
       width: 20rem;
+
+      @include respond(tab-port) {
+        width: 25rem;
+      }
     }
 
     &:active,
@@ -39,10 +47,11 @@
   }
 
   &__button {
+    height: 5.4rem;
+
     @include respond(tab-port) {
       margin-top: 1rem;
+      height: 4rem;
     }
-    
-    height: 5.4rem;
   }
 }

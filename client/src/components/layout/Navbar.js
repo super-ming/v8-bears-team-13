@@ -89,7 +89,7 @@ class Navbar extends Component {
             className="checkbox"
             type="checkbox"
             checked={this.state.checkboxChecked}
-            onClick={this.toggleCheckboxState}
+            onChange={this.toggleCheckboxState}
           />
           <span />
           <span />
