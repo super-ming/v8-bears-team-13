@@ -1,12 +1,10 @@
 const bcrypt = require('bcryptjs');
-const crypto = require('crypto');
-const { body, check, validationResult } = require('express-validator/check');
+const { body, validationResult } = require('express-validator/check');
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const moment = require('moment');
 const keys = require('../config/keys');
 const User = require('../models/User');
-const Entry = require('../models/Entry');
 
 // encrypt plain text password with bcrypt
 const hashPassword = (password) => {
@@ -48,7 +46,9 @@ exports.register = async (req, res, next) => {
   const { username, email, password } = req.body;
 
   // format the error from validatorResult
-  const errorFormatter = ({ location, msg, param, value, nestedErrors }) => `${msg}`;
+  const errorFormatter = ({
+    location, msg, param, value, nestedErrors
+  }) => `${msg}`;
 
   const result = validationResult(req).formatWith(errorFormatter);
 
@@ -134,7 +134,13 @@ exports.postLogin = (req, res, next) => {
 
         // assign our jwt to the cookie
         // change to secure true in prod, but false in dev for cookie to work
-        res.cookie('jwt', token, { httpOnly: true, secure: false, expires: new Date(Date.now() + 900000) });
+        const useSecureCookies = process.env.NODE_ENV === 'production';
+        
+        res.cookie('jwt', token, {
+          httpOnly: true,
+          secure: useSecureCookies,
+          expires: new Date(Date.now() + 900000)
+        });
 
         res.status(200).send(payload);
       });
