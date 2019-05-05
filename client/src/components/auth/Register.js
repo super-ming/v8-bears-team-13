@@ -104,7 +104,7 @@ class Register extends React.Component {
 
     if (!isValid) return;
 
-    const url = 'http://localhost:5000/api/auth/register';
+    const url = '/api/auth/register';
     const { username, email, password } = this.state;
     const data = JSON.stringify({ username, email, password });
 

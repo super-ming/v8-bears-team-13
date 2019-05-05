@@ -95,7 +95,7 @@ class Container extends React.Component {
     obj.userId = this.props.auth.userId;
     obj.id = this.props.dash.entry.id;
 
-    const url = 'http://localhost:5000/api/entries/edit-entry';
+    const url = '/api/entries/edit-entry';
     fetch(url, {
       method: 'PUT',
       body: JSON.stringify(obj),

@@ -63,7 +63,7 @@ class Login extends React.Component {
     if (!isValid) return;
 
     const { username, password } = this.state;
-    const url = 'http://localhost:5000/api/auth/login';
+    const url = '/api/auth/login';
     const data = JSON.stringify({ username, password });
 
     fetch(url, {

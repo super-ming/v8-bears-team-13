@@ -17,7 +17,7 @@ class Container extends Component {
   }
 
   fetchHistory = async (num) => {
-    const url = `http://localhost:5000/api/history/month/${num}`;
+    const url = `/api/history/month/${num}`;
     fetch(url, {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },

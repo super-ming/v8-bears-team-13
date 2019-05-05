@@ -28,7 +28,7 @@ export const deleteEntryFailure = error => ({
 });
 
 export const deleteEntry = entryId => (dispatch) => {
-  const url = `http://localhost:5000/api/entries/${entryId}`;
+  const url = `/api/entries/${entryId}`;
 
   fetch(url, {
     method: 'DELETE',
