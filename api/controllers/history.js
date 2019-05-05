@@ -10,6 +10,7 @@ exports.getHistory = async (req, res) => {
   const transact = req.query.transact;
   const str = req.query.str;
   console.log('req.query ', req.query);
+
   try {
     const histCurrMonth = await History.getHistory(userid, num, transact, str);
     res.json(histCurrMonth);

@@ -44,7 +44,7 @@ export const dashDefault = () => ({
 export const getLatestEntries = userId => (dispatch) => {
   dispatch(startLoading());
 
-  const url = `http://localhost:5000/api/entries/latest-entries/${userId}`;
+  const url = `/api/entries/latest-entries/${userId}`;
   fetch(url, {
     method: 'GET',
     headers: { 'Content-Type': 'application/json' },
@@ -79,7 +79,7 @@ export const deleteEntryFailure = error => ({
 });
 
 export const deleteEntry = entryId => (dispatch) => {
-  const url = `http://localhost:5000/api/entries/${entryId}`;
+  const url = `/api/entries/${entryId}`;
 
   fetch(url, {
     method: 'DELETE',

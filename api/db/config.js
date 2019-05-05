@@ -1,6 +1,6 @@
 const options = {
   query: (e) => {
-    console.log('Query Error:', e.query);
+    // console.log('Query Error:', e.query);
   }
 };
 

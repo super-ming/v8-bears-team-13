@@ -51,8 +51,7 @@ exports.editEntry = async (req, res) => {
   try {
     const updatedEntry = await Entry.editEntry(entryData, userId);
     res.json(updatedEntry);
-  } 
-  catch (err) {
+  } catch (err) {
     throw new Error(err);
   }
 };

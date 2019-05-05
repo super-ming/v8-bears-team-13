@@ -5,9 +5,9 @@ const db = require('../db/config');
 exports.getHistory = async (userid, num, transact, str) => {
   let sqlQuery;
   let time;
+
   let type;
-  // console.log(num, typeof num);
-  console.log(transact);
+
   if(num === '1') {
     // 1 month
     time = moment().subtract(1, 'month').format('YYYY-MM-DD');

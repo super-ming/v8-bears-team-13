@@ -1,28 +1,60 @@
 import React from 'react';
+import moment from 'moment';
+import PropTypes from 'prop-types';
 
 // need connect function to be able to connect to store from Provider
 import { connect } from 'react-redux';
 
-import moment from 'moment';
 import { dashDefault } from '../../actions/dashActions';
-
 
 class Container extends React.Component {
   state = {
-    transaction: this.props.dash.entry.transact_id,
+    transaction: this.props.dash.entry.transact_id ? '1' : '0',
+    category: this.props.dash.entry.category_id,
     entry: this.props.dash.entry.entry_desc,
-    amount: this.props.dash.entry.amount
+    amount: this.props.dash.entry.amount,
+
+    // Errors
+    errors: {
+      transaction: '',
+      category: '',
+      entry: '',
+      amount: '',
+      server: '',
+      date: ''
+    }
   };
 
-  handleTransactionTypeChange = (e) => {
+  dateRef = React.createRef();
+
+  handleChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value
     });
   };
 
+  getErrors = () => {
+    const errors = {};
+
+    if (this.state.transaction === 'DEFAULT') errors.transaction = 'Transaction type is required.';
+    if (this.state.category === 'DEFAULT') errors.category = 'Category is required.';
+    if (this.state.entry === '') errors.entry = 'Description is required.';
+    if (this.state.amount === '' || this.state.amount == null) errors.amount = 'Amount is required.';
+    if (this.dateRef.current.value === '') errors.date = 'Date is required';
+
+    const dateRegex = /^\d{4}[-]\d{1,2}[-]\d{1,2}$/;
+    console.log(typeof this.dateRef.current.value);
+    if (!dateRegex.test(this.dateRef.current.value)) errors.date = 'Date Format: YYYY-MM-DD';
+
+    return errors;
+  };
+
   getCategoryOptions = () => {
+    // Default
+    if (this.state.transaction === 'DEFAULT') return null;
+
     // Income
-    if (this.state.transaction === '0' || this.state.transaction === false) {
+    if (this.state.transaction === '0') {
       return <option value="1">Salary</option>;
     }
 
@@ -38,8 +70,20 @@ class Container extends React.Component {
 
   submitForm = (e) => {
     e.preventDefault();
+
+    let errors = this.getErrors();
+
+    // Errors present
+    if (Object.keys(errors).length > 0) {
+      errors = { ...errors, server: '' };
+      this.setState({ errors });
+      return;
+    }
+
     const formData = new FormData(document.getElementById('form-edit'));
     const obj = {};
+
+    // eslint-disable-next-line no-restricted-syntax
     for (const data of formData.entries()) {
       // data is in key-value pairs
       const key = data[0];
@@ -51,7 +95,7 @@ class Container extends React.Component {
     obj.userId = this.props.auth.userId;
     obj.id = this.props.dash.entry.id;
 
-    const url = 'http://localhost:5000/api/entries/edit-entry';
+    const url = '/api/entries/edit-entry';
     fetch(url, {
       method: 'PUT',
       body: JSON.stringify(obj),
@@ -60,14 +104,17 @@ class Container extends React.Component {
     })
       .then(res => res.json())
       .then((data) => {
-        this.props.getLatestEntries();
+        this.props.getEntries();
       })
       .catch((err) => {
-        throw err;
+        errors = { ...errors, server: err.message };
+        this.setState({ errors }, () => {
+          throw new Error(err);
+        });
       });
   };
 
-  getReccuringDefault = () => {
+  getRecurringDefault = () => {
     if (this.props.dash.entry.recurring) {
       return (
         <input
@@ -93,7 +140,9 @@ class Container extends React.Component {
   };
 
   render() {
+    const { errors } = this.state;
     const { transact_id, category_id } = this.props.dash.entry;
+
     return (
       <div className="edit-entry">
         <form onSubmit={this.submitForm} id="form-edit" className="form__edit">
@@ -102,16 +151,16 @@ class Container extends React.Component {
             <div className="form__container">
               <div className="form__group">
                 <label htmlFor="transaction" className="form__label">
-                  Transaction Type:{' '}
+                  Transaction Type:
                 </label>
                 <div className="form__input-container">
                   <select
                     className="form__input"
                     name="transaction"
                     id="transaction"
-                    defaultValue={transact_id}
-                    value={this.state.transactionType}
-                    onChange={this.handleTransactionTypeChange}
+                    defaultValue={this.state.transaction}
+                    value={this.state.transaction}
+                    onChange={this.handleChange}
                   >
                     <option value="DEFAULT" disabled>
                       Select Transaction Type
@@ -119,30 +168,33 @@ class Container extends React.Component {
                     <option value="0">Income</option>
                     <option value="1">Expense</option>
                   </select>
+                  <div className="error">{errors.transaction}</div>
                 </div>
               </div>
               <div className="form__group">
                 <label htmlFor="category" className="form__label">
-                  Category Type:{' '}
+                  Category Type:
                 </label>
                 <div className="form__input-container">
                   <select
                     className="form__input"
                     name="category"
                     id="category"
-                    defaultValue={category_id}
-                    onClick={this.handleTransactionTypeChange}
+                    defaultValue={this.state.category}
+                    value={this.state.category}
+                    onChange={this.handleChange}
                   >
                     <option value="DEFAULT" disabled>
                       Select Category Type
                     </option>
                     {this.getCategoryOptions()}
                   </select>
+                  <div className="error">{errors.category}</div>
                 </div>
               </div>
               <div className="form__group">
                 <label htmlFor="entry" className="form__label">
-                  Entry Description:{' '}
+                  Entry Description:
                 </label>
                 <div className="form__input-container">
                   <input
@@ -151,13 +203,14 @@ class Container extends React.Component {
                     name="entry"
                     id="entry"
                     value={this.state.entry}
-                    onInput={this.handleTransactionTypeChange}
+                    onInput={this.handleChange}
                   />
+                  <div className="error">{errors.entry}</div>
                 </div>
               </div>
               <div className="form__group">
                 <label htmlFor="amount" className="form__label">
-                  Amount:{' '}
+                  Amount:
                 </label>
                 <div className="form__input-container">
                   <input
@@ -168,13 +221,14 @@ class Container extends React.Component {
                     min="0.00"
                     step="0.01"
                     value={this.state.amount}
-                    onInput={this.handleTransactionTypeChange}
+                    onInput={this.handleChange}
                   />
+                  <div className="error">{errors.amount}</div>
                 </div>
               </div>
               <div className="form__group">
                 <label htmlFor="date" className="form__label">
-                  Date:{' '}
+                  Date:
                 </label>
                 <div className="form__input-container">
                   <input
@@ -183,26 +237,35 @@ class Container extends React.Component {
                     name="full_date"
                     id="date"
                     defaultValue={moment().format('YYYY-MM-DD')}
+                    ref={this.dateRef}
                   />
+                  <div className="error">{errors.date}</div>
                 </div>
               </div>
               <div className="form__group">
                 <label htmlFor="recurring" className="form__label">
-                  Recurring:{' '}
+                  Recurring:
                 </label>
-                <div className="form__input-container">{this.getReccuringDefault()}</div>
+                <div className="form__input-container">{this.getRecurringDefault()}</div>
               </div>
-              <button className="button">Submit</button>
+              <button className="button" type="submit">
+                Submit
+              </button>
+              <button className="button__back" type="button" onClick={this.props.getEntries}>
+                Back
+              </button>
             </div>
+            <div className="error">{errors.server}</div>
           </fieldset>
         </form>
-        <button className="button__back" onClick={this.props.getLatestEntries}>
-          Back
-        </button>
       </div>
     );
   }
 }
+
+Container.propTypes = {
+  getEntries: PropTypes.func.isRequired
+};
 
 const mapStateToProps = state => state;
 

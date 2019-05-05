@@ -8,21 +8,21 @@ class SearchBar extends Component {
   state = {
     isTyping: false,
     searchText: ''
-  }
+  };
 
   handleChange = (evt) => {
     this.setState({
       searchText: evt.target.value
     });
-  }
+  };
 
   handleFocus = () => {
     this.setState({ isTyping: true });
-  }
+  };
 
   handleBlur = () => {
     this.setState({ isTyping: false });
-  }
+  };
 
   render() {
     const searchIconClasses = classnames('search-bar__icon', {

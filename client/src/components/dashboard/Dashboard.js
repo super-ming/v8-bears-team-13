@@ -5,7 +5,11 @@ import PropTypes from 'prop-types';
 // need connect function to be able to connect to store from Provider
 
 import {
-  addEntry, editEntry, deleteEntry, dashDefault, getLatestEntries
+  addEntry,
+  editEntry,
+  deleteEntry,
+  dashDefault,
+  getLatestEntries
 } from '../../actions/dashActions';
 
 import Add from './Add';
@@ -19,7 +23,7 @@ import formatMoney from '../../helpers/formatMoney';
 class Container extends React.Component {
   static defaultProps = {
     latestEntries: []
-  }
+  };
 
   componentDidMount() {
     this.fetchEntries();
@@ -35,7 +39,13 @@ class Container extends React.Component {
 
       if (this.props.loading) return <Loader />;
       if (latestEntries !== undefined) {
-        return <EntryList entries={latestEntries} editEntry={this.props.editEntry} deleteEntry={this.props.deleteEntry} />;
+        return (
+          <EntryList
+            entries={latestEntries}
+            editEntry={this.props.editEntry}
+            deleteEntry={this.props.deleteEntry}
+          />
+        );
       }
     };
 
@@ -66,7 +76,7 @@ class Container extends React.Component {
       if (status === 'edit') {
         return (
           <div>
-            <EditEntry getLatestEntries={this.fetchEntries} />
+            <EditEntry getEntries={this.fetchEntries} />
           </div>
         );
       }

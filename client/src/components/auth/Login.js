@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import { loginUser } from '../../actions/authActions';
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
+
+import { loginUser } from '../../actions/authActions';
 
 const initialState = {
   username: '',
@@ -63,7 +63,7 @@ class Login extends React.Component {
     if (!isValid) return;
 
     const { username, password } = this.state;
-    const url = 'http://localhost:5000/api/auth/login';
+    const url = '/api/auth/login';
     const data = JSON.stringify({ username, password });
 
     fetch(url, {
@@ -83,25 +83,31 @@ class Login extends React.Component {
 
   handleFetchErrors = (response) => {
     if (!response.ok) {
-      response.text().then((body) => { this.setState({ serverError: JSON.parse(body).error }); });
+      response.text().then((body) => {
+        this.setState({ serverError: JSON.parse(body).error });
+      });
       throw Error(response.statusText);
     }
     return response;
-  }
+  };
 
   toggleMask = () => {
-    this.setState({ hidden: !this.state.hidden })
-  }
+    this.setState({ hidden: !this.state.hidden });
+  };
 
   render() {
     return (
       <div className="content">
         <div className="form__container">
           <h1 className="heading--main">Login</h1>
-          { this.state.redirectToDashboard && <Redirect to={`/dashboard/${this.props.auth.userId}`} />}
+          {this.state.redirectToDashboard && (
+            <Redirect to={`/dashboard/${this.props.auth.userId}`} />
+          )}
           <form className="form" onSubmit={this.handleSubmit}>
             <div className="form__group">
-              <label htmlFor="username" className="form__label">Username:</label>
+              <label htmlFor="username" className="form__label">
+                Username:
+              </label>
               <div className="form__input-container">
                 <input
                   required
@@ -117,7 +123,9 @@ class Login extends React.Component {
               </div>
             </div>
             <div className="form__group">
-              <label htmlFor="password" className="form__label">Password:</label>
+              <label htmlFor="password" className="form__label">
+                Password:
+              </label>
               <div className="form__input-container password">
                 <input
                   required
@@ -129,7 +137,12 @@ class Login extends React.Component {
                   value={this.state.password}
                   onChange={this.handleChange}
                 />
-                <button className="hidden" type="button" title="Mask/Unmask password to check content" onClick={this.toggleMask}> 
+                <button
+                  className="hidden"
+                  type="button"
+                  title="Mask/Unmask password to check content"
+                  onClick={this.toggleMask}
+                >
                   <FontAwesomeIcon icon={faEye} />
                 </button>
                 <div className="error">{this.state.passwordError}</div>
@@ -150,7 +163,7 @@ Login.propTypes = {
   auth: PropTypes.shape({
     username: PropTypes.string,
     userId: PropTypes.string,
-    expires: PropTypes.string, 
+    expires: PropTypes.string
   }).isRequired,
   loginUser: PropTypes.func.isRequired
 };
@@ -159,4 +172,7 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps, { loginUser })(Login);
+export default connect(
+  mapStateToProps,
+  { loginUser }
+)(Login);
