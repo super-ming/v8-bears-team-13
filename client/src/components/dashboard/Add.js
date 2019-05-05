@@ -20,9 +20,12 @@ class Container extends React.Component {
       category: '',
       entry: '',
       amount: '',
-      server: ''
+      server: '',
+      date: ''
     }
   };
+
+  dateRef = React.createRef();
 
   handleChange = (e) => {
     this.setState({
@@ -77,7 +80,11 @@ class Container extends React.Component {
     if (this.state.transaction === 'DEFAULT') errors.transaction = 'Transaction type is required.';
     if (this.state.category === 'DEFAULT') errors.category = 'Category is required.';
     if (this.state.entry === '') errors.entry = 'Description is required.';
-    if (this.state.amount == '' || this.state.amount == null) errors.amount = 'Amount is required.';
+    if (this.state.amount === '' || this.state.amount == null) errors.amount = 'Amount is required.';
+    if (this.dateRef.current.value === '') errors.date = 'Date is required';
+
+    const dateRegex = /^\d{4}[-]\d{1,2}[-]\d{1,2}$/;
+    if (!dateRegex.test(this.dateRef.current.value)) errors.date = 'Date Format: YYYY-MM-DD';
 
     return errors;
   }
@@ -198,7 +205,9 @@ class Container extends React.Component {
                     name="full_date"
                     id="date"
                     defaultValue={moment().format('YYYY-MM-DD')}
+                    ref={this.dateRef}
                   />
+                  <div className="error">{errors.date}</div>
                 </div>
               </div>
               <div className="form__group">
