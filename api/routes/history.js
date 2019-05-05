@@ -10,7 +10,7 @@ const router = express.Router();
 // @route   GET api/history/current-month
 // @desc    get current entries for this month
 // @access  Private
-router.get('/month/:num', passport.authenticate('jwt', { session: false }), historyController.getHistory);
+router.get('/month', passport.authenticate('jwt', { session: false }), historyController.getHistory);
 
 
 module.exports = router;

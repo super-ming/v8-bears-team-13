@@ -16,8 +16,14 @@ class Container extends Component {
     this.fetchHistory(1);
   }
 
-  fetchHistory = async (num) => {
-    const url = `/api/history/month/${num}`;
+  fetchHistory = async (num, transact, str) => {
+    const qTransact = transact ? `&transact=${transact}` : '';
+    const qStr = str ? `&str=${str}` : '';
+
+    const url = `http://localhost:5000/api/history/month?num=${num}` +
+      `${qTransact}` +
+      `${qStr}`;
+
     fetch(url, {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
@@ -71,7 +77,7 @@ class Container extends Component {
         return (
           <>
             <h1 className="heading--main">History</h1>
-            <FilterBar />
+            <FilterBar fetchHistory={this.fetchHistory}/>
             <h2 className="heading--sub">Showing results from...</h2>
             <SavingsCard income={income} expenses={expenses} />
             <h2 className="heading--sub">Entries</h2>
@@ -84,6 +90,7 @@ class Container extends Component {
     return (
       <div className="content">
         <div className="history">{index()}</div>
+
       </div>
     );
   }
