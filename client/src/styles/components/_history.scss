@@ -2,6 +2,18 @@
   display: flex;
   flex-direction: column;
   margin: 0 0 10vw 0;
+
+  &__subheading {
+    font-size: 2.6rem;
+    font-weight: normal;
+    margin: 3rem auto;
+  }
+
+  &__no-entries {
+    font-size: 2.6rem;
+    font-weight: normal;
+    margin-top: -1rem;
+  }
 }
 
 .content {

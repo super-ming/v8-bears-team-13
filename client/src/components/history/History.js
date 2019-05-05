@@ -81,7 +81,7 @@ class Container extends Component {
       }
 
       if (entries.length === 0) {
-        return <h2 className="heading history__subheading">No entries for this time period...</h2>;
+        return <h2 className="heading history__no-entries">No entries for this time period...</h2>;
       }
 
       if (entries !== undefined) {
@@ -124,7 +124,7 @@ class Container extends Component {
               fetchHistory={this.fetchHistory}
               updateResultsString={this.updateResultsString}
             />
-            <h2 className="heading--sub">{this.state.resultsString}</h2>
+            <h2 className="heading history__subheading">{this.state.resultsString}</h2>
             <SavingsCard income={income} expenses={expenses} />
             <h2 className="heading--sub">Entries</h2>
             {historyEntries()}
