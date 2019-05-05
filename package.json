@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "App for tracking expenses and encouraging healthy spending habits",
   "scripts": {
+    "start": "node server.js --prefix api",
     "dev": "concurrently --kill-others \"npm:start:api\" \"npm:start:client\"",
     "start:api": "nodemon api/server.js",
     "start:client": "npm start --prefix client",
