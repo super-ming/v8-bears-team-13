@@ -63,7 +63,6 @@ class Container extends React.Component {
     })
       .then(res => res.json())
       .then((data) => {
-        console.log(data);
         this.props.getLatestEntries();
       })
       .catch((err) => {
@@ -78,7 +77,7 @@ class Container extends React.Component {
     if (this.state.transaction === 'DEFAULT') errors.transaction = 'Transaction type is required.';
     if (this.state.category === 'DEFAULT') errors.category = 'Category is required.';
     if (this.state.entry === '') errors.entry = 'Description is required.';
-    if (this.state.amount === null) errors.amount = 'Amount is required.';
+    if (this.state.amount == '' || this.state.amount == null) errors.amount = 'Amount is required.';
 
     return errors;
   }
@@ -109,7 +108,7 @@ class Container extends React.Component {
       <div className="add-entry">
         <form onSubmit={this.submitForm} id="form__add" className="form__add">
           <fieldset>
-            <legend>Add A New Entry</legend>
+            <legend>Add Entry</legend>
             <div className="form__container">
               <div className="form__group">
                 <label htmlFor="transaction" className="form__label">
