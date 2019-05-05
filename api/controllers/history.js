@@ -6,10 +6,7 @@ const keys = require('../config/keys');
 
 exports.getHistory = async (req, res) => {
   const userid = (jwt.verify(req.cookies.jwt, keys.secret)).userId;
-  const num = req.query.num;
-  const transact = req.query.transact;
-  const str = req.query.str;
-  console.log('req.query ', req.query);
+  const { num, transact, str } = req.query;
 
   try {
     const histCurrMonth = await History.getHistory(userid, num, transact, str);
@@ -18,6 +15,3 @@ exports.getHistory = async (req, res) => {
     throw new Error(err);
   }
 };
-
-
-

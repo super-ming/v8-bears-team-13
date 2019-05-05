@@ -1,13 +1,6 @@
-const options = {
-  query: (e) => {
-    // console.log('Query Error:', e.query);
-  }
-};
-
-const pgp = require('pg-promise')(options);
+const pgp = require('pg-promise')({});
 const keys = require('../config/keys');
 
-// eslint-disable-next-line consistent-return
 const setupDB = () => {
   if (process.env.NODE_ENV === 'development' || !process.env.NODE_ENV) {
     return pgp({

@@ -141,7 +141,6 @@ class Container extends React.Component {
 
   render() {
     const { errors } = this.state;
-    const { transact_id, category_id } = this.props.dash.entry;
 
     return (
       <div className="edit-entry">
@@ -248,12 +247,14 @@ class Container extends React.Component {
                 </label>
                 <div className="form__input-container">{this.getRecurringDefault()}</div>
               </div>
-              <button className="button" type="submit">
-                Submit
-              </button>
-              <button className="button__back" type="button" onClick={this.props.getEntries}>
-                Back
-              </button>
+              <div className="form__button-container">
+                <button className="button" type="submit">
+                  Submit
+                </button>
+                <button className="button button__back" type="button" onClick={this.props.getEntries}>
+                  Back
+                </button>
+              </div>
             </div>
             <div className="error">{errors.server}</div>
           </fieldset>

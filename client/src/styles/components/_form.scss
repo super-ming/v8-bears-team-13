@@ -1,6 +1,12 @@
 .form {
   font-size: $font-size-small;
-  width: 30%;
+  margin-bottom: 3rem;
+  width: 50rem;
+
+  @include respond(tab-port) {
+    height: 22rem;
+    width: 25rem;
+  }
 
   &__group {
     margin: 2rem 0 2rem 0;
@@ -14,7 +20,13 @@
     
     @include respond(tab-port) {
       flex-direction: column;
-      margin: 1.5rem 0;
+      margin: 2rem 0;
+    }
+  }
+
+  &--register {
+    @include respond(tab-port) {
+      height: 47rem;
     }
   }
 
@@ -25,8 +37,9 @@
     width: 100%;
 
     display: flex;
-    flex-flow: row wrap;
-    justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
   }
 
   &__label {
@@ -64,7 +77,7 @@
     @include respond(tab-port) {
       padding-left: 0;
       text-align: center;
-      width: 100%;
+      width: 90%;
     }
   }
 
@@ -83,6 +96,19 @@
     width: 2rem;
     transform: translateY(5px);
   }
+
+  &__button-container {
+    width: 100%;
+
+    display: flex;
+      align-content: space-around;
+      justify-content: center;
+
+    & .button {
+      margin-left: 1rem;
+      margin-right: 1rem;
+    }
+  }
 }
 
 .add-entry,
@@ -98,6 +124,10 @@
 
       &:last-of-type {
         margin-top: 1rem;
+
+        @include respond(tab-port) {
+          margin-top: 0;
+        }
       }
     }
   }
@@ -123,11 +153,18 @@ fieldset {
 }
 
 .hidden {
-  position: absolute;
-  top: 0.35rem;
-  right: 22%;
   background-color: $color-white;
   border: none;
+  cursor: pointer;
+  outline-color: #eee;
+  position: absolute;
+    top: 0.35rem;
+    right: 3.4rem;
+  
+  @include respond(tab-port) {
+    right: 1.5rem;
+  }
+
   svg path {
     fill: purple;
   }

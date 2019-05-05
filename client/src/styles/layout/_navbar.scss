@@ -9,19 +9,21 @@
   font-size: $font-size-small;
   list-style-type: none;
   display: flex;
-  justify-content: right;
-  float: right;
+  justify-content: space-between;
   width: 100%;
   margin: 0;
   background: #232222;
   color: white;
   position: fixed;
-  height: 60px;
+  height: 6rem;
   box-shadow: 0 0 10px $color-black;
   z-index: 999;
 
+  @include respond(tab-port) {
+    height: 6rem;
+  }
+
   h2 {
-    width: 73%;
     text-align: left;
     padding: 0 0 0 3rem;
     margin: 15px 0 15px 0;
@@ -50,6 +52,11 @@
     transition: background-color .1s ease-in, color .1s ease-in;
     text-align: center;
     text-decoration: none;
+
+    @include respond(tab-port) {
+      font-size: 1.4rem;
+      margin: -1.5rem 0.25rem;
+    }
     
     &:hover{
       border: 2px solid $color-red;
@@ -67,8 +74,6 @@
 {
   opacity: 0;
 }
-
-//1rem = 10px and 0.1rem is = 1px
 
  @media only screen and (max-width: 550px){
 

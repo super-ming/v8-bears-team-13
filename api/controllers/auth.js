@@ -135,7 +135,7 @@ exports.postLogin = (req, res, next) => {
         // assign our jwt to the cookie
         // change to secure true in prod, but false in dev for cookie to work
         const useSecureCookies = process.env.NODE_ENV === 'production';
-        
+
         res.cookie('jwt', token, {
           httpOnly: true,
           secure: useSecureCookies,
