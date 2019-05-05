@@ -1,6 +1,10 @@
 .form {
   font-size: $font-size-small;
-  width: 30%;
+  width: 50rem;
+
+  @include respond(tab-port) {
+    width: 25rem;
+  }
 
   &__group {
     margin: 2rem 0 2rem 0;
@@ -123,11 +127,18 @@ fieldset {
 }
 
 .hidden {
-  position: absolute;
-  top: 0.35rem;
-  right: 22%;
   background-color: $color-white;
   border: none;
+  cursor: pointer;
+  outline-color: #eee;
+  position: absolute;
+    top: 0.35rem;
+    right: 3.4rem;
+  
+  @include respond(tab-port) {
+    right: 1rem;
+  }
+
   svg path {
     fill: purple;
   }
