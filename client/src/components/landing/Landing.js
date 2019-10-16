@@ -1,5 +1,4 @@
 import React from 'react';
-import { ReactComponent as Chart } from '../../assets/chart.svg';
 
 const Landing = () => (
   <div className="content">
@@ -12,9 +11,6 @@ const Landing = () => (
           <p className="body-text">
             This app will help you manage your revenue and expenses more effectively.
           </p>
-          <div className="landing-chart">
-            <Chart />
-          </div>
         </div>
       </div>
     </div>
